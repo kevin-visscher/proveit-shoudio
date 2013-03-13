@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" creationComplete="init()">
 	
-	<fx:Script>
-		<![CDATA[
-			protected function button1_clickHandler(event:MouseEvent):void
-			{
-				// TODO Auto-generated method stub
-				vp1.source = "http://noise.shoudio.com/mp3/shoudio_1004.mp3";
-				img1.source = "http://noise.shoudio.com/avatars/100x100/1.jpg";
-			}
-		]]>
-	</fx:Script>
+	<fx:Script source="main.as" />
 	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<s:Button x="315" y="201" label="Button" click="button1_clickHandler(event)"/>
+	<s:Button x="41" y="164" label="Laad in" click="button1_clickHandler(event)"/>
 	<s:VideoPlayer id="vp1" x="43" y="341" height="25"/>
-	<s:Image id="img1" x="62" y="147" width="108" height="91"/>
-	<s:Label x="62" y="42" text="API URL"/>
-	<s:TextInput x="121" y="32"/>
+	<s:Image id="img1" x="43" y="34" width="108" height="91"/>
+	<s:Label id="lbluname" x="159" y="38" text="Username:"/>
+	<s:Label id="lbluid" x="159" y="58" text="UserID:"/>
+	<s:Label id="lblcreated" x="159" y="78" text="Shoudio item created @:"/>
+	<s:Label id="lblLat" x="159" y="98" text="Lat:"/>
+	<s:Label id="lblLong" x="159" y="118" text="Lon:"/>
+	<s:Label id="lblBeschrijving" x="43" y="305" text="Description: "/>
+	<mx:Canvas id="mappanel" x="360" y="11" width="390" height="390"/> 
 </s:Application>
