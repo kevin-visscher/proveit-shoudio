@@ -37,7 +37,7 @@ package nl.hva.proveit.shoudio
 		</root>;
 		
 		[Embed(source="img/marker.png")]
-		private var MarkerImage:Class;
+		protected var MarkerImage:Class;
 		
 		private function addMarkers():void
 		{

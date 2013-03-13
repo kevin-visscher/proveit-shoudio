@@ -18,16 +18,6 @@ package nl.hva.proveit.shoudio {
 			loader.load(request);
 			loader.addEventListener(Event.COMPLETE, jsonLoaded);
 		}
-		
-		public function get url():String
-		{
-			return _url;
-		}
-
-		public function set url(value:String):void
-		{
-			_url = value;
-		}
 
 		public function get data():Object {
 			return _data;
@@ -37,18 +27,10 @@ package nl.hva.proveit.shoudio {
 			_data = value;
 		}
 
-		public function jsonLoaded(event:Event):void {
+		private function jsonLoaded(event:Event):void {
 			var jsonContent:URLLoader = URLLoader(event.target);
 			
-			//json
 			_data = JSON.parse(jsonContent.data);
-			/*
-			lbl1.text = data.shoudios.length;
-			lbl2.text = "The first one is " + data.shoudios[0].id + " : " + data.shoudios[0].username;
-			
-			var secondShoudio:String = data.shoudios[0].id;
-			lbl3.text = "secondShoudio as string data: " + secondShoudio;
-			*/
 		}
 	}
 }
