@@ -19,6 +19,7 @@ package nl.hva.proveit.shoudio
 		[Bindable]private var _initialLat:Number;
 		[Bindable]private var _initialLong:Number;
 		[Bindable]private var _initialZoom:Number;
+		
 		private var srcXML:XML = 
 		<root>
 		<location>
