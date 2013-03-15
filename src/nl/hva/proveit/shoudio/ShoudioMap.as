@@ -1,16 +1,16 @@
 // ActionScript file
 package nl.hva.proveit.shoudio
 {
-	import com.modestmaps.TweenMap;
-	import com.modestmaps.geo.Location;
-	import com.modestmaps.mapproviders.OpenStreetMapProvider;
-	
-	import flash.display.Bitmap;
-	
-	import mx.containers.Canvas;
-	import mx.core.UIComponent;
-	
-	public class ShoudioMap
+    import com.modestmaps.TweenMap;
+    import com.modestmaps.geo.Location;
+    import com.modestmaps.mapproviders.OpenStreetMapProvider;
+
+    import flash.display.Bitmap;
+
+    import mx.containers.Canvas;
+    import mx.core.UIComponent;
+
+    public class ShoudioMap
 	{
 		[Bindable]private var _map:TweenMap; 
 		private  var _mapUI:UIComponent;
@@ -36,7 +36,7 @@ package nl.hva.proveit.shoudio
 		</location>
 		</root>;
 		
-		[Embed(source="img/marker.png")]
+		[Embed(source="/../img/marker.png")]
 		protected var MarkerImage:Class;
 		
 		private function addMarkers():void
