@@ -14,7 +14,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="nl/hva/proveit/shoudio/shouldio.mxml"/>
+    <application path="nl/hva/proveit/shoudio/Shouldio.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>
