@@ -31,14 +31,20 @@ package nl.hva.proveit.shoudio
 		<root>
 		<location>
 		<name>Alta Ski Resort</name>
-		<lat>52.0021890000</lat>
-		<long>6.5992640000</long>
+		<lat>52.3369242</lat>
+		<long>4.928485</long>
 		<description>Home of the Greatest Snow on Earth</description>
 		</location> 
 		<location>
 		<name>Crested Butte Resort</name>
-		<lat>52.0021890100</lat>
-		<long>6.5992640100</long>
+		<lat>52.3369039</lat>
+		<long>4.9286505</long>
+		<description>Amazing skiing with small town charm</description>
+		</location>
+		<location>
+		<name>Crested Butte Resort</name>
+		<lat>52.3372901</lat>
+		<long>4.9288802</long>
 		<description>Amazing skiing with small town charm</description>
 		</location>
 		</root>;
