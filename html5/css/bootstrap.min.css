@@ -3,7 +3,7 @@
 body {
 	margin: 0px;
 	padding: 0px;
-    background: #fff url('../img/background.png') repeat-x;
+    background: #fff url('../img/bodybackground.png') repeat-x;
 }
 #title {
 	text-align: center;
@@ -22,22 +22,6 @@ body {
 	box-shadow: 0 0 20px #444;
 	margin-top: 48px;
 }
-
-#imgdescription {
-	width: 384px;
-	height: 104px;
-	margin-top: -120px;
-    background: rgba(0, 0, 0, 0.5);
-	font-size: 12px; 
-	color: #fff;
-	z-index: 1001;
-	position: absolute;
-	padding: 8px;
-}
-
-#imgdescription .titlebold { font-family: "MyriadHebrew-SemiBold" !important; margin-top: -1px;}
-#imgdescription .datetime {	font-family: "MyriadHebrew-Regular" !important; margin-top: -12px;}
-#imgdescription .description { font-family: "MyriadHebrew-Regular" !important; }
 
 #rechtermenu {
 	width: 160px;
@@ -64,7 +48,4 @@ ul.rechtermenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
 ul.rechtermenuitems .geselecteerd {
 	background: #fff url('../img/rechtermenuselectie.gif') repeat-x;
 	color: #fff;
-}
-#icon{
-	text-align: middle;
 }
