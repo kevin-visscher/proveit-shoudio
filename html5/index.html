@@ -6,7 +6,6 @@
 <script src="js/jquery.orbit.js"></script>
 <script src="js/jquery.orbit.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="OpenLayers.js"></script>
 <link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 <link media="all" type="text/css" rel="stylesheet" href="css/orbit.css" />
 <title>Shoudio Player</title>
@@ -14,14 +13,21 @@
 <body>
 <div id="title">Shoudio</div>
 <div id="playerwrapper">
-	<div id="openstreetmap"></div>
+	<div id="featured"> 
+		 <img src="img/testimage.jpg" alt="Overflow: Hidden No More" />
+		 <img src="img/testimage.jpg" alt="Overflow: Hidden No More" />
+	</div>
+	<div id="imgdescription">
+	<p class="titlebold">roelandp near Oudekerksplein 19-23, 1012 Amsterdam, The Netherlands</p>
+	<p class="datetime">About 2 minutes ago</p>
+	<p class="description">YOLO #blaat</p>
+	</div>
 	<div id="rechtermenu">
-	<a href="javascript:slideaway(); ">HIDEMEDAN</a>
 	<ul class="rechtermenuitems">
-	<li id="musicitem" class="nietgeselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Punt 1</li>
-	<li id="photoitem" class="geselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Punt 2</li>
-	<li id="videoitem" class="nietgeselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Punt 3</li>
-	<li id="mapitem" class="nietgeselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Punt 4</li>
+	<li id="musicitem" class="nietgeselecteerd"><object id="icon" data="img/music.svg" type="image/svg+xml" width="18" height="18"></object>Music</li>
+	<li id="photoitem" class="geselecteerd"><object id="icon" data="img/photowit.svg" type="image/svg+xml" width="18" height="18"></object>Photo</li>
+	<li id="videoitem" class="nietgeselecteerd"><object id="icon" data="img/video.svg" type="image/svg+xml" width="18" height="18"></object>Video</li>
+	<li id="mapitem" class="nietgeselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Map</li>
 	</ul>
 	</div>
 </div>
