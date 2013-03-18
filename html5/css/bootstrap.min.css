@@ -1,0 +1,70 @@
+@import url("MyriadHebrew-SemiBold-Include");
+
+body {
+	margin: 0px;
+	padding: 0px;
+    background: #fff url('../img/background.png') repeat-x;
+}
+#title {
+	text-align: center;
+	color: #fff;
+	font-size: 36px;
+	font-family: "MyriadHebrew-SemiBold" !important;
+	text-shadow: 1px 2px #444;
+	margin-top: 20px;
+}
+
+#playerwrapper {
+	width:400px;
+	height: 400px;
+	margin:0px auto;
+	background-color: #fff;
+	box-shadow: 0 0 20px #444;
+	margin-top: 48px;
+}
+
+#imgdescription {
+	width: 384px;
+	height: 104px;
+	margin-top: -120px;
+    background: rgba(0, 0, 0, 0.5);
+	font-size: 12px; 
+	color: #fff;
+	z-index: 1001;
+	position: absolute;
+	padding: 8px;
+}
+
+#imgdescription .titlebold { font-family: "MyriadHebrew-SemiBold" !important; margin-top: -1px;}
+#imgdescription .datetime {	font-family: "MyriadHebrew-Regular" !important; margin-top: -12px;}
+#imgdescription .description { font-family: "MyriadHebrew-Regular" !important; }
+
+#rechtermenu {
+	width: 160px;
+	height: 400px;
+	background-color: #fff;
+	margin-top:-400px;
+	z-index: 1002;
+	position: absolute;
+	margin-left: 240px;	
+	box-shadow: -2px 0 2px #444;
+}
+ul.rechtermenuitems {
+	list-style-type: none;
+	font-family: "MyriadHebrew-Regular" !important; 
+	font-size: 12px;
+	padding: 0px;
+}
+ul.rechtermenuitems li {
+	height: 30px;
+	width: 160px;
+	line-height:30px;
+}
+ul.rechtermenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
+ul.rechtermenuitems .geselecteerd {
+	background: #fff url('../img/rechtermenuselectie.gif') repeat-x;
+	color: #fff;
+}
+#icon{
+	text-align: middle;
+}
