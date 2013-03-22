@@ -6,6 +6,7 @@
 <script src="js/jquery.orbit.js"></script>
 <script src="js/jquery.orbit.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/rightmenu.js"></script>
 <script src="OpenLayers.js"></script>
 <link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 <link media="all" type="text/css" rel="stylesheet" href="css/orbit.css" />
@@ -15,14 +16,14 @@
 <div id="title">Shoudio</div>
 <div id="playerwrapper">
 
-	<div id="openstreetmap"><div class="rechtermenuopen"><a href="javascript:showrechtermenu()"><img class="imgopen" src="img/open-sidebar.png"/></a></div></div>
-	<div id="rechtermenu">
-        <div class="rechtermenuclose"><a href="javascript:hiderechtermenu()"><img src="img/slide-up.gif"/></a></div>
-        <ul class="rechtermenuitems">
-        <li id="musicitem" class="nietgeselecteerd"><object id="icon" data="img/music.svg" type="image/svg+xml" width="18" height="18"></object>Music</li>
-        <li id="photoitem" class="geselecteerd"><object id="icon" data="img/photowit.svg" type="image/svg+xml" width="18" height="18"></object>Photo</li>
-        <li id="videoitem" class="nietgeselecteerd"><object id="icon" data="img/video.svg" type="image/svg+xml" width="18" height="18"></object>Video</li>
-        <li id="mapitem" class="nietgeselecteerd"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Map</li>
+	<div id="openstreetmap"><div class="rightmenuopen"><a href="javascript:showrightmenu()"><img class="imgopen" src="img/open-sidebar.png"/></a></div></div>
+	<div id="rightmenu">
+        <div class="rightmenuclose"><a href="javascript:hiderightmenu()"><img src="img/slide-up.gif"/></a></div>
+        <ul class="rightmenuitems">
+        <li id="musicitem" class="notselected"><object id="icon" data="img/music.svg" type="image/svg+xml" width="18" height="18"></object>Music</li>
+        <li id="photoitem" class="notselected"><object id="icon" data="img/photo.svg" type="image/svg+xml" width="18" height="18"></object>Photo</li>
+        <li id="videoitem" class="notselected"><object id="icon" data="img/video.svg" type="image/svg+xml" width="18" height="18"></object>Video</li>
+        <li id="mapitem" class="notselected"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Map</li>
         </ul>
 	</div>
 </div>

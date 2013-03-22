@@ -29,16 +29,15 @@ body {
 	width: 400px;
 	height: 400px;
 }
-.rechtermenuopen {
+.rightmenuopen {
     z-index: 1002;
     position: absolute;
-    top: 3px;
+    top: 6px;
     right: 3px;
 }
-
 /*OPENSTREETMAP*/
 /* RECHTERMENU */
-#rechtermenu {
+#rightmenu {
 	width: 160px;
 	height: 400px;
 	background-color: #fff;
@@ -46,26 +45,26 @@ body {
 	z-index: 1003;
 	position: absolute;
 	margin-left: 240px;	
-	box-shadow: -2px 0 2px #999;
+	box-shadow: -2px 0 2px #666;
     padding: 0px;
 }
-ul.rechtermenuitems {
+ul.rightmenuitems {
 	list-style-type: none;
 	font-family: "MyriadHebrew-Regular" !important; 
 	font-size: 12px;
 	padding: 0px;
 }
-ul.rechtermenuitems li {
+ul.rightmenuitems li {
 	height: 30px;
 	width: 160px;
 	line-height:30px;
 }
-ul.rechtermenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
-ul.rechtermenuitems .geselecteerd {
+ul.rightmenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
+ul.rightmenuitems .selected {
 	background: #fff url('../img/rechtermenuselectie.gif') repeat-x;
 	color: #fff;
 }
-.rechtermenuclose {
+.rightmenuclose {
     position: absolute;
     margin-left: 147px;
     margin-top: 4px;

@@ -7,18 +7,24 @@ $(window).load(function() {
             title: '${tooltip}'
         })
     });
-
+    
+    var jsondata;
+    $.get("json-mooie-ding.json",null,
+    function(data) {
+        var temp = jQuery.parseJSON(data);
+        alert(temp.collection.name);
+    });
+    
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
-    var myLocation = new OpenLayers.Geometry.Point(10.2, 48.9)
+    var myLocation = new OpenLayers.Geometry.Point(4.8742051100, 52.3671226500)
         .transform('EPSG:4326', 'EPSG:3857');
-
-    // We add the marker with a tooltip text to the overlay
+    
     overlay.addFeatures([
         new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
     ]);
 
-    // A popup with some information about our location
+    // A popup with some information about our location 
     var popup = new OpenLayers.Popup.FramedCloud("Popup", 
         myLocation.getBounds().getCenterLonLat(), null,
         '<a target="_blank" href="http://openlayers.org/">We</a> ' +
@@ -28,7 +34,7 @@ $(window).load(function() {
 
     // Finally we create the map
     map = new OpenLayers.Map({
-        div: "openstreetmap", projection: "EPSG:3857",
+        div: "openstreetmap", projection: 'EPSG:4326',
         layers: [new OpenLayers.Layer.OSM(), overlay],
         center: myLocation.getBounds().getCenterLonLat(), zoom: 15
     });
@@ -36,11 +42,12 @@ $(window).load(function() {
     map.addPopup(popup);
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_23'));
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_21'));
+    
+    var oldthis;
+    $('.rightmenuitems li').click(function() {
+        $(oldthis).toggleClass('selected');
+        $(this).toggleClass('selected');
+        oldthis = this;
+    }); 
 });
 
-function hiderechtermenu() {
-    $("#rechtermenu").hide();
-}
-function showrechtermenu() {
-    $("#rechtermenu").show();
-}
