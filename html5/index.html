@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script src="js/jquery.orbit.js"></script>
+<script src="js/jquery.orbit.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/rightmenu.js"></script>
+<script src="OpenLayers.js"></script>
+<link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+<link media="all" type="text/css" rel="stylesheet" href="css/orbit.css" />
+<title>Shoudio Player</title>
+</head>
+<body>
+<div id="title">Shoudio</div>
+<div id="playerwrapper">
+
+	<div id="openstreetmap"><div class="rightmenuopen"><a href="javascript:showrightmenu()"><img class="imgopen" src="img/open-sidebar.png"/></a></div></div>
+	<div id="rightmenu">
+        <div class="rightmenuclose"><a href="javascript:hiderightmenu()"><img src="img/slide-up.gif"/></a></div>
+        <ul class="rightmenuitems">
+        <li id="musicitem" class="notselected"><object id="icon" data="img/music.svg" type="image/svg+xml" width="18" height="18"></object>Music</li>
+        <li id="photoitem" class="notselected"><object id="icon" data="img/photo.svg" type="image/svg+xml" width="18" height="18"></object>Photo</li>
+        <li id="videoitem" class="notselected"><object id="icon" data="img/video.svg" type="image/svg+xml" width="18" height="18"></object>Video</li>
+        <li id="mapitem" class="notselected"><object id="icon" data="img/map.svg" type="image/svg+xml" width="18" height="18"></object>Map</li>
+        </ul>
+	</div>
+</div>
+</body>
+</html>

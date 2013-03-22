@@ -1,0 +1,75 @@
+@import url("MyriadHebrew-SemiBold-Include");
+
+body {
+	margin: 0px;
+	padding: 0px;
+    background: #fff url('../img/bodybackground.png') repeat-x;
+    font-family: "MyriadHebrew-Regular";
+}
+#title {
+	text-align: center;
+	color: #fff;
+	font-size: 36px;
+	font-family: "MyriadHebrew-SemiBold" !important;
+	text-shadow: 1px 2px #444;
+	margin-top: 20px;
+}
+
+#playerwrapper {
+	width:400px;
+	height: 400px;
+	margin:0px auto;
+	background-color: #fff;
+	box-shadow: 0 0 20px #444;
+	margin-top: 48px;
+    position: relative;
+}
+/*OPENSTREETMAP*/
+#openstreetmap { 
+	width: 400px;
+	height: 400px;
+}
+.rightmenuopen {
+    z-index: 1002;
+    position: absolute;
+    top: 6px;
+    right: 3px;
+}
+/*OPENSTREETMAP*/
+/* RECHTERMENU */
+#rightmenu {
+	width: 160px;
+	height: 400px;
+	background-color: #fff;
+	margin-top:-400px;
+	z-index: 1003;
+	position: absolute;
+	margin-left: 240px;	
+	box-shadow: -2px 0 2px #666;
+    padding: 0px;
+}
+ul.rightmenuitems {
+	list-style-type: none;
+	font-family: "MyriadHebrew-Regular" !important; 
+	font-size: 12px;
+	padding: 0px;
+}
+ul.rightmenuitems li {
+	height: 30px;
+	width: 160px;
+	line-height:30px;
+}
+ul.rightmenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
+ul.rightmenuitems .selected {
+	background: #fff url('../img/rechtermenuselectie.gif') repeat-x;
+	color: #fff;
+}
+.rightmenuclose {
+    position: absolute;
+    margin-left: 147px;
+    margin-top: 4px;
+}
+#icon {
+    margin: 0px 7px -5px 7px;
+}
+/* RECHTERMENU */
