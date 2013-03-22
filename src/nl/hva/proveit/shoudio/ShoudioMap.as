@@ -12,92 +12,60 @@ package nl.hva.proveit.shoudio
 
     public class ShoudioMap
 	{
+        [Embed(source="/../img/marker.png")]
+        private static const MarkerImage:Class;
+
         private var _map:TweenMap;
 
-        private var resortMarker:PointMarker;
-
-        private var _mapContainer:UIComponent;
+        [Bindable]
+        private var _latitude:Number;
 
         [Bindable]
-        private var _initialLat:Number;
+        private var _longtitude:Number;
 
         [Bindable]
-        private var _initialLong:Number;
+        private var _zoom:Number;
 
-        [Bindable]
-        private var _initialZoom:Number;
-		
-		private var srcXML:XML = 
-		<root>
-		<location>
-		<name>Alta Ski Resort</name>
-		<lat>52.3369242</lat>
-		<long>4.928485</long>
-		<description>Home of the Greatest Snow on Earth</description>
-		</location> 
-		<location>
-		<name>Crested Butte Resort</name>
-		<lat>52.3369039</lat>
-		<long>4.9286505</long>
-		<description>Amazing skiing with small town charm</description>
-		</location>
-		<location>
-		<name>Crested Butte Resort</name>
-		<lat>52.3372901</lat>
-		<long>4.9288802</long>
-		<description>Amazing skiing with small town charm</description>
-		</location>
-		</root>;
-		
-		[Embed(source="/../img/marker.png")]
-		private static const MarkerImage:Class;
-
-        public function ShoudioMap(lat:Number, lon:Number, zoom:Number, mapContainer:UIComponent) {
-            _initialLat = lat;
-            _initialLong = lon;
-            _initialZoom = zoom;
-            _mapContainer = mapContainer;
+        public function ShoudioMap(latitude:Number, longtitude:Number, zoom:Number, mapContainer:UIComponent) {
+            _latitude = latitude;
+            _longtitude = longtitude;
+            _zoom = zoom;
 
             _map = new TweenMap(
-                    _mapContainer.width,
-                    _mapContainer.height,
+                    mapContainer.width,
+                    mapContainer.height,
                     true,
                     new OpenStreetMapProvider()
             );
 
-            _map.setCenterZoom(new Location(_initialLat, _initialLong), _initialZoom);
+            _map.setCenterZoom(new Location(_latitude, _longtitude), _zoom);
 
-            mapCore();
+            addMapToContainer(mapContainer);
         }
 
-		private function addMarkers():void
-		{
-			for each (var resort:XML in srcXML.location){
-				resortMarker = new PointMarker();
+        public function addMarker(latitude:Number, longtitude:Number):void {
+            var marker:ShoudioMapMarker = new ShoudioMapMarker();
 
-                var markerImage:Bitmap = new MarkerImage() as Bitmap;
-				markerImage.x = -markerImage.width / 2;
-				markerImage.y = -markerImage.height / 2;
+            var markerImage:Bitmap = new MarkerImage() as Bitmap;
+            markerImage.x = markerImage.width / 2;
+            markerImage.y = markerImage.height / 2;
 
-				resortMarker.addChild(markerImage);
-				resortMarker.resortName = resort.name;
-				resortMarker.resortDesc = resort.description;
+            marker.addChild(markerImage);
+            marker.resortName = "blaat";
+            marker.resortDesc = "blaat";
 
-                _map.putMarker(new Location(resort.lat, resort.long), resortMarker);
-			} 
-		}
-		
-		private function mapCore():void {
-            if (_mapContainer is IVisualElementContainer) {
+            _map.putMarker(new Location(latitude, longtitude), marker);
+        }
+
+		private function addMapToContainer(mapContainer:UIComponent):void {
+            if (mapContainer is IVisualElementContainer) {
                 var tmp:UIComponent = new UIComponent();
                 tmp.addChild(_map);
 
-			    IVisualElementContainer(_mapContainer).addElement(tmp);
+			    IVisualElementContainer(mapContainer).addElement(tmp);
             } else {
-                _mapContainer.addChild(_map);
+                mapContainer.addChild(_map);
             }
-
-            addMarkers();
 		}
 		
 		public function centerZoom(lat:Number, lon:Number, zoom:Number):void {
