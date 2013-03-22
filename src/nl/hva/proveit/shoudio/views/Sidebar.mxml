@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009"
+                      xmlns:s="library://ns.adobe.com/flex/spark"
+                      minWidth="160"
+                      height="100%">
+
+    <fx:Script>
+        <![CDATA[
+
+        ]]>
+    </fx:Script>
+
+    <s:layout>
+        <s:BasicLayout/>
+    </s:layout>
+
+    <!-- Drop shadow on the left side -->
+    <s:Rect top="0" bottom="0" left="-8" width="8">
+        <s:fill>
+            <s:LinearGradient rotation="180">
+                <s:GradientEntry color="0x777777"/>
+                <s:GradientEntry color="0xFFFFFF" alpha="0"/>
+            </s:LinearGradient>
+        </s:fill>
+    </s:Rect>
+
+    <s:Rect top="0" right="0" bottom="0" left="0">
+        <s:fill>
+            <s:SolidColor color="0xFFFFFF"/>
+        </s:fill>
+    </s:Rect>
+
+    <s:List top="32" right="0"
+            bottom="0" left="0"
+            borderVisible="false"
+            itemRenderer="nl.hva.proveit.shoudio.renderer.SidebarListRenderer">
+        <s:dataProvider>
+            <s:ArrayList>
+                <fx:Array>
+                    <fx:Object text="Point 1" icon="@Embed('/assets/music.png')"/>
+                    <fx:Object text="Point 2" icon="@Embed('/assets/music.png')"/>
+                    <fx:Object text="Point 3" icon="@Embed('/assets/music.png')"/>
+                    <fx:Object text="Point 4" icon="@Embed('/assets/music.png')"/>
+                    <fx:Object text="Point 5" icon="@Embed('/assets/music.png')"/>
+                </fx:Array>
+            </s:ArrayList>
+        </s:dataProvider>
+    </s:List>
+
+</s:SkinnableContainer>

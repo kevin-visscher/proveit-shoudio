@@ -1,14 +1,18 @@
 package nl.hva.proveit.shoudio
 {
-	import mx.core.UIComponent;
-	import flash.display.Sprite;
-	
-	public class PointMarker extends Sprite
+    import flash.display.Sprite;
+
+    public class ShoudioMapMarker extends Sprite
 	{
 		private var _nName:String;
 		private var _nMarker:String;
 		private var _nDescription:String;
-		
+
+        public function ShoudioMapMarker()
+        {
+
+        }
+
 		public function set resortName(name:String):void
 		{
 			_nName = name;

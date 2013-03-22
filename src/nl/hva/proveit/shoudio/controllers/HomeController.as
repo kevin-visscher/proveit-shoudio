@@ -1,20 +1,17 @@
 package nl.hva.proveit.shoudio.controllers {
 
-    import flash.events.Event;
     import flash.events.MouseEvent;
-    import flash.media.Sound;
-    import flash.net.URLRequest;
 
-    import mx.controls.Alert;
-
+    import nl.hva.proveit.shoudio.Main;
     import nl.hva.proveit.shoudio.ShoudioMap;
-    import nl.hva.proveit.shoudio.Shouldio;
     import nl.hva.proveit.shoudio.json.JsonLoader;
     import nl.hva.proveit.shoudio.json.JsonLoaderEvent;
+    import nl.hva.proveit.shoudio.models.ShoudioCollection;
+    import nl.hva.proveit.shoudio.models.ShoudioCollectionItem;
 
     public class HomeController {
 
-        public var view:Shouldio;
+        public var view:Main;
 
         private var _jsonLoader:JsonLoader;
         private var _map:ShoudioMap;
@@ -27,36 +24,17 @@ package nl.hva.proveit.shoudio.controllers {
         }
 
         public function button1_clickHandler(e:MouseEvent):void {
-            _jsonLoader.load("https://shoudio.com/api/v1/channel?oauth_token=f95134f71ed352a28ae872e7aa37e65f&channel=sxswnl");
+            _jsonLoader.load("https://dl.dropbox.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
         }
 
         private function jsonLoader_jsonLoadedHandler(e:JsonLoaderEvent):void {
-            var data:Object = e.data;
+            var collection:ShoudioCollection = ShoudioCollection.fromObject(e.data);
 
-            view.lbluname.text = "Username: " + data.shoudios[0].username;
-            view.lbluid.text = "UserID: " + data.shoudios[0].id;
-            view.lblcreated.text = "Shoudio item created @:" + data.shoudios[0].created_at;
-            view.lblLong.text = "Lon: " + data.shoudios[0].lon;
-            view.lblLat.text = "Lat: " + data.shoudios[0].lat;
+            for each (var item:ShoudioCollectionItem in collection.items) {
+                _map.addMarker(item.latitude, item.longtitude);
+            }
 
-            _map.centerZoom(data.shoudios[0].lat, data.shoudios[0].lon, 14);
-
-            view.lblBeschrijving.text = "Description: " + data.shoudios[0].message;
-
-            view.img1.source = data.shoudios[0].user.avatar;
-            var sound:Sound = new Sound(new URLRequest(data.shoudios[0].audio.mp3));
-            sound.addEventListener(Event.COMPLETE, function(e:Event):void {
-
-                var s:Sound = e.target as Sound;
-                s.play();
-
-            });
-
-            var s:String = "";
-            for (var key:* in data)
-                s += key + " = " + data[key];
-
-            Alert.show(s);
+            _map.centerZoom(collection.latitude, collection.longtitude, 20);
         }
     }
 }

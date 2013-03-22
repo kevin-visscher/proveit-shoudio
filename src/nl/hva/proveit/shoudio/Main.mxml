@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
+               xmlns:views="nl.hva.proveit.shoudio.views.*"
+               minWidth="400"
+               minHeight="400"
+               creationComplete="{controller.creationCompleteHandler()}">
+
+    <fx:Declarations>
+	    <controllers:HomeController id="controller" view="{this}"/>
+	</fx:Declarations>
+
+    <s:states>
+        <s:State name="sidebarHidden"/>
+        <s:State name="sidebarVisible"/>
+    </s:states>
+
+    <s:transitions>
+        <s:Transition fromState="sidebarHidden" toState="sidebarVisible">
+            <s:Animate id="sidebarAnim" duration="450" target="{sidebar}">
+                <s:motionPaths>
+                    <s:SimpleMotionPath property="right" valueFrom="-160" valueTo="0"/>
+                </s:motionPaths>
+            </s:Animate>
+        </s:Transition>
+    </s:transitions>
+
+    <s:Rect top="0" right="0" bottom="0" left="0">
+        <s:fill>
+            <s:LinearGradient rotation="90">
+                <s:GradientEntry color="0x5195CE"/>
+                <s:GradientEntry color="0x005DB3"/>
+            </s:LinearGradient>
+        </s:fill>
+    </s:Rect>
+
+    <s:Group width="400" height="400"
+             left="{(width - 400) / 2}" top="{(height - 400) / 2}"
+             clipAndEnableScrolling="true">
+
+        <!-- Map container -->
+        <s:Group id="mapGroup"
+                 top="0"
+                 right="0"
+                 bottom="0"
+                 left="0"/>
+
+        <views:Sidebar id="sidebar"
+                       top="0"
+                       right="0"
+                       bottom="0"
+                       includeIn="sidebarVisible"
+                       creationPolicy="all"
+                       cacheAsBitmap="true"/>
+
+        <s:Button id="btnToggleSidebar"
+                  label="Show sidebar"
+                  label.sidebarVisible="Hide sidebar"
+                  top="4"
+                  right="4"
+                  click="{sidebarAnim.play()}"
+                  click.sidebarVisible="{sidebarAnim.play(null, true)}"/>
+
+    </s:Group>
+
+</s:Application>
