@@ -55,13 +55,14 @@ ul.rightmenuitems {
 	padding: 0px;
 }
 ul.rightmenuitems li {
-	height: 30px;
+	height: auto;
+    min-height:30px;
 	width: 160px;
 	line-height:30px;
 }
 ul.rightmenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
 ul.rightmenuitems .selected {
-	background: #fff url('../img/rechtermenuselectie.gif') repeat-x;
+	background: #fff url('../img/rechtermenuselectie.gif') repeat;
 	color: #fff;
 }
 .rightmenuclose {

@@ -1,3 +1,5 @@
+var shoudioobjects = [];
+
 $(window).load(function() {
     // The overlay layer for our marker, with a simple diamond as symbol
     var overlay = new OpenLayers.Layer.Vector('Overlay', {
@@ -12,8 +14,16 @@ $(window).load(function() {
     $.get("json-mooie-ding.json",null,
     function(data) {
         var temp = jQuery.parseJSON(data);
-        alert(temp.collection.name);
+        for(var i in temp.contents) {
+            if(temp.contents[i].sorting > -1) shoudioobjects.push(temp.contents[i]);
+        }
     });
+    
+    for(var i in shoudioobjects)
+    {
+        var message = shoudioobjects[i].message;
+        $(".rightmenuitems").append('<li id="musicitem" class="notselected"><object id="icon" data="img/music.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
+    }
     
     // The location of our marker and popup. We usually think in geographic
     // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
@@ -44,10 +54,14 @@ $(window).load(function() {
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_21'));
     
     var oldthis;
-    $('.rightmenuitems li').click(function() {
+    $('.rightmenuitems li').live('click', function() {
         $(oldthis).toggleClass('selected');
         $(this).toggleClass('selected');
         oldthis = this;
     }); 
 });
+
+function addrightmenuitem(item){
+    
+}
 
