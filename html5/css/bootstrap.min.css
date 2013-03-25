@@ -23,6 +23,7 @@ body {
 	box-shadow: 0 0 20px #444;
 	margin-top: 48px;
     position: relative;
+    overflow: hidden;
 }
 /*OPENSTREETMAP*/
 #openstreetmap { 
