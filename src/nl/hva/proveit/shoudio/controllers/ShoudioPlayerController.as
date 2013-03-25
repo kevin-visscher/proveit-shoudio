@@ -1,4 +1,5 @@
-package nl.hva.proveit.shoudio.controllers {
+package nl.hva.proveit.shoudio.controllers
+{
 
     import flash.events.Event;
     import flash.media.Sound;
@@ -9,7 +10,8 @@ package nl.hva.proveit.shoudio.controllers {
 
     import nl.hva.proveit.shoudio.views.ShoudioPlayerView;
 
-    public class ShoudioPlayerController {
+    public class ShoudioPlayerController
+    {
 
         public var view:ShoudioPlayerView;
 
@@ -18,29 +20,37 @@ package nl.hva.proveit.shoudio.controllers {
         private var _sound:Sound;
         private var _soundChannel:SoundChannel;
 
-        public function btnPlayPause_clickHandler():void {
+        public function btnPlayPause_clickHandler():void
+        {
 
             Alert.show("loading sound..(" + _source + ")");
 
-            if (view.currentState === "playing") {
+            if (view.currentState === "playing")
+            {
 
                 _soundChannel.stop();
 
                 view.currentState = "default";
 
-            } else {
+            }
+            else
+            {
 
-                if (!!_sound) {
+                if (!!_sound)
+                {
                     _sound = new Sound(new URLRequest(_source));
 
                     Alert.show("loading sound..(" + _source + ")");
 
-                    _sound.addEventListener(Event.COMPLETE, function(e:Event):void {
+                    _sound.addEventListener(Event.COMPLETE, function (e:Event):void
+                    {
                         Alert.show("sound loaded");
                         _soundChannel = _sound.play();
                     });
 
-                } else {
+                }
+                else
+                {
                     _sound.play(_soundChannel.position);
                 }
 
@@ -49,11 +59,13 @@ package nl.hva.proveit.shoudio.controllers {
         }
 
         [Bindable]
-        public function get source():String {
+        public function get source():String
+        {
             return _source;
         }
 
-        public function set source(value:String):void {
+        public function set source(value:String):void
+        {
             _source = value;
         }
     }

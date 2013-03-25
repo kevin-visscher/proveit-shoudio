@@ -1,20 +1,25 @@
-package nl.hva.proveit.shoudio.models {
+package nl.hva.proveit.shoudio.models
+{
 
-    public class ShoudioRating {
+    public class ShoudioRating
+    {
 
         private var _value:Number;
         private var _votes:int;
 
-        public function ShoudioRating(value:Number,  votes:int) {
+        public function ShoudioRating(value:Number, votes:int)
+        {
             _value = value;
             _votes = votes;
         }
 
-        public function get value():Number {
+        public function get value():Number
+        {
             return _value;
         }
 
-        public function get votes():int {
+        public function get votes():int
+        {
             return _votes;
         }
     }

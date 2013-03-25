@@ -1,7 +1,8 @@
-package nl.hva.proveit.shoudio.models {
-
-    public class ShoudioCollectionItem {
-
+package nl.hva.proveit.shoudio.models
+{
+    [Bindable]
+    public class ShoudioCollectionItem
+    {
         private var _id:int;
 
         private var _collectionId:int;
@@ -18,7 +19,6 @@ package nl.hva.proveit.shoudio.models {
 
         private var _placeId:int;
 
-        // weird name, not sure what poi stands for
         private var _poi:PointOfInterest;
 
         private var _shoudioId:int;
@@ -37,10 +37,14 @@ package nl.hva.proveit.shoudio.models {
 
         private var _email:String;
 
-        // The type of the item
+        /**
+         * The type of the item.
+         * @see ShoudioItemType
+         */
         private var _type:String;
 
         // Depends on property type
+        // if the type is youtube this link only contains: "/watch?v=sadas
         private var _externalLink:String;
 
         private var _hasImage:Boolean;
@@ -413,6 +417,50 @@ package nl.hva.proveit.shoudio.models {
             _userName = value;
         }
 
+        public function clone():ShoudioCollectionItem
+        {
+            var clone:ShoudioCollectionItem = new ShoudioCollectionItem();
+
+            clone._altitudeAccuracy = this.altitudeAccuracy;
+            clone._attribution = this.attribution;
+            clone._channelId = this.channelId;
+            clone._clientId = this.clientId;
+            clone._collectionId = this.collectionId;
+            clone._creationDate = this.creationDate
+            clone._description = this.description;
+            clone._deviceId = this.deviceId;
+            clone._duration = this.duration;
+            clone._email = this.email;
+            clone._externalLink = this.externalLink;
+            clone._hasImage = this.hasImage;
+            clone._hasMp3 = this.hasMp3;
+            clone._heading = this.heading;
+            clone._id = this.id;
+            clone._iplong = this.iplong;
+            clone._latitude = this.latitude;
+            clone._licenseId = this.licenseId;
+            clone._listId = this.listId;
+            clone._locationAccurary = this.locationAccurary;
+            clone._locationTimestamp = this.locationTimestamp;
+            clone._longtitude = this.longtitude;
+            clone._message = this.message;
+            clone._nearby = this.nearby;
+            clone._placeId = this.placeId;
+            clone._poi = this.poi.clone();
+
+            clone._published = this._published;
+            clone._shoudioId = this.shoudioId;
+            clone._sorting = this.sorting;
+            clone._speed = this.speed;
+            clone._telephone = this.telephone;
+            clone._type = this.type;
+            clone._userId = this.userId;
+            clone._userImageType = this.userImageType;
+            clone._userName = this.userName;
+
+            return clone;
+        }
+
         public static function fromObject(o:Object):ShoudioCollectionItem
         {
             var item:ShoudioCollectionItem = new ShoudioCollectionItem();
@@ -443,11 +491,11 @@ package nl.hva.proveit.shoudio.models {
             item._placeId = o.placeid;
 
             var poi:PointOfInterest = new PointOfInterest(
-                o.poi_country,
-                o.poi_state,
-                o.poi_city,
-                o.poi_address,
-                o.poi_zip
+                    o.poi_country,
+                    o.poi_state,
+                    o.poi_city,
+                    o.poi_address,
+                    o.poi_zip
             );
 
             poi.categoryId = o.poi_category;
@@ -466,7 +514,8 @@ package nl.hva.proveit.shoudio.models {
             return item;
         }
 
-        private static function parseShoudioDate(str:String):Date {
+        private static function parseShoudioDate(str:String):Date
+        {
 
             var splitIndex:int = str.indexOf(" ");
 

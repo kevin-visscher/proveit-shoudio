@@ -5,7 +5,7 @@ package nl.hva.proveit.shoudio.models
         private var _location:String;
         private var _city:String;
 
-        public function ShoudioAddress(location:String,  city:String)
+        public function ShoudioAddress(location:String, city:String)
         {
             _location = location;
             _city = city;

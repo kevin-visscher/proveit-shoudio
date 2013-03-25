@@ -3,13 +3,14 @@
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
                xmlns:views="nl.hva.proveit.shoudio.views.*"
+               xmlns:modestmaps="com.modestmaps.flex.*"
                minWidth="400"
                minHeight="400"
                creationComplete="{controller.creationCompleteHandler()}">
 
     <fx:Declarations>
-	    <controllers:HomeController id="controller" view="{this}"/>
-	</fx:Declarations>
+        <controllers:MainController id="controller" view="{this}"/>
+    </fx:Declarations>
 
     <s:states>
         <s:State name="sidebarHidden"/>
@@ -18,9 +19,20 @@
 
     <s:transitions>
         <s:Transition fromState="sidebarHidden" toState="sidebarVisible">
-            <s:Animate id="sidebarAnim" duration="450" target="{sidebar}">
+            <s:Animate duration="450" target="{sidebar}" effectEnd="{sidebar.right = 0}">
                 <s:motionPaths>
-                    <s:SimpleMotionPath property="right" valueFrom="-160" valueTo="0"/>
+                    <s:SimpleMotionPath property="right"
+                                        valueFrom="{-sidebar.width}"
+                                        valueTo="0"/>
+                </s:motionPaths>
+            </s:Animate>
+        </s:Transition>
+        <s:Transition fromState="sidebarVisible" toState="sidebarHidden">
+            <s:Animate duration="450" target="{sidebar}" effectEnd="{sidebar.right = -sidebar.width}">
+                <s:motionPaths>
+                    <s:SimpleMotionPath property="right"
+                                        valueFrom="0"
+                                        valueTo="{-sidebar.width}"/>
                 </s:motionPaths>
             </s:Animate>
         </s:Transition>
@@ -39,19 +51,18 @@
              left="{(width - 400) / 2}" top="{(height - 400) / 2}"
              clipAndEnableScrolling="true">
 
-        <!-- Map container -->
-        <s:Group id="mapGroup"
-                 top="0"
-                 right="0"
-                 bottom="0"
-                 left="0"/>
+        <modestmaps:MapComponent id="map"
+                                 provider="OPEN_STREET_MAP"
+                                 top="0"
+                                 right="0"
+                                 bottom="0"
+                                 left="0"/>
 
         <views:Sidebar id="sidebar"
                        top="0"
-                       right="0"
                        bottom="0"
-                       includeIn="sidebarVisible"
-                       creationPolicy="all"
+                       right="-160"
+                       width="160"
                        cacheAsBitmap="true"/>
 
         <s:Button id="btnToggleSidebar"
@@ -59,8 +70,7 @@
                   label.sidebarVisible="Hide sidebar"
                   top="4"
                   right="4"
-                  click="{sidebarAnim.play()}"
-                  click.sidebarVisible="{sidebarAnim.play(null, true)}"/>
+                  click="{currentState = (currentState === 'sidebarHidden' ? 'sidebarVisible' : 'sidebarHidden')}"/>
 
     </s:Group>
 

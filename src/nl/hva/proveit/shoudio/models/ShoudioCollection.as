@@ -1,7 +1,9 @@
-package nl.hva.proveit.shoudio.models {
+package nl.hva.proveit.shoudio.models
+{
     import org.sepy.io.Serializer;
 
-    public class ShoudioCollection {
+    public class ShoudioCollection
+    {
 
         private var _id:int;
 
@@ -166,7 +168,8 @@ package nl.hva.proveit.shoudio.models {
             return _route;
         }
 
-        public static function fromObject(data:Object):ShoudioCollection {
+        public static function fromObject(data:Object):ShoudioCollection
+        {
 
             var collection:Object = data.collection;
 
@@ -213,7 +216,8 @@ package nl.hva.proveit.shoudio.models {
             return o;
         }
 
-        private static function parseShoudioDate(str:String):Date {
+        private static function parseShoudioDate(str:String):Date
+        {
 
             var splitIndex:int = str.indexOf(" ");
 

@@ -5,13 +5,11 @@
 
     <fx:Script>
         <![CDATA[
-
-            /**
-             * Url to a media file (wav, mp3, etc.)
-             */
-            [Bindable]
-            public var source:String;
-
+        /**
+         * Url to a media file (wav, mp3, etc.)
+         */
+        [Bindable]
+        public var source:String;
         ]]>
     </fx:Script>
 
