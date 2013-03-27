@@ -55,3 +55,24 @@ function addmapPoi(item, overlay) {
         ]);
     }
 }
+
+function addMarker() {
+    currentLL = new OpenLayers.LonLat(shoudioObjects[0].lon, shoudioObjects[0].lat).transform(fromProjection, toProjection);
+
+    if (markers == null) {
+        markers = new OpenLayers.Layer.Markers("Markers");
+        map.addLayer(markers);
+    }
+
+    var marker = new OpenLayers.Marker(currentLL, icon)
+    markers.addMarker(marker);
+    marker.events.register("click",this.marker,markerClick);
+}
+
+function markerClick() {
+    if (popup) map.removePopup(popup);
+    popup = new OpenLayers.Popup.FramedCloud("test", currentLL, null,
+                "testksfdjslfkjsl",
+                anchor = null, true, null);
+    map.addPopup(popup);
+}
