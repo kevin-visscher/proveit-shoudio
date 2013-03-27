@@ -1,4 +1,5 @@
 var shoudioObjects = [];
+var shoudioPois = [];
 var map;
 var fromProjection;
 var toProjection;
@@ -12,7 +13,7 @@ $(function() {
     
     overlay = new OpenLayers.Layer.Vector('Overlay', {
         styleMap: new OpenLayers.StyleMap({
-            externalGraphic: '../img/marker.png',
+            externalGraphic: 'img/marker.png',
             graphicWidth: 25, graphicHeight: 41, graphicYOffset: -41,
             title: '${tooltip}'
         })
@@ -22,4 +23,5 @@ $(function() {
     
     //add rightmenuclick handler
     $('.rightmenuitems li').live('click', rightmenuClick);
+    
 });

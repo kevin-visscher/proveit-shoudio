@@ -38,3 +38,20 @@ function addmapItems(item, overlay) {
             .transform(fromProjection, toProjection))]);
     }
 }
+
+function addmapPoi(item, overlay) {
+    for(var i in item) {
+        var message = item[i].message;
+        var lon = item[i].lon;
+        var lat = item[i].lat;
+        
+        // The location of our marker and popup. We usually think in geographic
+        // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
+        var myLocation = new OpenLayers.Geometry.Point(lon, lat)
+            .transform(fromProjection, toProjection);
+        
+        overlay.addFeatures([
+            new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
+        ]);
+    }
+}

@@ -2,9 +2,11 @@ function jsonLoaded(data) {
     var temp = jQuery.parseJSON(data);
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
+        else shoudioPois.push(temp.contents[i]);
     }
     addrightmenuItems(shoudioObjects);
     addmapItems(shoudioObjects, overlay);
+    addmapPoi(shoudioPois, overlay);
     
     var centerLocation = new OpenLayers.Geometry.Point(
         shoudioObjects[0].lon, 
@@ -26,6 +28,6 @@ function jsonLoaded(data) {
     );*/
     // and add the popup to it.
     //map.addPopup(popup);
-    map.removeControl(map.getControl('OpenLayers.Control.Zoom_46'));
-    map.removeControl(map.getControl('OpenLayers.Control.Attribution_48'));
+    map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
+    map.removeControl(map.getControl('OpenLayers.Control.Attribution_56'));
 }
