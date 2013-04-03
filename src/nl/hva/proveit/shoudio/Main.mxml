@@ -8,6 +8,8 @@
                minHeight="400"
                creationComplete="{controller.creationCompleteHandler()}">
 
+    <fx:Style source="/assets/style.css"/>
+
     <fx:Declarations>
         <controllers:MainController id="controller" view="{this}"/>
     </fx:Declarations>
@@ -49,7 +51,8 @@
 
     <s:Group width="400" height="400"
              left="{(width - 400) / 2}" top="{(height - 400) / 2}"
-             clipAndEnableScrolling="true">
+             clipAndEnableScrolling="true"
+             id="mapContainer">
 
         <modestmaps:MapComponent id="map"
                                  provider="OPEN_STREET_MAP"

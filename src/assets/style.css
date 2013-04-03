@@ -1,0 +1,11 @@
+.shoudioMessage
+{
+    fontSize: 16px;
+    fontWeight: bold;
+}
+
+.shoudioDescription
+{
+    fontFamily: Georgia;
+    fontSize: 12px;
+}

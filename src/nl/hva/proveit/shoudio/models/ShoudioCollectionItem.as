@@ -3,7 +3,7 @@ package nl.hva.proveit.shoudio.models
     [Bindable]
     public class ShoudioCollectionItem
     {
-        private var _id:int;
+        private var _itemId:int;
 
         private var _collectionId:int;
 
@@ -77,14 +77,14 @@ package nl.hva.proveit.shoudio.models
 
         private var _published:Boolean;
 
-        public function get id():int
+        public function get itemId():int
         {
-            return _id;
+            return _itemId;
         }
 
-        public function set id(value:int):void
+        public function set itemId(value:int):void
         {
-            _id = value;
+            _itemId = value;
         }
 
         public function get collectionId():int
@@ -435,7 +435,7 @@ package nl.hva.proveit.shoudio.models
             clone._hasImage = this.hasImage;
             clone._hasMp3 = this.hasMp3;
             clone._heading = this.heading;
-            clone._id = this.id;
+            clone._itemId = this.itemId;
             clone._iplong = this.iplong;
             clone._latitude = this.latitude;
             clone._licenseId = this.licenseId;
@@ -478,7 +478,7 @@ package nl.hva.proveit.shoudio.models
             item._hasImage = o.hasimg === 1;
             item._hasMp3 = o.hasmp3 === 1;
             item._heading = o.heading;
-            item._id = o.id;
+            item._itemId = o.id;
             item._iplong = o.iplong;
             item._latitude = o.lat;
             item._licenseId = o.license_id;

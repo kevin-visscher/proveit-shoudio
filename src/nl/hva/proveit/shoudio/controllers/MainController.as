@@ -5,11 +5,13 @@ package nl.hva.proveit.shoudio.controllers
     import com.modestmaps.events.MarkerEvent;
     import com.modestmaps.geo.Location;
 
-    import flash.display.Sprite;
+    import flash.events.MouseEvent;
+    import flash.geom.Point;
 
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.core.FlexGlobals;
+    import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.Main;
     import nl.hva.proveit.shoudio.json.JsonLoader;
@@ -28,6 +30,8 @@ package nl.hva.proveit.shoudio.controllers
         private var _jsonLoader:JsonLoader;
         private var _map:Map;
 
+        private var _activePopup:MapMarkerPopup;
+
         public function creationCompleteHandler():void
         {
             _jsonLoader = new JsonLoader();
@@ -35,6 +39,7 @@ package nl.hva.proveit.shoudio.controllers
 
             _map = view.map.map;
             _map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickedHandler);
+            _map.addEventListener(MouseEvent.CLICK, map_clickHandler);
 
             _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri);
 
@@ -43,23 +48,32 @@ package nl.hva.proveit.shoudio.controllers
 
         private function map_markerClickedHandler(e:MarkerEvent):void
         {
+            // TODO: Position the popup on the appropriate location
+
+            var p:Point = _map.locationPoint(e.location);
+
             var popup:MapMarkerPopup = new MapMarkerPopup();
+            popup.item = (e.marker as MapMarker).item;
             popup.width = 128;
             popup.height = 128;
+            popup.x = view.mapContainer.x + p.x;
+            popup.y = view.mapContainer.y + p.y;
 
-            var s:Sprite = new Sprite();
-            s.width = 256;
-            s.height = 256;
-            s.x = e.marker.x;
-            s.y = e.marker.y;
+            if (_activePopup !== null)
+                PopUpManager.removePopUp(_activePopup);
 
-            s.graphics.beginFill(0x00FF00);
-            s.graphics.drawRect(0, 0, 256, 256);
-            s.graphics.endFill();
+            PopUpManager.addPopUp(popup, view);
 
-//            s.addChild(popup);
+            _activePopup = popup;
+        }
 
-            _map.markerClip.addChild(s);
+        private function map_clickHandler(e:MouseEvent):void
+        {
+            if (!(e.target is MapMarker))
+                return;
+
+            if (_activePopup !== null)
+                PopUpManager.removePopUp(_activePopup);
         }
 
         private function listPoints_indexChangingEvent(e:IndexChangeEvent):void
@@ -88,7 +102,7 @@ package nl.hva.proveit.shoudio.controllers
             for each (var item:ShoudioCollectionItem in collection.items)
             {
                 // Add a marker for each item in the collection
-                _map.putMarker(new Location(item.latitude, item.longtitude), new MapMarker());
+                _map.putMarker(new Location(item.latitude, item.longtitude), new MapMarker(item));
 
                 // Only put items that are part of the actual route
                 // in to the sidebar. The points of interest are shown on the map
