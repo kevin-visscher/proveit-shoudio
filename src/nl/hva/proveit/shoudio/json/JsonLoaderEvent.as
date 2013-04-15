@@ -17,6 +17,11 @@ package nl.hva.proveit.shoudio.json
             _data = data;
         }
 
+        override public function clone():Event
+        {
+            return new JsonLoaderEvent(type,  _data);
+        }
+
         public function get data():Object
         {
             return _data;

@@ -1,25 +1,16 @@
 package nl.hva.proveit.shoudio.controllers
 {
 
-    import com.modestmaps.Map;
-    import com.modestmaps.events.MarkerEvent;
-    import com.modestmaps.geo.Location;
-
-    import flash.events.MouseEvent;
-    import flash.geom.Point;
-
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.core.FlexGlobals;
-    import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.Main;
+    import nl.hva.proveit.shoudio.events.SidebarEvent;
     import nl.hva.proveit.shoudio.json.JsonLoader;
     import nl.hva.proveit.shoudio.json.JsonLoaderEvent;
     import nl.hva.proveit.shoudio.models.ShoudioCollection;
     import nl.hva.proveit.shoudio.models.ShoudioCollectionItem;
-    import nl.hva.proveit.shoudio.views.MapMarker;
-    import nl.hva.proveit.shoudio.views.MapMarkerPopup;
 
     import spark.events.IndexChangeEvent;
 
@@ -28,51 +19,12 @@ package nl.hva.proveit.shoudio.controllers
         public var view:Main;
 
         private var _jsonLoader:JsonLoader;
-        private var _map:Map;
-
-        private var _activePopup:MapMarkerPopup;
 
         public function creationCompleteHandler():void
         {
             _jsonLoader = new JsonLoader();
             _jsonLoader.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
-
-            _map = view.map.map;
-            _map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickedHandler);
-
-            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri);
-
-            view.sidebar.listPoints.addEventListener(IndexChangeEvent.CHANGING, listPoints_indexChangingEvent);
-        }
-
-        private function map_markerClickedHandler(e:MarkerEvent):void
-        {
-            // TODO: Position the popup on the appropriate location
-
-            var p:Point = _map.locationPoint(e.location);
-
-            var popup:MapMarkerPopup = new MapMarkerPopup();
-            popup.item = (e.marker as MapMarker).item;
-            popup.width = 128;
-            popup.height = 128;
-            popup.x = view.mapContainer.x + p.x;
-            popup.y = view.mapContainer.y + p.y;
-
-            if (_activePopup !== null)
-                PopUpManager.removePopUp(_activePopup);
-
-            PopUpManager.addPopUp(popup, view);
-
-            _activePopup = popup;
-        }
-
-        private function map_clickHandler(e:MouseEvent):void
-        {
-            if (!(e.target is MapMarker))
-                return;
-
-            if (_activePopup !== null)
-                PopUpManager.removePopUp(_activePopup);
+            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri || "https://dl.dropbox.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
         }
 
         private function listPoints_indexChangingEvent(e:IndexChangeEvent):void
@@ -86,8 +38,8 @@ package nl.hva.proveit.shoudio.controllers
             var list:IList = view.sidebar.listPoints.dataProvider;
             var selectedItem:Object = list.getItemAt(e.newIndex);
 
-            // Center the map around the selected point
-            _map.setCenter(new Location(selectedItem.latitude, selectedItem.longtitude));
+            // Notify the map view that a marker was clicked in the sidebar
+            view.mapView.dispatchEvent(new SidebarEvent(SidebarEvent.MAP_MARKER_CLICKED, selectedItem as ShoudioCollectionItem));
 
             // "Close" the sidebar
             view.currentState = "sidebarHidden";
@@ -95,27 +47,30 @@ package nl.hva.proveit.shoudio.controllers
 
         private function jsonLoader_jsonLoadedHandler(e:JsonLoaderEvent):void
         {
+            _jsonLoader.removeEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
+
             var collection:ShoudioCollection = ShoudioCollection.fromObject(e.data);
             var sidebarItems:Array = [ ];
 
             for each (var item:ShoudioCollectionItem in collection.items)
             {
-                // Add a marker for each item in the collection
-                _map.putMarker(new Location(item.latitude, item.longtitude), new MapMarker(item));
-
-                // Only put items that are part of the actual route
-                // in to the sidebar. The points of interest are shown on the map
-                if (item.sorting !== -1)
+                if (item.sorting >= 0)
                 {
                     sidebarItems.push(item);
                 }
             }
 
-            // Update the dataprovider of the sidebar
+            // Update the list in the sidebar
             view.sidebar.listPoints.dataProvider = new ArrayList(sidebarItems);
 
-            // Initial location of the map are the long- and latitude of the collection
-            _map.setCenterZoom(new Location(collection.latitude, collection.longtitude), 15);
+            // Notify the map view that the json has loaded and that it can begin showing the
+            // markers on the map etc.
+            view.mapView.dispatchEvent(e);
+
+            // Add a listener to the list in the sidebar to be able to center on the clicked item
+            view.sidebar.listPoints.addEventListener(IndexChangeEvent.CHANGING, listPoints_indexChangingEvent);
+
+            view.currentState = "sidebarHidden";
         }
     }
 }

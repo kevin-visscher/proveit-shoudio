@@ -2,25 +2,41 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
-         xmlns:models="nl.hva.proveit.shoudio.models.*">
+         xmlns:models="nl.hva.proveit.shoudio.models.*"
+         mask="{popupMask}">
 
     <fx:Declarations>
         <models:ShoudioCollectionItem id="item"/>
         <controllers:MapMarkerPopupController id="controller" view="{this}" item="{item}"/>
     </fx:Declarations>
 
+    <s:filters>
+        <s:DropShadowFilter color="0x777777"
+                            angle="90"
+                            distance="0"/>
+    </s:filters>
+
+    <s:Group id="popupMask" top="0" right="0" bottom="0" left="0">
+        <s:Rect top="0" right="0" bottom="32" left="0" radiusX="4" radiusY="4">
+            <s:fill>
+                <s:SolidColor color="0xFFFFFF"/>
+            </s:fill>
+        </s:Rect>
+        <s:Path bottom="0" right="8" width="32" height="32">
+            <s:data>M 0 0 h 32 l 16 32 l 0 0 z</s:data>
+            <s:fill>
+                <s:SolidColor color="0xFFFFFF"/>
+            </s:fill>
+        </s:Path>
+    </s:Group>
+
     <s:Rect top="0" right="0" bottom="0" left="0" radiusX="4" radiusY="4">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
         </s:fill>
-        <s:filters>
-            <s:DropShadowFilter color="0x777777"
-                                angle="90"
-                                distance="0"/>
-        </s:filters>
     </s:Rect>
 
-    <s:Scroller top="4" right="4" bottom="2" left="4">
+    <s:Scroller top="4" right="4" bottom="34" left="4">
         <s:VGroup top="0" right="0" bottom="0" left="0" clipAndEnableScrolling="true">
             <s:Label text="{item.message}" styleName="shoudioMessage"/>
             <s:Label text="{item.description}" styleName="shoudioDescription"/>
