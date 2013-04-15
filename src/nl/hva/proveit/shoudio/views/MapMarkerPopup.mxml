@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
          xmlns:models="nl.hva.proveit.shoudio.models.*">
 
     <fx:Declarations>
         <models:ShoudioCollectionItem id="item"/>
+        <controllers:MapMarkerPopupController id="controller" view="{this}" item="{item}"/>
     </fx:Declarations>
 
     <s:Rect top="0" right="0" bottom="0" left="0" radiusX="4" radiusY="4">

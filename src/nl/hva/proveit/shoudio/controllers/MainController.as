@@ -39,7 +39,6 @@ package nl.hva.proveit.shoudio.controllers
 
             _map = view.map.map;
             _map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickedHandler);
-            _map.addEventListener(MouseEvent.CLICK, map_clickHandler);
 
             _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri);
 
