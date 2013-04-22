@@ -34,7 +34,7 @@ function jsonLoaded(data) {
         center: centerLocation.getBounds().getCenterLonLat(), zoom: 17
     });
     
-    addMarker();
+    addMarker(shoudioObjects);
     
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_56'));

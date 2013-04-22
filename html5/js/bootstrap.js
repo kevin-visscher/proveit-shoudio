@@ -3,6 +3,7 @@
 */
 var shoudioObjects = [];
 var shoudioPois = [];
+var marker = [];
 var map;
 var fromProjection;
 var toProjection;
@@ -11,7 +12,6 @@ var overlay;
 var popup;
 var markers;
 var icon;
-var currentLL;
 
 $(function() {
     

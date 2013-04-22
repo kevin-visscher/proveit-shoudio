@@ -56,23 +56,29 @@ function addmapPoi(item, overlay) {
     }
 }
 
-function addMarker() {
-    currentLL = new OpenLayers.LonLat(shoudioObjects[0].lon, shoudioObjects[0].lat).transform(fromProjection, toProjection);
-
-    if (markers == null) {
-        markers = new OpenLayers.Layer.Markers("Markers");
+function addMarker(item) {
+    
+    if (this.markers == null) {
+        this.markers = new OpenLayers.Layer.Markers("Markers");
         map.addLayer(markers);
     }
 
-    var marker = new OpenLayers.Marker(currentLL, icon)
-    markers.addMarker(marker);
-    marker.events.register("click",this.marker,markerClick);
+    var i = 0;
+    for(var i in item) {
+        var currentLL = new OpenLayers.LonLat(item[i].lon, item[i].lat).transform(fromProjection, toProjection);
+        this.marker.push(new OpenLayers.Marker(currentLL, icon));
+    
+        marker[i].events.register("click",marker[i],function() {markerClick(currentLL, item[i].description)});
+        this.markers.addMarker(marker[i]);
+        console.log(marker[i]);
+    }
 }
 
-function markerClick() {
+function markerClick(lonlat,description) {
+    alert(1);
     if (popup) map.removePopup(popup);
-    popup = new OpenLayers.Popup.FramedCloud("test", currentLL, null,
-                "testksfdjslfkjsl",
+    popup = new OpenLayers.Popup.FramedCloud("test", lonlat, null,
+                description,
                 anchor = null, true, null);
     map.addPopup(popup);
 }
