@@ -11,7 +11,6 @@ var icon;
 var currentLL;
 
 $(function() {
-    // The overlay layer for our marker, with a simple diamond as symbol
     fromProjection = new OpenLayers.Projection("EPSG:4326");  // Transform from WGS 1984
     toProjection   = new OpenLayers.Projection("EPSG:3857");
     
