@@ -4,7 +4,14 @@
 * @param (data) jsondata
 */
 function jsonLoaded(data) {
-    var temp = jQuery.parseJSON(data);
+    console.log(data);
+    var temp;
+    
+    if (document.location.hostname == "localhost")
+        temp = data;
+    else
+        temp = jQuery.parseJSON(data);
+    
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
         else shoudioPois.push(temp.contents[i]);

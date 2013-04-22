@@ -1,3 +1,6 @@
+/**
+* 
+*/
 var shoudioObjects = [];
 var shoudioPois = [];
 var map;
@@ -11,6 +14,7 @@ var icon;
 var currentLL;
 
 $(function() {
+    
     fromProjection = new OpenLayers.Projection("EPSG:4326");  // Transform from WGS 1984
     toProjection   = new OpenLayers.Projection("EPSG:3857");
     
