@@ -3,6 +3,8 @@
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
          xmlns:models="nl.hva.proveit.shoudio.models.*"
+         width="300"
+         height="200"
          mask="{popupMask}">
 
     <fx:Declarations>
@@ -36,11 +38,18 @@
         </s:fill>
     </s:Rect>
 
-    <s:Scroller top="4" right="4" bottom="34" left="4">
-        <s:VGroup top="0" right="0" bottom="0" left="0" clipAndEnableScrolling="true">
-            <s:Label text="{item.message}" styleName="shoudioMessage"/>
-            <s:Label text="{item.description}" styleName="shoudioDescription"/>
-        </s:VGroup>
-    </s:Scroller>
+    <s:Group top="4" right="4" bottom="34" left="4">
+        <s:Scroller top="0" right="0" bottom="32" left="0">
+            <s:VGroup top="0" right="0" bottom="0" left="0" clipAndEnableScrolling="true">
+                <s:Label text="{item.message}" styleName="shoudioMessage"/>
+                <s:Label text="{item.description}" styleName="shoudioDescription"/>
+            </s:VGroup>
+        </s:Scroller>
+
+        <s:Button label="Do something awesome"
+                  click="{controller.doSomethingAwesome()}"/>
+    </s:Group>
+
+
 
 </s:Group>

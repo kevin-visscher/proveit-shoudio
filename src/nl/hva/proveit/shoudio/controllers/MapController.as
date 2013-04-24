@@ -4,16 +4,10 @@ package nl.hva.proveit.shoudio.controllers
     import com.modestmaps.events.MarkerEvent;
     import com.modestmaps.geo.Location;
 
-    import flash.display.Loader;
-    import flash.display.LoaderInfo;
-    import flash.events.Event;
+    import flash.events.MouseEvent;
     import flash.geom.Point;
-    import flash.net.URLRequest;
-    import flash.system.Security;
 
-    import mx.controls.Alert;
     import mx.core.IFlexDisplayObject;
-    import mx.core.UIComponent;
     import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.events.SidebarEvent;
@@ -26,7 +20,8 @@ package nl.hva.proveit.shoudio.controllers
 
     public final class MapController
     {
-        private static const YOUTUBE_API_URL:String = "http://www.youtube.com/apiplayer?version=3";
+        private static const MAP_POPUP_MARGIN_TOP:Number = 80;
+        private static const MAP_POPUP_MARGIN_LEFT:Number = 120;
 
         public var view:MapView;
 
@@ -36,47 +31,11 @@ package nl.hva.proveit.shoudio.controllers
 
         private var _activePopup:IFlexDisplayObject;
 
-        private var loader:Loader = new Loader();
-
         public function init():void
         {
             view.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
 
             map = view.mapComponent.map;
-
-            // Allow YouTube to communicate with the SWF
-            Security.allowDomain("www.youtube.com");
-
-            var request:URLRequest = new URLRequest(YOUTUBE_API_URL);
-
-            loader.contentLoaderInfo.addEventListener(Event.INIT, initYouTubePlayer, false, 0, true);
-            loader.load(request);
-        }
-
-        private function initYouTubePlayer(e:Event):void
-        {
-            var loaderInfo:LoaderInfo = e.target as LoaderInfo;
-
-            loaderInfo.content.addEventListener("onReady", youTubePlayer_readyHandler);
-            loaderInfo.content.addEventListener("onError", youTubePlayer_errorHandler);
-
-            var youTubePlayerContainer:UIComponent = new UIComponent();
-            youTubePlayerContainer.addChild(loaderInfo.loader);
-
-            view.addElement(youTubePlayerContainer);
-        }
-
-        private function youTubePlayer_readyHandler(e:Event):void
-        {
-            Alert.show("youtube player ready");
-
-            (loader.content as Object).setSize(400, 400);
-            (loader.content as Object).loadVideoById({videoId: "Xt7-FvK9TVs"});
-        }
-
-        private function youTubePlayer_errorHandler(e:Event):void
-        {
-            Alert.show("youtube player error");
         }
 
         private function jsonLoader_jsonLoadedHandler(e:JsonLoaderEvent):void
@@ -92,41 +51,67 @@ package nl.hva.proveit.shoudio.controllers
             }
 
             // Initial location of the map are the long- and latitude of the collection
-            map.setCenterZoom(new Location(_collection.latitude, _collection.longtitude), 15);
+            map.setCenterZoom(new Location(_collection.latitude, _collection.longtitude), 17);
 
             view.addEventListener(SidebarEvent.MAP_MARKER_CLICKED, sidebar_mapMarkerClickedHandler);
 
-            map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickHandler);
+            map.addEventListener(MarkerEvent.MARKER_ROLL_OVER, map_markerRollOverHandler);
+            map.addEventListener(MarkerEvent.MARKER_ROLL_OUT, map_markerRollOutHandler);
+        }
+
+        private function openMarkerPopup(markerLocation:Location, item:ShoudioCollectionItem):void
+        {
+            var clickedPoint:Point = map.locationPoint(markerLocation);
+            var mapCenterPoint:Point = map.locationPoint(map.getCenter());
+
+            map.panBy(mapCenterPoint.x - clickedPoint.x, mapCenterPoint.y - clickedPoint.y);
+            map.panBy(MAP_POPUP_MARGIN_LEFT, MAP_POPUP_MARGIN_TOP);
+
+            mapCenterPoint = map.locationPoint(map.getCenter());
+
+            var popup:MapMarkerPopup = new MapMarkerPopup();
+            popup.item = item;
+            popup.x = view.parent.x + mapCenterPoint.x + MAP_POPUP_MARGIN_LEFT - popup.width;
+            popup.y = view.parent.y + mapCenterPoint.y + MAP_POPUP_MARGIN_TOP - popup.height;
+
+            closeActivePopup();
+
+            _activePopup = popup;
+            _activePopup.addEventListener(MouseEvent.ROLL_OUT, activePopup_rollOutHandler, false, 0, true);
+
+            PopUpManager.addPopUp(popup, view);
+        }
+
+        private function closeActivePopup():void
+        {
+            if (_activePopup !== null)
+                PopUpManager.removePopUp(_activePopup);
+        }
+
+        private function map_markerRollOverHandler(e:MarkerEvent):void
+        {
+            var location:Location = e.location;
+            var item:ShoudioCollectionItem = (e.marker as MapMarker).item;
+
+            openMarkerPopup(location, item);
+        }
+
+        private function map_markerRollOutHandler(e:MarkerEvent):void
+        {
+//            if (_activePopup !== null)
+//                PopUpManager.removePopUp(_activePopup);
+        }
+
+        private function activePopup_rollOutHandler(e:MouseEvent):void
+        {
+            PopUpManager.removePopUp(e.target as IFlexDisplayObject);
         }
 
         private function sidebar_mapMarkerClickedHandler(e:SidebarEvent):void
         {
             var item:ShoudioCollectionItem = e.item;
 
-            // Center the map on the item that was clicked
-            map.setCenter(new Location(item.latitude, item.longtitude));
-        }
-
-        private function map_markerClickHandler(e:MarkerEvent):void
-        {
-            var location:Location = e.location;
-            var clickedPoint:Point = map.locationPoint(location);
-            var item:ShoudioCollectionItem = (e.marker as MapMarker).item;
-
-            var popup:MapMarkerPopup = new MapMarkerPopup();
-            popup.item = item;
-            popup.x = view.x + clickedPoint.x;
-            popup.y = view.y + clickedPoint.y;
-
-            if (_activePopup !== null)
-                PopUpManager.removePopUp(_activePopup);
-
-            // TODO: Don't show popup if the it's of type audio/video
-            PopUpManager.addPopUp(popup, view);
-
-            _activePopup = popup;
-
-            map.setCenter(location);
+            openMarkerPopup(new Location(item.latitude, item.longtitude), item);
         }
     }
 }
