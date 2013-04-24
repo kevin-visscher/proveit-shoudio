@@ -14,6 +14,7 @@ function jsonLoaded(data) {
     
     this.collection = temp.collection;
     
+
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
         else shoudioPois.push(temp.contents[i]);
@@ -48,7 +49,9 @@ function jsonLoaded(data) {
     addrightmenuItems(shoudioObjects);
     addmapItems(shoudioObjects, overlay);
     addmapPoi(shoudioPois, overlay);
-    
+    startmenu(this.collection);
+
+
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));
 }

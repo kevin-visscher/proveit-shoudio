@@ -75,3 +75,18 @@ ul.rightmenuitems .selected {
     margin: 0px 7px -5px 7px;
 }
 /* RECHTERMENU */
+
+/* STARTMENU */
+.startmenu_naamrondje{
+	text-align: center;
+}
+
+.startmenu_plaatje{
+	width:100px;
+}
+
+.startmenu_address{
+	width:300px;
+}
+
+/* END STARTMENU */
