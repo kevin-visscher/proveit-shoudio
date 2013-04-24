@@ -4,7 +4,7 @@
 * @param (data) jsondata
 */
 function jsonLoaded(data) {
-    console.log(data);
+    
     var temp;
     
     if (document.location.hostname == "localhost")
@@ -12,13 +12,12 @@ function jsonLoaded(data) {
     else
         temp = jQuery.parseJSON(data);
     
+    this.collection = temp.collection;
+    
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
         else shoudioPois.push(temp.contents[i]);
     }
-    addrightmenuItems(shoudioObjects);
-    addmapItems(shoudioObjects, overlay);
-    addmapPoi(shoudioPois, overlay);
     
     var centerLocation = new OpenLayers.Geometry.Point(
         shoudioObjects[0].lon, 
@@ -34,7 +33,9 @@ function jsonLoaded(data) {
         center: centerLocation.getBounds().getCenterLonLat(), zoom: 17
     });
     
-    addMarker(shoudioObjects);
+    addrightmenuItems(shoudioObjects);
+    addmapItems(shoudioObjects, overlay);
+    addmapPoi(shoudioPois, overlay);
     
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_56'));

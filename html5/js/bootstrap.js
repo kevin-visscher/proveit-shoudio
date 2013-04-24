@@ -4,14 +4,16 @@
 var shoudioObjects = [];
 var shoudioPois = [];
 var marker = [];
+var markers;
 var map;
 var fromProjection;
 var toProjection;
 var oldthis;
 var overlay;
+var selectControl;
 var popup;
-var markers;
 var icon;
+var collection;
 
 $(function() {
     

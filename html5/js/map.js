@@ -8,9 +8,9 @@ function addmapItems(item, overlay) {
         // The location of our marker and popup. We usually think in geographic
         // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
         var myLocation = new OpenLayers.Geometry.Point(lon, lat)
-            .transform(fromProjection, toProjection);
+            .transform(this.fromProjection, this.toProjection);
         
-        overlay.addFeatures([
+        this.overlay.addFeatures([
             new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
         ]);
         
@@ -27,15 +27,15 @@ function addmapItems(item, overlay) {
             //draw line to to start
             start_point = new OpenLayers.Geometry.Point(lon, lat);
             end_point = new OpenLayers.Geometry.Point(item[0].lon, item[0].lat);
-            overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-            .transform(fromProjection, toProjection))]);
+            this.overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
+            .transform(this.fromProjection, this.toProjection))]);
             
             //draw last line
             start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
             end_point = new OpenLayers.Geometry.Point(lon, lat);
         }
         overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-            .transform(fromProjection, toProjection))]);
+            .transform(this.fromProjection, this.toProjection))]);
     }
 }
 
@@ -50,27 +50,9 @@ function addmapPoi(item, overlay) {
         var myLocation = new OpenLayers.Geometry.Point(lon, lat)
             .transform(fromProjection, toProjection);
         
-        overlay.addFeatures([
+        this.overlay.addFeatures([
             new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
         ]);
-    }
-}
-
-function addMarker(item) {
-    
-    if (this.markers == null) {
-        this.markers = new OpenLayers.Layer.Markers("Markers");
-        map.addLayer(markers);
-    }
-
-    var i = 0;
-    for(var i in item) {
-        var currentLL = new OpenLayers.LonLat(item[i].lon, item[i].lat).transform(fromProjection, toProjection);
-        this.marker.push(new OpenLayers.Marker(currentLL, icon));
-    
-        marker[i].events.register("click",marker[i],function() {markerClick(currentLL, item[i].description)});
-        this.markers.addMarker(marker[i]);
-        console.log(marker[i]);
     }
 }
 
