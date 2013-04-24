@@ -19,6 +19,14 @@ function jsonLoaded(data) {
         else shoudioPois.push(temp.contents[i]);
     }
     
+    overlay = new OpenLayers.Layer.Vector('Overlay', {
+        styleMap: new OpenLayers.StyleMap({
+            externalGraphic: 'img/marker.png',
+            graphicWidth: 25, graphicHeight: 41, graphicYOffset: -41,
+            title: '${tooltip}'
+        })
+    });
+    
     var centerLocation = new OpenLayers.Geometry.Point(
         shoudioObjects[0].lon, 
         shoudioObjects[0].lat)
@@ -33,10 +41,14 @@ function jsonLoaded(data) {
         center: centerLocation.getBounds().getCenterLonLat(), zoom: 17
     });
     
+    selectMarkerControl = new OpenLayers.Control.SelectFeature(overlay, {onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});
+    map.addControl(selectMarkerControl);
+    selectMarkerControl.activate();
+    
     addrightmenuItems(shoudioObjects);
     addmapItems(shoudioObjects, overlay);
     addmapPoi(shoudioPois, overlay);
     
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
-    map.removeControl(map.getControl('OpenLayers.Control.Attribution_56'));
+    map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));
 }

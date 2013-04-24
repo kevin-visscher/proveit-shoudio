@@ -56,11 +56,27 @@ function addmapPoi(item, overlay) {
     }
 }
 
-function markerClick(lonlat,description) {
-    alert(1);
-    if (popup) map.removePopup(popup);
-    popup = new OpenLayers.Popup.FramedCloud("test", lonlat, null,
-                description,
-                anchor = null, true, null);
+/*
+* Function that creates the popup onclick
+*/
+function onFeatureSelect(feature) {
+    hiderightmenu();
+    selectedFeature = feature;
+    popup = new OpenLayers.Popup.FramedCloud("tempId", feature.geometry.getBounds().getCenterLonLat(),
+                             null,
+                             selectedFeature.attributes.salutation + " from Lat:" + selectedFeature.attributes.Lat + " Lon:" + selectedFeature.attributes.Lon,
+                             null, true);
+    feature.popup = popup;
     map.addPopup(popup);
 }
+
+/*
+* Function that removes the popup
+*  this function is called when a user clicks 
+*  on another marker or somewhere the map
+*/
+function onFeatureUnselect(feature) {
+    map.removePopup(feature.popup);
+    feature.popup.destroy();
+    feature.popup = null;
+}   
