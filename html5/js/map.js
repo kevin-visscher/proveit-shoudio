@@ -62,10 +62,14 @@ function addmapPoi(item, overlay) {
 function onFeatureSelect(feature) {
     hiderightmenu();
     selectedFeature = feature;
-    popup = new OpenLayers.Popup.FramedCloud("tempId", feature.geometry.getBounds().getCenterLonLat(),
+    console.log(feature);
+    
+    map.panTo(feature.geometry.getBounds().getCenterLonLat());
+    
+    popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
-                             selectedFeature.attributes.salutation + " from Lat:" + selectedFeature.attributes.Lat + " Lon:" + selectedFeature.attributes.Lon,
-                             null, true);
+                             shoudioObjects[0].description,
+                             null, false);
     feature.popup = popup;
     map.addPopup(popup);
 }
