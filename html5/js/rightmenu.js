@@ -10,8 +10,6 @@ function addrightmenuItems(item){
     for(var i in item) {
         if(item[i].sorting < 0) continue;
         var message = item[i].message;
-        var lat = item[i].lat;
-        var lon = item[i].lon;
         var shoudiotype = item[i].type;
         
         if(message.length > 19) message = message.substr(0,19) + "...";

@@ -4,6 +4,7 @@
 var shoudioObjects = [];
 var shoudioPois = [];
 var marker = [];
+var shoudioObjectsPointer = {};
 var markers;
 var map;
 var fromProjection;

@@ -47,11 +47,15 @@ function jsonLoaded(data) {
     selectMarkerControl.activate();
     
     addrightmenuItems(shoudioObjects);
+
     addmapItems(shoudioObjects, overlay);
     addmapPoi(shoudioPois, overlay);
     startmenu(this.collection);
 
 
+    addmapItems(temp.contents, overlay);
+    //addmapPoi(shoudioPois, overlay);
+    
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));
 }

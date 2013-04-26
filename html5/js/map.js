@@ -1,5 +1,16 @@
+/*
+* Function that projects a marker on the map for all shoudio
+*  items, if the item is in a collection, 
+*  the items that have a sorting value > -1
+*
+* @param item       Array of the collection with all 
+*                   the items
+* @param overlay    extra layer above the map to add 
+*                   an marker (feature) to the overlay
+*/
 function addmapItems(item, overlay) {
     //add to map
+    var b = -1;
     for(var i in item) {
         var message = item[i].message;
         var lon = item[i].lon;
@@ -10,49 +21,41 @@ function addmapItems(item, overlay) {
         var myLocation = new OpenLayers.Geometry.Point(lon, lat)
             .transform(this.fromProjection, this.toProjection);
         
-        this.overlay.addFeatures([
-            new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
-        ]);
+        var feature = new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'});
         
-        //draw the line
-        var start_point;
-        var end_point;
+        this.shoudioObjectsPointer[feature.id] = item[i];
+        this.overlay.addFeatures([feature]);
         
-        if(i>0) {
-            start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
-            end_point = new OpenLayers.Geometry.Point(lon, lat);
-        } if(i==item.length-1) {
-            //last object so draw the last line and draw the line back to start
+        //if the shoudioitem is an collection item,
+        if(item[i].sorting > -1) {
             
-            //draw line to to start
-            start_point = new OpenLayers.Geometry.Point(lon, lat);
-            end_point = new OpenLayers.Geometry.Point(item[0].lon, item[0].lat);
-            this.overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-            .transform(this.fromProjection, this.toProjection))]);
+            //set b the first time we come accross an collection item,
+            // so that we can start drawing lines for the collection items.
+            if(b == -1) b = i;
+            //draw the line
+            var start_point;
+            var end_point;
             
-            //draw last line
-            start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
-            end_point = new OpenLayers.Geometry.Point(lon, lat);
+            if(i>b) {
+                start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
+                end_point = new OpenLayers.Geometry.Point(lon, lat);
+            } if(i==item.length-1) {
+                //this is the last object, so draw the last line
+                // and draw the line back to start
+                
+                //draw line to to start
+                start_point = new OpenLayers.Geometry.Point(lon, lat);
+                end_point = new OpenLayers.Geometry.Point(item[b].lon, item[b].lat);
+                this.overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
+                .transform(this.fromProjection, this.toProjection))]);
+                
+                //draw last line
+                start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
+                end_point = new OpenLayers.Geometry.Point(lon, lat);
+            }
+            overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
+                .transform(this.fromProjection, this.toProjection))]);
         }
-        overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-            .transform(this.fromProjection, this.toProjection))]);
-    }
-}
-
-function addmapPoi(item, overlay) {
-    for(var i in item) {
-        var message = item[i].message;
-        var lon = item[i].lon;
-        var lat = item[i].lat;
-        
-        // The location of our marker and popup. We usually think in geographic
-        // coordinates ('EPSG:4326'), but the map is projected ('EPSG:3857').
-        var myLocation = new OpenLayers.Geometry.Point(lon, lat)
-            .transform(fromProjection, toProjection);
-        
-        this.overlay.addFeatures([
-            new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
-        ]);
     }
 }
 
@@ -62,13 +65,14 @@ function addmapPoi(item, overlay) {
 function onFeatureSelect(feature) {
     hiderightmenu();
     selectedFeature = feature;
-    console.log(feature);
+    
+    var shoudioItem = shoudioObjectsPointer[feature.id];
     
     map.panTo(feature.geometry.getBounds().getCenterLonLat());
     
     popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
-                             shoudioObjects[0].description,
+                             shoudioItem.message,
                              null, false);
     feature.popup = popup;
     map.addPopup(popup);
