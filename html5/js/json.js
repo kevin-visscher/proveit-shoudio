@@ -17,7 +17,6 @@ function jsonLoaded(data) {
 
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
-        else shoudioPois.push(temp.contents[i]);
     }
     
     overlay = new OpenLayers.Layer.Vector('Overlay', {
@@ -46,16 +45,9 @@ function jsonLoaded(data) {
     map.addControl(selectMarkerControl);
     selectMarkerControl.activate();
     
-    addrightmenuItems(shoudioObjects);
-
-    addmapItems(shoudioObjects, overlay);
-    addmapPoi(shoudioPois, overlay);
-    startmenu(this.collection);
-
-
     addmapItems(temp.contents, overlay);
-    //addmapPoi(shoudioPois, overlay);
-    
+    //startmenu(this.collection);
+
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));
 }

@@ -1,5 +1,5 @@
 /**
-* 
+* Bootstrap, main javascript file
 */
 var shoudioObjects = [];
 var shoudioPois = [];
@@ -25,5 +25,4 @@ $(function() {
     
     //add rightmenuclick handler
     $('.rightmenuitems li').live('click', rightmenuClick);
-    
 });

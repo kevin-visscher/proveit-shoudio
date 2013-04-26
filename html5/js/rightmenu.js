@@ -6,16 +6,12 @@ function showrightmenu() {
     $("#rightmenu").animate({'margin-left':'240px'},1000);
 }
 
-function addrightmenuItems(item){
-    for(var i in item) {
-        if(item[i].sorting < 0) continue;
-        var message = item[i].message;
-        var shoudiotype = item[i].type;
-        
-        if(message.length > 19) message = message.substr(0,19) + "...";
-        
-        $(".rightmenuitems").append('<li class="notselected" data-shouindex="'+i+'"><object id="icon" data="img/'+shoudiotype+'black.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
-    }
+function addrightmenuItem(item, featureid) {
+    var message = item.message;
+    var shoudiotype = item.type;
+    if(message.length > 19) message = message.substr(0,19) + "...";
+    
+    $(".rightmenuitems").append('<li class="notselected" data-shouindex="'+featureid+'"><object id="icon" data="img/'+shoudiotype+'black.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
 }
 
 function rightmenuClick(){
@@ -24,8 +20,12 @@ function rightmenuClick(){
     $(this).toggleClass('selected');
     
     
-    var shouindex = $(this).data("shouindex");
-    var lon = shoudioObjects[shouindex].lon;
+    var featureid = $(this).data("shouindex");
+    var feature = shoudioObjectsPointer[featureid][1];
+    
+    onFeatureUnselect(selectedFeature);
+    onFeatureSelect(feature);
+    /*var lon = shoudioObjects[shouindex].lon;
     var lat = shoudioObjects[shouindex].lat;
     var description = shoudioObjects[shouindex].description;
     var shoudio_id = shoudioObjects[shouindex].shoudio_id;
@@ -96,6 +96,6 @@ function rightmenuClick(){
             supplied: "mp3",
             wmode: "window"
         });
-    
+    */
     hiderightmenu();
 }

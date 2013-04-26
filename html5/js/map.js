@@ -23,7 +23,10 @@ function addmapItems(item, overlay) {
         
         var feature = new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'});
         
-        this.shoudioObjectsPointer[feature.id] = item[i];
+        this.shoudioObjectsPointer[feature.id] = Array(2);
+        this.shoudioObjectsPointer[feature.id][0] = item[i];
+        this.shoudioObjectsPointer[feature.id][1] = feature;
+        
         this.overlay.addFeatures([feature]);
         
         //if the shoudioitem is an collection item,
@@ -32,6 +35,10 @@ function addmapItems(item, overlay) {
             //set b the first time we come accross an collection item,
             // so that we can start drawing lines for the collection items.
             if(b == -1) b = i;
+            
+            //add map item to right menu
+            addrightmenuItem(item[i], feature.id);
+            
             //draw the line
             var start_point;
             var end_point;
@@ -66,7 +73,7 @@ function onFeatureSelect(feature) {
     hiderightmenu();
     selectedFeature = feature;
     
-    var shoudioItem = shoudioObjectsPointer[feature.id];
+    var shoudioItem = shoudioObjectsPointer[feature.id][0];
     
     map.panTo(feature.geometry.getBounds().getCenterLonLat());
     
