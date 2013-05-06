@@ -18,7 +18,7 @@
     </fx:Declarations>
 
     <s:states>
-        <s:State name="default"/>
+        <s:State name="default"/>                           */
         <s:State name="playing"/>
     </s:states>
 

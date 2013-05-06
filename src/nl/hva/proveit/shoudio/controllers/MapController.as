@@ -10,6 +10,7 @@ package nl.hva.proveit.shoudio.controllers
     import mx.core.IFlexDisplayObject;
     import mx.managers.PopUpManager;
 
+    import nl.hva.proveit.shoudio.MapPanner;
     import nl.hva.proveit.shoudio.events.SidebarEvent;
     import nl.hva.proveit.shoudio.json.JsonLoaderEvent;
     import nl.hva.proveit.shoudio.models.ShoudioCollection;
@@ -25,17 +26,21 @@ package nl.hva.proveit.shoudio.controllers
 
         public var view:MapView;
 
-        private var _collection:ShoudioCollection;
-
         public var map:Map;
 
+        private var _collection:ShoudioCollection;
+
         private var _activePopup:IFlexDisplayObject;
+
+        private var _panner:MapPanner;
 
         public function init():void
         {
             view.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
 
             map = view.mapComponent.map;
+
+            _panner = new MapPanner(map);
         }
 
         private function jsonLoader_jsonLoadedHandler(e:JsonLoaderEvent):void

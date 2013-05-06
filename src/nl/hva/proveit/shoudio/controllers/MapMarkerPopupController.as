@@ -6,6 +6,7 @@ package nl.hva.proveit.shoudio.controllers
 
     import nl.hva.proveit.shoudio.models.ShoudioCollectionItem;
     import nl.hva.proveit.shoudio.models.ShoudioItemType;
+    import nl.hva.proveit.shoudio.views.ImagePlayerView;
     import nl.hva.proveit.shoudio.views.MapMarkerPopup;
     import nl.hva.proveit.shoudio.views.VideoPlayerView;
 
@@ -21,6 +22,10 @@ package nl.hva.proveit.shoudio.controllers
             {
                 case ShoudioItemType.VIDEO:
                     openVideoPlayer();
+                    break;
+
+                case ShoudioItemType.IMAGE:
+                    openImageViewer();
                     break;
 
                 default:
@@ -40,6 +45,20 @@ package nl.hva.proveit.shoudio.controllers
             videoPlayer.youTubeVideoId = item.externalLink;
 
             PopUpManager.addPopUp(videoPlayer, view);
+        }
+
+        private function openImageViewer():void
+        {
+            var topLevelApp:Object = FlexGlobals.topLevelApplication;
+
+            var imageViewer:ImagePlayerView = new ImagePlayerView();
+            imageViewer.x = (topLevelApp.width - topLevelApp.mapContainer.width) / 2;
+            imageViewer.y = (topLevelApp.height - topLevelApp.mapContainer.height) / 2;
+            imageViewer.width = topLevelApp.mapContainer.width;
+            imageViewer.height = topLevelApp.mapContainer.height;
+            imageViewer.imageSource = "http://s3.amazonaws.com/noise.shoudio.com/jpg/original/" + item.shoudioId + ".jpg";
+
+            PopUpManager.addPopUp(imageViewer, view);
         }
     }
 }

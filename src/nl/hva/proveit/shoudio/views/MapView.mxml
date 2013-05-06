@@ -34,9 +34,4 @@
                           width="{width}"
                           height="{height}"
                           includeIn="video"/>
-
-
-
-    <s:Button label="change state"
-              click="{currentState = (currentState === 'music' ? 'map' : 'music')}"/>
 </s:Group>

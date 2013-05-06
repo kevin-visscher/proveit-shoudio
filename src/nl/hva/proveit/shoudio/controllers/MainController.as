@@ -4,6 +4,7 @@ package nl.hva.proveit.shoudio.controllers
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.core.FlexGlobals;
+    import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.Main;
     import nl.hva.proveit.shoudio.events.SidebarEvent;
@@ -11,6 +12,7 @@ package nl.hva.proveit.shoudio.controllers
     import nl.hva.proveit.shoudio.json.JsonLoaderEvent;
     import nl.hva.proveit.shoudio.models.ShoudioCollection;
     import nl.hva.proveit.shoudio.models.ShoudioCollectionItem;
+    import nl.hva.proveit.shoudio.views.StartView;
 
     import spark.events.IndexChangeEvent;
 
@@ -59,6 +61,16 @@ package nl.hva.proveit.shoudio.controllers
                     sidebarItems.push(item);
                 }
             }
+
+            var startView:StartView = new StartView();
+            startView.width = 400;
+            startView.height = 400;
+            startView.x = (view.width - startView.width) / 2;
+            startView.y = (view.height - startView.height) / 2;
+            startView.collection = collection;
+
+            // Show the start screen
+            PopUpManager.addPopUp(startView, view);
 
             // Update the list in the sidebar
             view.sidebar.listPoints.dataProvider = new ArrayList(sidebarItems);

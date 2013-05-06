@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:controller="nl.hva.proveit.shoudio.controllers.*">
+
+    <fx:Declarations>
+        <fx:Object id="collection"/>
+        <controller:StartController id="controller" view="{this}"/>
+    </fx:Declarations>
+
+    <s:Rect top="0" left="0" bottom="0" right="0">
+        <s:fill>
+            <s:SolidColor color="0xFFFFFF"/>
+        </s:fill>
+    </s:Rect>
+
+    <s:VGroup top="4" left="4" bottom="4" right="4">
+        <s:HGroup width="100%" height="100%">
+            <s:Image id="imgAvatar"
+                     source="http://s3.amazonaws.com/noise.shoudio.com/collections/100x100/collection_{collection.id}.jpg"/>
+
+            <s:VGroup width="100%" height="100%" horizontalAlign="contentJustify">
+                <s:Label id="lblRouteName"
+                         fontSize="14"
+                         text="{collection.name}"/>
+
+                <s:Label id="lblRouteDescription"
+                         text="{collection.description}"/>
+
+                <s:Label id="lblRouteRating"
+                         text="Rating: {collection.rating.value} / 5"/>
+            </s:VGroup>
+        </s:HGroup>
+
+        <s:Button id="btnStart"
+                  label="Start"
+                  click="{controller.btnStart_clickHandler()}"/>
+    </s:VGroup>
+
+</s:Group>

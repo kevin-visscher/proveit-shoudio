@@ -19,27 +19,7 @@
         <s:State name="sidebarVisible"/>
     </s:states>
 
-    <s:transitions>
-        <s:Transition fromState="sidebarHidden" toState="sidebarVisible">
-            <s:Animate duration="450" target="{sidebar}" effectEnd="{sidebar.right = 0}">
-                <s:motionPaths>
-                    <s:SimpleMotionPath property="right"
-                                        valueFrom="{-sidebar.width}"
-                                        valueTo="0"/>
-                </s:motionPaths>
-            </s:Animate>
-        </s:Transition>
-        <s:Transition fromState="sidebarVisible" toState="sidebarHidden">
-            <s:Animate duration="450" target="{sidebar}" effectEnd="{sidebar.right = -sidebar.width}">
-                <s:motionPaths>
-                    <s:SimpleMotionPath property="right"
-                                        valueFrom="0"
-                                        valueTo="{-sidebar.width}"/>
-                </s:motionPaths>
-            </s:Animate>
-        </s:Transition>
-    </s:transitions>
-
+    <!-- Background color -->
     <s:Rect top="0" right="0" bottom="0" left="0">
         <s:fill>
             <s:LinearGradient rotation="90">
