@@ -12,6 +12,7 @@ var toProjection;
 var oldthis;
 var overlay;
 var selectMarkerControl;
+var selectedFeature;
 var popup;
 var icon;
 var collection;

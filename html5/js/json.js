@@ -41,7 +41,7 @@ function jsonLoaded(data) {
         center: centerLocation.getBounds().getCenterLonLat(), zoom: 17
     });
     
-    selectMarkerControl = new OpenLayers.Control.SelectFeature(overlay, {onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});
+    selectMarkerControl = new OpenLayers.Control.SelectFeature(overlay, {onSelect: onFeatureSelect});
     map.addControl(selectMarkerControl);
     selectMarkerControl.activate();
     

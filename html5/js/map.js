@@ -71,6 +71,13 @@ function addmapItems(item, overlay) {
 */
 function onFeatureSelect(feature) {
     hiderightmenu();
+    
+    if(selectedFeature) {
+        map.removePopup(selectedFeature.popup);
+        selectedFeature.popup.destroy();
+        selectedFeature.popup = null;
+    }
+    
     selectedFeature = feature;
     
     var shoudioItem = shoudioObjectsPointer[feature.id][0];

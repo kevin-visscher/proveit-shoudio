@@ -15,16 +15,18 @@ function addrightmenuItem(item, featureid) {
 }
 
 function rightmenuClick(){
+    
     if(this == oldthis) return;
+    
     $(oldthis).toggleClass('selected');
     $(this).toggleClass('selected');
     
-    
     var featureid = $(this).data("shouindex");
     var feature = shoudioObjectsPointer[featureid][1];
+    oldthis = this;
     
-    onFeatureUnselect(selectedFeature);
     onFeatureSelect(feature);
+    selectedFeature = feature;
     /*var lon = shoudioObjects[shouindex].lon;
     var lat = shoudioObjects[shouindex].lat;
     var description = shoudioObjects[shouindex].description;
@@ -97,5 +99,4 @@ function rightmenuClick(){
             wmode: "window"
         });
     */
-    hiderightmenu();
 }
