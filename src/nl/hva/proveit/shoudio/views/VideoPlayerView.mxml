@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:controller="nl.hva.proveit.shoudio.controllers.*"
+         xmlns:controller="nl.hva.proveit.shoudio.controllers.*" xmlns:mx="library://ns.adobe.com/flex/mx"
          creationComplete="{controller.init()}">
 
     <fx:Declarations>
@@ -14,6 +14,18 @@
         <s:State name="playing" enterState="{controller.playingStateEnteredHandler()}"/>
         <s:State name="paused"/>
     </s:states>
+
+    <s:Rect top="0" right="0"
+            bottom="0" left="0">
+        <s:fill>
+            <s:SolidColor color="0xEEEEEE"/>
+        </s:fill>
+    </s:Rect>
+
+    <mx:ProgressBar indeterminate="true"
+                    horizontalCenter="0"
+                    verticalCenter="0"
+                    includeIn="loading"/>
 
     <s:Group id="videoContainer"
              top="0" right="0"
@@ -44,6 +56,7 @@
     <s:Button label="Close"
               top="0"
               right="0"
+              includeIn="playing, paused"
               click="{controller.btnClose_clickHandler()}"/>
 
 </s:Group>

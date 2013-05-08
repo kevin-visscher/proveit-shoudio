@@ -10,25 +10,26 @@
 
     <s:Rect top="0" left="0" bottom="0" right="0">
         <s:fill>
-            <s:SolidColor color="0xFFFFFF"/>
+            <s:SolidColor color="0xEEEEEE"/>
         </s:fill>
     </s:Rect>
 
     <s:VGroup top="4" left="4" bottom="4" right="4">
-        <s:HGroup width="100%" height="100%">
+        <s:HGroup id="startScreenContainer" width="100%" height="100%">
             <s:Image id="imgAvatar"
                      source="http://s3.amazonaws.com/noise.shoudio.com/collections/100x100/collection_{collection.id}.jpg"/>
 
             <s:VGroup width="100%" height="100%" horizontalAlign="contentJustify">
                 <s:Label id="lblRouteName"
+                         text="{collection.name}"
                          fontSize="14"
-                         text="{collection.name}"/>
+                         fontWeight="bold"
+                         paddingBottom="8"
+                         width="80%"/>
 
                 <s:Label id="lblRouteDescription"
-                         text="{collection.description}"/>
-
-                <s:Label id="lblRouteRating"
-                         text="Rating: {collection.rating.value} / 5"/>
+                         text="{collection.description}"
+                         width="80%"/>
             </s:VGroup>
         </s:HGroup>
 

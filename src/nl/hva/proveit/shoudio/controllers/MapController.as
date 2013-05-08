@@ -69,10 +69,10 @@ package nl.hva.proveit.shoudio.controllers
             var clickedPoint:Point = map.locationPoint(markerLocation);
             var mapCenterPoint:Point = map.locationPoint(map.getCenter());
 
-            map.panBy(mapCenterPoint.x - clickedPoint.x, mapCenterPoint.y - clickedPoint.y);
-            map.panBy(MAP_POPUP_MARGIN_LEFT, MAP_POPUP_MARGIN_TOP);
+//            map.panBy(mapCenterPoint.x - clickedPoint.x, mapCenterPoint.y - clickedPoint.y);
+//            map.panBy(MAP_POPUP_MARGIN_LEFT, MAP_POPUP_MARGIN_TOP);
 
-            mapCenterPoint = map.locationPoint(map.getCenter());
+//            mapCenterPoint = map.locationPoint(map.getCenter());
 
             var popup:MapMarkerPopup = new MapMarkerPopup();
             popup.item = item;

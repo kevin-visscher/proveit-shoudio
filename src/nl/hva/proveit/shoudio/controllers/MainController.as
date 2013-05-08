@@ -70,7 +70,7 @@ package nl.hva.proveit.shoudio.controllers
             startView.collection = collection;
 
             // Show the start screen
-            PopUpManager.addPopUp(startView, view);
+            PopUpManager.addPopUp(startView, view, true);
 
             // Update the list in the sidebar
             view.sidebar.listPoints.dataProvider = new ArrayList(sidebarItems);

@@ -2,6 +2,7 @@ package nl.hva.proveit.shoudio.controllers
 {
     import mx.controls.Alert;
     import mx.core.FlexGlobals;
+    import mx.effects.AnimateProperty;
     import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.models.ShoudioCollectionItem;
@@ -9,6 +10,8 @@ package nl.hva.proveit.shoudio.controllers
     import nl.hva.proveit.shoudio.views.ImagePlayerView;
     import nl.hva.proveit.shoudio.views.MapMarkerPopup;
     import nl.hva.proveit.shoudio.views.VideoPlayerView;
+
+    import spark.components.Group;
 
     public final class MapMarkerPopupController
     {
@@ -29,36 +32,45 @@ package nl.hva.proveit.shoudio.controllers
                     break;
 
                 default:
-                    Alert.show("Unable to handle type: " + item.type);
+                    Alert.show("Sorry. Was unable to handle type: " + item.type);
             }
         }
 
         private function openVideoPlayer():void
         {
-            var topLevelApp:Object = FlexGlobals.topLevelApplication;
-
             var videoPlayer:VideoPlayerView = new VideoPlayerView();
-            videoPlayer.x = (topLevelApp.width - topLevelApp.mapContainer.width) / 2;
-            videoPlayer.y = (topLevelApp.height - topLevelApp.mapContainer.height) / 2;
-            videoPlayer.width = topLevelApp.mapContainer.width;
-            videoPlayer.height = topLevelApp.mapContainer.height;
             videoPlayer.youTubeVideoId = item.externalLink;
 
-            PopUpManager.addPopUp(videoPlayer, view);
+            openViewer(videoPlayer);
         }
 
         private function openImageViewer():void
         {
-            var topLevelApp:Object = FlexGlobals.topLevelApplication;
-
             var imageViewer:ImagePlayerView = new ImagePlayerView();
-            imageViewer.x = (topLevelApp.width - topLevelApp.mapContainer.width) / 2;
-            imageViewer.y = (topLevelApp.height - topLevelApp.mapContainer.height) / 2;
-            imageViewer.width = topLevelApp.mapContainer.width;
-            imageViewer.height = topLevelApp.mapContainer.height;
             imageViewer.imageSource = "http://s3.amazonaws.com/noise.shoudio.com/jpg/original/" + item.shoudioId + ".jpg";
 
-            PopUpManager.addPopUp(imageViewer, view);
+            openViewer(imageViewer);
+        }
+
+        private final function openViewer(viewer:Group, width:Number = NaN, height:Number = NaN):void
+        {
+            var topLevelApp:Object = FlexGlobals.topLevelApplication;
+
+            viewer.x = (topLevelApp.width - topLevelApp.mapContainer.width) / 2;
+            viewer.y = topLevelApp.height;
+
+            viewer.width = width || topLevelApp.mapContainer.width;
+            viewer.height = height || topLevelApp.mapContainer.height;
+
+            var anim:AnimateProperty = new AnimateProperty(viewer);
+            anim.property = "y";
+            anim.fromValue = viewer.y;
+            anim.toValue = (topLevelApp.height - viewer.height) / 2 + (topLevelApp.mapContainer.height - viewer.height) / 2;
+            anim.duration = 350;
+
+            viewer.setStyle("addedEffect", anim);
+
+            PopUpManager.addPopUp(viewer, view);
         }
     }
 }

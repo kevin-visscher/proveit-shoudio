@@ -2,7 +2,6 @@ package nl.hva.proveit.shoudio.controllers
 {
     import flash.events.Event;
 
-    import mx.controls.Alert;
     import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.views.ImagePlayerView;
@@ -23,7 +22,7 @@ package nl.hva.proveit.shoudio.controllers
 
         public function image_readyHandler(e:Event):void
         {
-            Alert.show("image ready: " + e.toString());
+            view.currentState = "done";
         }
     }
 }
