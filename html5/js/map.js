@@ -86,13 +86,17 @@ function onFeatureSelect(feature) {
     
     popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
-                             shoudioItem.message,
+                             shoudioItem.description,
                              null, false);
+    var offset = {'size':new OpenLayers.Size(200,12),'offset':new OpenLayers.Pixel(0,-102)};
+    popup.offset = offset;
+    popup.relativePosition = "tr";
+
     feature.popup = popup;
     map.addPopup(popup);
 }
 
-/*
+/* DEPRECATED
 * Function that removes the popup
 *  this function is called when a user clicks 
 *  on another marker or somewhere the map

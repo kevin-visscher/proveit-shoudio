@@ -24,9 +24,9 @@ function startmenu(item){
  	
  	$('.startmenu_createdon').append(createdon);
  	$('.startmenu_rating').append(rating);
-
- 	
-
-
 }
 
+function startmenuHide() {
+    $("#startmenu").fadeOut();
+    showrightmenu();
+}

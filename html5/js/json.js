@@ -46,7 +46,7 @@ function jsonLoaded(data) {
     selectMarkerControl.activate();
     
     addmapItems(temp.contents, overlay);
-    //startmenu(this.collection);
+    startmenu(this.collection);
 
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
     map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));

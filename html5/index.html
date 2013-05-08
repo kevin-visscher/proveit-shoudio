@@ -8,6 +8,7 @@
 <script src="js/jquery.orbit.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/rightmenu.js"></script>
+<script src="js/startmenu.js"></script>
 <script src="js/json.js"></script>
 <script src="js/map.js"></script>
 <script src="OpenLayers.js"></script>
@@ -19,7 +20,26 @@
 <body>
 <div id="title">Shoudio</div>
 <div id="playerwrapper">
-
+    <div id="startmenu">
+        <h1 class="startmenu_naamrondje"></h1>
+        <table border="0">
+            <tr>
+                <td class="startmenu_plaatje">
+                </td>
+                <td class="startmenu_address">
+                </td>
+            </tr>
+            <tr class="startmenu_createdon">
+            </tr>
+            <tr class="startmenu_rating">
+    
+            </tr>
+    
+        </table>
+        <div class="startmenu_button_div">
+                    <button type="button" onclick="javascript:startmenuHide()" name="" value="" class="css3button">Start</button>
+        </div>
+    </div>
 	<div id="openstreetmap">
 		<div class="rightmenuopen">
 			<a href="javascript:showrightmenu()">
