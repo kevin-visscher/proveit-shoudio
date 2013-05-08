@@ -5,6 +5,13 @@ body {
 	padding: 0px;
     background: #fff url('../img/bodybackground.png') repeat-x;
     font-family: "MyriadHebrew-Regular";
+    
+    /*make everything none selectable*/
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 #title {
 	text-align: center;
@@ -77,6 +84,11 @@ ul.rightmenuitems .selected {
 /* RECHTERMENU */
 
 /* STARTMENU */
+
+#startmenu {
+    height: 400px;
+}
+
 .startmenu_naamrondje{
 	text-align: center;
 }
