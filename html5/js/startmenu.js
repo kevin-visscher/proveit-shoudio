@@ -1,4 +1,4 @@
-
+ 
 function startmenu(item){
 	
 	//collection info ophalen
