@@ -2,13 +2,15 @@
 function startmenu(item){
 	
 	//collection info ophalen
-	var naamrondje= item.name;	
+	//naam rondje
+	var naamrondje= item.name;
+	//plaatje
 	var user_id = item.userid;
-	var address =item.address;
-
-	var createdon= item.created_on;
+	//rating
 	var rating_rate = item.rating_rate;
 	var rating_votes = item.rating_votes;
+	//omschrijving
+	var description = item.description;
 	
 	//s3.amazonaws.com/noise.shoudio.com/avatars/{SIZING}/user_id.jpg
 	var sizing = "100x100";
@@ -18,11 +20,8 @@ function startmenu(item){
 
 	// var zenden naar hTmL
  	$('.startmenu_naamrondje').append(naamrondje);
- 	
  	$('.startmenu_plaatje').append(plaatje);
- 	$('.startmenu_address').append(address);
- 	
- 	$('.startmenu_createdon').append(createdon);
+ 	$('.startmenu_description').append(description);
  	$('.startmenu_rating').append(rating);
 }
 
