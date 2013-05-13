@@ -141,3 +141,34 @@ ul.rightmenuitems .selected {
 
 
 /* END STARTMENU */
+
+#playbuttondiv {
+
+width: 20px;
+height: 20px;
+background-color: #fff;
+border: 1px solid #000;
+}
+#playbutton{
+width: 20px;
+height: 20px;
+background-color: #fff;
+display: block;
+}
+
+#playbuttonx{
+margin-left: 25%;
+
+width: 0px;
+height: 0px;
+
+border-width: 7.5px 0 7.5px 10px;
+border-color: transparent transparent transparent #007bff;
+}
+
+#pausebutton {
+width: 20px;
+height: 20px;
+background-color: #000;
+display: none;
+}
