@@ -13,6 +13,16 @@
         <controllers:MainController id="controller" view="{this}"/>
     </fx:Declarations>
 
+    <s:transitions>
+        <!-- Doesn't work? :'( -->
+        <s:Transition fromState="*" toState="sidebarVisible">
+            <s:Parallel duration="350">
+                <s:SetAction property="right" target="{sidebar}"/>
+                <s:SetAction property="alpha" target="{sidebar}"/>
+            </s:Parallel>
+        </s:Transition>
+    </s:transitions>
+
     <s:states>
         <s:State name="loading"/>
         <s:State name="sidebarHidden"/>
@@ -51,6 +61,10 @@
                        top="0"
                        bottom="0"
                        right="-160"
+                       right.sidebarHidden="-160"
+                       alpha.sidebarHidden="0"
+                       right.sidebarVisible="0"
+                       alpha.sidebarVisible="1"
                        width="160"
                        cacheAsBitmap="true"/>
 
@@ -64,4 +78,6 @@
 
     </s:Group>
 
+    <fx:Script><![CDATA[
+        ]]></fx:Script>
 </s:Application>

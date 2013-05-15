@@ -22,6 +22,12 @@ package nl.hva.proveit.shoudio.controllers
 
         public function image_readyHandler(e:Event):void
         {
+            if (view.image.width > view.width)
+                view.image.width = view.width;
+
+            if (view.image.height > view.height)
+                view.image.height = view.height;
+
             view.currentState = "done";
         }
     }

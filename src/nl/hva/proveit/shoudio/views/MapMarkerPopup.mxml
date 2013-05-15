@@ -39,15 +39,25 @@
     </s:Rect>
 
     <s:Group top="4" right="4" bottom="34" left="4">
-        <s:Scroller top="0" right="0" bottom="32" left="0">
-            <s:VGroup top="0" right="0" bottom="0" left="0" clipAndEnableScrolling="true">
-                <s:Label text="{item.message}" styleName="shoudioMessage"/>
-                <s:Label text="{item.description}" styleName="shoudioDescription"/>
-            </s:VGroup>
-        </s:Scroller>
+        <s:VGroup top="0" right="0" bottom="0" left="0">
+            <s:Label text="{item.message}"
+                     styleName="shoudioMessage"
+                     width="100%"/>
 
-        <s:Button label="Do something awesome"
-                  click="{controller.doSomethingAwesome()}"/>
+            <s:TextArea text="{item.description}"
+                        styleName="shoudioDescription"
+                        editable="false"
+                        selectable="false"
+                        lineBreak="toFit"
+                        borderVisible="false"
+                        width="100%"
+                        height="100%"/>
+
+            <s:Button id="btnOpenViewer"
+                      label="{controller.btnOpenViewerLabel}"
+                      click="{controller.doSomethingAwesome()}"
+                      bottom="4"/>
+        </s:VGroup>
     </s:Group>
 
 

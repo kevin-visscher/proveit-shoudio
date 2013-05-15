@@ -14,12 +14,11 @@
         <s:State name="done"/>
     </s:states>
 
-    <s:Rect top="0"
-            right="0"
-            bottom="0"
-            left="0">
+    <!-- Background -->
+    <s:Rect top="0" right="0"
+            bottom="0" left="0" alpha=".5">
         <s:fill>
-            <s:SolidColor color="0xEEEEEE"/>
+            <s:SolidColor color="0x000000"/>
         </s:fill>
     </s:Rect>
 
@@ -35,9 +34,9 @@
 
     <s:Image id="image"
              source="{imageSource}"
-             top="0"
-             right="0"
-             bottom="0"
-             left="0"
+             maxWidth="{width}"
+             maxHeight="{height}"
+             horizontalCenter="0"
+             verticalCenter="0"
              ready="{controller.image_readyHandler(event)}"/>
 </s:Group>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="nl/hva/proveit/shoudio/shouldio.mxml" projectUUID="1d8ef340-9f13-41a9-b78c-d8a132cb93bd" version="10">
+<actionScriptProperties analytics="false" mainApplicationPath="nl/hva/proveit/shoudio/Main.mxml" projectUUID="1d8ef340-9f13-41a9-b78c-d8a132cb93bd" version="10">
   <compiler additionalCompilerArguments="-locale en_US" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="true" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
@@ -14,7 +14,7 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="nl/hva/proveit/shoudio/Shouldio.mxml"/>
+    <application path="nl/hva/proveit/shoudio/Main.mxml"/>
   </applications>
   <modules/>
   <buildCSSFiles/>

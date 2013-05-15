@@ -14,4 +14,15 @@
                              width="{width}"
                              height="{height}"
                              zoom="17"/>
+
+    <!-- 0xA9 is the hex code for the copyright symbol -->
+    <s:Label text="{String.fromCharCode(0xA9)} OpenStreetMap"
+             fontFamily="Lucida Sans Unicode"
+             fontSize="10"
+             fontWeight="bold"
+             color="0x333333"
+             alpha=".8"
+             bottom="2"
+             right="2"/>
+
 </s:Group>

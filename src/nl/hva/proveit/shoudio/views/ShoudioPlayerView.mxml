@@ -1,39 +1,51 @@
 <?xml version="1.0"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
-         xmlns:controllers="nl.hva.proveit.shoudio.controllers.*">
-
-    <fx:Script>
-        <![CDATA[
-        /**
-         * Url to a media file (wav, mp3, etc.)
-         */
-        [Bindable]
-        public var source:String;
-        ]]>
-    </fx:Script>
+         xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
+         xmlns:mx="library://ns.adobe.com/flex/mx"
+         removed="{controller.removedHandler()}">
 
     <fx:Declarations>
-        <controllers:ShoudioPlayerController id="controller" view="{this}" source="{source}"/>
+        <controllers:ShoudioPlayerController id="controller" view="{this}" shoudioId="{shoudioId}"/>
+        <fx:int id="shoudioId"/>
     </fx:Declarations>
 
     <s:states>
-        <s:State name="default"/>                           */
+        <s:State name="loading"/>
         <s:State name="playing"/>
+        <s:State name="paused"/>
     </s:states>
 
-    <s:Button id="btnPlayPause"
-              label="play"
-              label.playing="pause"
-              top="2"
-              left="2"
-              bottom="2"
-              click="{controller.btnPlayPause_clickHandler()}"/>
-
-    <s:Rect id="progress" width="0" height="16">
+    <s:Rect top="0" left="0" bottom="0" right="0">
         <s:fill>
-            <s:SolidColor color="0x0000FF"/>
+            <s:SolidColor color="0xEEEEEE"/>
         </s:fill>
     </s:Rect>
+
+    <mx:ProgressBar id="progressBar"
+                    indeterminate="true"
+                    includeIn="loading"
+                    horizontalCenter="0"
+                    verticalCenter="0"/>
+
+    <s:VGroup includeIn="playing, paused"
+              top="0" left="0" right="0" bottom="0">
+
+        <s:Button id="btnClose"
+                  label="Close"
+                  click="{controller.btnClose_clickHandler()}"/>
+
+        <s:Image id="imgWave"
+                 width="400"
+                 height="74"
+                 source="{controller.imageWaveSource}"/>
+
+        <s:HGroup width="100%">
+            <s:Button id="btnPlayPause"
+                      label.paused="Play"
+                      label.playing="Pause"
+                      click="{controller.btnPlayPause_clickHandler()}"/>
+        </s:HGroup>
+    </s:VGroup>
 
 </s:Group>

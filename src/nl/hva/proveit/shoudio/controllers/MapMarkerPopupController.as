@@ -2,6 +2,7 @@ package nl.hva.proveit.shoudio.controllers
 {
     import mx.controls.Alert;
     import mx.core.FlexGlobals;
+    import mx.core.IFlexDisplayObject;
     import mx.effects.AnimateProperty;
     import mx.managers.PopUpManager;
 
@@ -9,6 +10,8 @@ package nl.hva.proveit.shoudio.controllers
     import nl.hva.proveit.shoudio.models.ShoudioItemType;
     import nl.hva.proveit.shoudio.views.ImagePlayerView;
     import nl.hva.proveit.shoudio.views.MapMarkerPopup;
+    import nl.hva.proveit.shoudio.views.ShoudioPlayerView;
+    import nl.hva.proveit.shoudio.views.TextView;
     import nl.hva.proveit.shoudio.views.VideoPlayerView;
 
     import spark.components.Group;
@@ -17,10 +20,22 @@ package nl.hva.proveit.shoudio.controllers
     {
         public var view:MapMarkerPopup;
 
-        public var item:ShoudioCollectionItem;
+        private var _item:ShoudioCollectionItem;
+
+        [Bindable]
+        public var btnOpenViewerLabel:String;
+
+        private static var _openedPopup:IFlexDisplayObject;
 
         public function doSomethingAwesome():void
         {
+            if (_openedPopup)
+            {
+                PopUpManager.removePopUp(_openedPopup);
+
+                _openedPopup = null;
+            }
+
             switch (item.type)
             {
                 case ShoudioItemType.VIDEO:
@@ -29,6 +44,14 @@ package nl.hva.proveit.shoudio.controllers
 
                 case ShoudioItemType.IMAGE:
                     openImageViewer();
+                    break;
+
+                case ShoudioItemType.SHOUDIO:
+                    openShoudioPlayer();
+                    break;
+
+                case ShoudioItemType.TEXT:
+                    openTextViewer();
                     break;
 
                 default:
@@ -52,6 +75,22 @@ package nl.hva.proveit.shoudio.controllers
             openViewer(imageViewer);
         }
 
+        private function openShoudioPlayer():void
+        {
+            var shoudioPlayer:ShoudioPlayerView = new ShoudioPlayerView();
+            shoudioPlayer.shoudioId = item.shoudioId;
+
+            openViewer(shoudioPlayer, NaN, 150);
+        }
+
+        private function openTextViewer():void
+        {
+            var textViewer:TextView = new TextView();
+            textViewer.item = item;
+
+            openViewer(textViewer);
+        }
+
         private final function openViewer(viewer:Group, width:Number = NaN, height:Number = NaN):void
         {
             var topLevelApp:Object = FlexGlobals.topLevelApplication;
@@ -65,12 +104,46 @@ package nl.hva.proveit.shoudio.controllers
             var anim:AnimateProperty = new AnimateProperty(viewer);
             anim.property = "y";
             anim.fromValue = viewer.y;
-            anim.toValue = (topLevelApp.height - viewer.height) / 2 + (topLevelApp.mapContainer.height - viewer.height) / 2;
+            anim.toValue = topLevelApp.mapContainer.y + (topLevelApp.mapContainer.height - viewer.height);
             anim.duration = 350;
 
             viewer.setStyle("addedEffect", anim);
 
             PopUpManager.addPopUp(viewer, view);
+
+            _openedPopup = viewer;
+        }
+
+        public function get item():ShoudioCollectionItem
+        {
+            return _item;
+        }
+
+        public function set item(value:ShoudioCollectionItem):void
+        {
+            _item = value;
+
+            switch (_item.type)
+            {
+                case ShoudioItemType.IMAGE:
+                    btnOpenViewerLabel = "View image";
+                    break;
+
+                case ShoudioItemType.SHOUDIO:
+                    btnOpenViewerLabel = "Listen";
+                    break;
+
+                case ShoudioItemType.TEXT:
+                    btnOpenViewerLabel = "View text";
+                    break;
+
+                case ShoudioItemType.VIDEO:
+                    btnOpenViewerLabel = "Play video";
+                    break;
+
+                default:
+                    btnOpenViewerLabel = "Try to open";
+            }
         }
     }
 }
