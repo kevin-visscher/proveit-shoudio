@@ -4,9 +4,6 @@
 	<meta charset="utf-8">
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
-	<script src="js/jquery.jplayer.min.js"></script>
-	<script src="js/jquery.orbit.js"></script>
-	<script src="js/jquery.orbit.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/rightmenu.js"></script>
 	<script src="js/startmenu.js"></script>
@@ -20,6 +17,7 @@
 	<title>Shoudio Player</title>
 </head>
 <body>
+<div id="rightmarkforwindowwidth"></div>
 <div id="title">Shoudio</div>
 
 <div id="playerwrapper">
@@ -31,11 +29,13 @@
 		<a id="pausebutton" href="#"></a>
 	</div>
 
-	<div id="progress">
-	<div id="load_progress"></div>
-	<div id="play_progress"></div>
-</div>
-	
+	<button id="stop-bt">WEJOOW</button>
+
+	<div id="imgloading">
+		<img src="http://s3.amazonaws.com/noise.shoudio.com/waveform/small/7050.png" style="" width="400" height="74"/>
+		<div id="waveimg"></div>
+		<div id="loadclickhandler"></div>
+	</div>
 </div>
 
 </body>

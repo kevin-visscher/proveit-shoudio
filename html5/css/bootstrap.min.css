@@ -172,3 +172,41 @@ height: 20px;
 background-color: #000;
 display: none;
 }
+
+#imgloading {
+	position: absolute;
+	width: 400px;
+	height: 74px;
+}
+
+#waveimg { 
+	z-index: 1004;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #f55100;
+	opacity: 0.2;
+	width: 0px;
+ 	height: 74px;
+	border-right: 2px solid #990000;
+}
+#loadclickhandler {
+	z-index:1005;
+	position: absolute;
+	top: 0;
+ 	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 400px;
+	height: 74px;
+}
+#rightmarkforwindowwidth {
+	position: absolute;
+	right: 0;
+	width: 0;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
