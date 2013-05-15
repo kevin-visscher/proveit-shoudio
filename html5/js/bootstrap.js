@@ -16,6 +16,7 @@ var selectedFeature;
 var popup;
 var icon;
 var collection;
+var youtubePlayer;
 
 $(function() {
     

@@ -81,12 +81,36 @@ function onFeatureSelect(feature) {
     selectedFeature = feature;
     
     var shoudioItem = shoudioObjectsPointer[feature.id][0];
+    var description = shoudioItem.description;
+    var shoudio_id = shoudioItem.shoudio_id;
+    var type = shoudioItem.type;
+    var collections_id = shoudioItem.collections_id;
+    var sizing = "original";
     
     map.panTo(feature.geometry.getBounds().getCenterLonLat());
     
+    var popupdata = shoudioItem.message + "<br /><br />";
+    popupdata += "<a href='javascript:popupClick(\""+feature.id+"\");'>";
+    
+    switch(type) {
+        case 'shoudio':
+            popupdata += "Speel deze shoudio af</a>";
+            break;
+        case 'text':
+            popupdata += "Text laten zien</a>";
+            break;
+        case 'poi':
+        case 'image':
+            popupdata += "Foto weergeven</a>";
+            break;
+        case 'youtube':
+            popupdata += "Speel de video af</a>";
+            break;
+    }
+    
     popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
-                             shoudioItem.description,
+                             popupdata,
                              null, false);
     var offset = {'size':new OpenLayers.Size(200,12),'offset':new OpenLayers.Pixel(0,-102)};
     popup.offset = offset;
@@ -94,6 +118,36 @@ function onFeatureSelect(feature) {
 
     feature.popup = popup;
     map.addPopup(popup);
+}
+
+function popupClick(featureid) {
+    var shoudioItem = shoudioObjectsPointer[featureid][0];
+    var type = shoudioItem.type;
+    
+    switch(type) {
+        case 'shoudio':
+            //show player
+            break;
+        case 'text':
+            $(".placeholder").append("<div class='reader'><h3>"+shoudioItem.message+"</h3>"+shoudioItem.description+"</div>");
+            $("#imagecontainer").fadeIn();
+            break;
+        case 'poi':
+        case 'image':
+            $(".placeholder").html('<img src="http://s3.amazonaws.com/noise.shoudio.com/jpg/original/'+shoudioItem.shoudio_id+'.jpg" />');
+            $("#imagecontainer").fadeIn();
+            break;
+        case 'youtube':
+            var youtubeiframe = '<iframe id="youtubeDivPlayer" width="400" height="300" frameborder="0"' +
+                'src="http://www.youtube.com/embed/'+shoudioItem.external_link+
+                '?autoplay=1&amp;modestbranding=1"></iframe>';
+            
+            $(".placeholder").html(youtubeiframe);
+            $("#imagecontainer").fadeIn();
+            break;
+        default:
+            alert(type + ' niet bekend');
+    }
 }
 
 /* DEPRECATED

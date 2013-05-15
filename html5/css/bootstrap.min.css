@@ -142,6 +142,7 @@ ul.rightmenuitems .selected {
 
 /* END STARTMENU */
 
+<<<<<<< HEAD
 #playbuttondiv {
 
 width: 20px;
@@ -210,3 +211,64 @@ display: none;
 	padding: 0;
 	margin: 0;
 }
+=======
+/* IMAGECONTAINER for image and poi */
+#imagecontainer {
+    position: absolute;
+	height: 400px;
+    width: 400px;
+    z-index: 1005;
+    display: none;
+    text-align: center;
+    vertical-align:middle; 
+}
+#imagecontainer .seethroughbg {
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+#imagecontainer .placeholder {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+#imagecontainer .clickhandler {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+#imagecontainer img, iframe, .reader {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+}
+#imagecontainer .reader {
+    width: 300px;
+    height: 375px;
+    margin-top:25px;
+    background-color: #fff;
+    font-size: 18px;
+    font-family: "times new roman";
+    text-align:left;
+    padding: 5px;
+}
+
+/* END IMAGECONTAINER */
+>>>>>>> video player

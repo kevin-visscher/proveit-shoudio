@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <script type="text/javascript" src="https://bamhosting.nl/templates/bamhostingnew/js/jquery.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script src="js/jquery.jplayer.min.js"></script>
 <script src="js/jquery.orbit.js"></script>
 <script src="js/jquery.orbit.min.js"></script>
@@ -39,6 +40,11 @@
         <div class="startmenu_button_div">
                     <button type="button" onclick="javascript:startmenuHide()" name="" value="" class="css3button">Start</button>
         </div>
+    </div>
+    <div id="imagecontainer">
+        <div class="seethroughbg"></div>
+        <div class="placeholder"></div>
+        <div class="clickhandler" onclick='javascript:$("#imagecontainer").fadeOut();javascript:$(".placeholder").html("");'></div>
     </div>
 	<div id="openstreetmap">
 		<div class="rightmenuopen">
