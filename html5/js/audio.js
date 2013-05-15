@@ -23,8 +23,10 @@
 			var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
 			var locclick = event.pageX - windowwidth;
             $("#waveimg").css('width', locclick + 'px');
-            var time = locclick / 400 / 100 * maxsec;
-            $("#audio-player")[0].currentTime = time;
+            $("#audio-player")[0].currentTime = (locclick / 400 * maxsec);
+            $("#audio-player")[0].pause();
+			$("#playbutton").css("display", "block");
+			$("#pausebutton").css("display", "none");
         });
 
 
@@ -38,7 +40,6 @@
 		$("#stop-bt").click(function(){
 			$("#audio-player")[0].pause(); 
 			$("#audio-player")[0].currentTime = 0;
-			alert($("#audio-player")[0].currentTime);
 			$("#message").text("Music Stopped");
 		})
 

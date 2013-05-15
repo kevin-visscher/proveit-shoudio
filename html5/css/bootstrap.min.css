@@ -142,7 +142,6 @@ ul.rightmenuitems .selected {
 
 /* END STARTMENU */
 
-<<<<<<< HEAD
 #playbuttondiv {
 
 width: 20px;
@@ -211,7 +210,6 @@ display: none;
 	padding: 0;
 	margin: 0;
 }
-=======
 /* IMAGECONTAINER for image and poi */
 #imagecontainer {
     position: absolute;
@@ -271,4 +269,3 @@ display: none;
 }
 
 /* END IMAGECONTAINER */
->>>>>>> video player
