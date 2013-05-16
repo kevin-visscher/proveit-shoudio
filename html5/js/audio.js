@@ -1,61 +1,73 @@
-	var currenctsec = 0;
-	var maxsec = 0;
+/*
+========================
+= Shoudio audio-player =
+=					   =
+========================
+*/
 
-	$(document).ready(function(){
-
-		$("#playbutton").click(function(){
-			$("#audio-player")[0].play();
-			$("#message").text("Music started");
-			$("#playbutton").css("display", "none");
-			$("#pausebutton").css("display", "block");
-			maxsec = $("#audio-player")[0].duration;
-
-			setInterval(function() {
-				currenctsec = $("#audio-player")[0].currentTime;
-				var procent = 100/maxsec * currenctsec;
-				procent = procent * 4;
-				$("#waveimg").css('width', procent + 'px');
-			}, 10);
-			
-		})
-
-		$("#loadclickhandler").bind("click", function(event){
-			var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
-			var locclick = event.pageX - windowwidth;
-            $("#waveimg").css('width', locclick + 'px');
-            $("#audio-player")[0].currentTime = (locclick / 400 * maxsec);
-            $("#audio-player")[0].pause();
-			$("#playbutton").css("display", "block");
-			$("#pausebutton").css("display", "none");
-        });
+var currenctsec = 0;
+var maxsec = 0;
+var status = 0;
 
 
-		$("#pausebutton").click(function(){
-			$("#audio-player")[0].pause();
-			$("#message").text("Music paused");
-			$("#playbutton").css("display", "block");
-			$("#pausebutton").css("display", "none");
-		})
- 
-		$("#stop-bt").click(function(){
-			$("#audio-player")[0].pause(); 
-			$("#audio-player")[0].currentTime = 0;
-			$("#message").text("Music Stopped");
-		})
+$(document).ready(function(){
 
-		/*
-		//var duur = audio-player.duration;
-		//$(".songtime").html(duration);
-		
+	$("#playbutton").click(function(){
+		$("#audio-player")[0].play();
+		$("#playbutton").css("display", "none");
+		$("#pausebutton").css("display", "block");
+		maxsec = $("#audio-player")[0].duration;
+		status = 0;
 
 
-		$("#audio-player").on("Canplay", function () {
-       	var currenctsec = this.currentTime;
-       	var maxsec =
+		setInterval(function() {
+			currenctsec = $("#audio-player")[0].currentTime;
+			var procent = 100/maxsec * currenctsec;
+			procent = procent * 4;
+			$("#waveimg").css('width', procent + 'px');
+		}, 10);		
 
-       	$("#songtime").text();
-    	});
-
-		});
-	*/
 	})
+
+	$("#loadclickhandler").bind("click", function(event){
+		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
+		var locclick = event.pageX - windowwidth;
+        $("#waveimg").css('width', locclick + 'px');
+        $("#audio-player")[0].currentTime = (locclick / 400 * maxsec);
+        $("#audio-player")[0].pause();
+        //css knoppen
+
+	  if (status == 1) {
+	    $("#audio-player")[0].play();
+		$("#playbutton").css("display", "none");
+		$("#pausebutton").css("display", "block");
+
+	  } else {
+	     $("#audio-player")[0].pause();
+		//css knoppen
+		$("#playbutton").css("display", "block");
+		$("#pausebutton").css("display", "none");
+	  }
+
+		//$("#playbutton").css("display", "block");
+		//$("#pausebutton").css("display", "none");
+    });
+
+
+	$("#pausebutton").click(function(){
+		$("#audio-player")[0].pause();
+		//css knoppen
+		$("#playbutton").css("display", "block");
+		$("#pausebutton").css("display", "none");
+		status = 0;
+	})
+
+	$("#stop-bt").click(function(){
+		$("#audio-player")[0].pause(); 
+		$("#audio-player")[0].currentTime = 0;
+		//css knoppen
+		$("#playbutton").css("display", "block");
+		$("#pausebutton").css("display", "none");
+		status = 0;
+	})
+})
