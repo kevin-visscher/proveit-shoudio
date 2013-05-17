@@ -30,7 +30,6 @@ function timeConvert(time) {
     }else{
     	var time    = minutes+':'+seconds;
     }
-
     return time;
 }
 //alert(timeConvert(maxsec));
