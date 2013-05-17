@@ -170,7 +170,7 @@ display: block;
 
 #imgloading {
 	position: absolute;
-	width: 400px;
+	width: 300px;
 	height: 74px;
 }
 
@@ -194,7 +194,7 @@ display: block;
  	bottom: 0;
 	left: 0;
 	right: 0;
-	width: 400px;
+	width: 300px;
 	height: 74px;
 }
 #rightmarkforwindowwidth {

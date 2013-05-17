@@ -9,6 +9,9 @@ var currenctsec = 0;
 var maxsec = 0;
 var status = 0;
 
+function changeVolume(value){
+    $("#audio-player")[0].volume = (value / 100);
+}
 
 $(document).ready(function(){
 
