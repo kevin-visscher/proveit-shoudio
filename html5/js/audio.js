@@ -17,7 +17,7 @@ $(document).ready(function(){
 		$("#playbutton").css("display", "none");
 		$("#pausebutton").css("display", "block");
 		maxsec = $("#audio-player")[0].duration;
-		status = 0;
+		status = 1;
 
 
 		setInterval(function() {
@@ -70,4 +70,19 @@ $(document).ready(function(){
 		$("#pausebutton").css("display", "none");
 		status = 0;
 	})
+
+	$("#sliders").slider({
+	    value : 75,
+	    step  : 1,
+	    range : 'min',
+	    min   : 0,
+	    max   : 100,
+	    slide : function(){
+	        //var value = $("#slider").slider("value");
+	        //$("#audio-player")[0].volume = (value / 100);
+	        alert(maxsec);
+	    }
+	});
+
+// hack hack	
 })
