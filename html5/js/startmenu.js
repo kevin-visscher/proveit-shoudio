@@ -1,4 +1,8 @@
- 
+function round5(x)
+{
+	return (x % 5) >= 2.5 ? parseInt(x / 5) * 5 + 5 : parseInt(x / 5) * 5;
+} 
+
 function startmenu(item){
 	
 	//collection info ophalen
@@ -11,49 +15,12 @@ function startmenu(item){
 	//s3.amazonaws.com/noise.shoudio.com/avatars/{SIZING}/user_id.jpg
 	var sizing = "100x100";
 	var plaatje = '<img src="http://s3.amazonaws.com/noise.shoudio.com/avatars/'+sizing+'/'+ user_id+'.jpg" />';
-	//rating
-	var rating_rate = Math.round(item.rating_rate * 10)/10;
+	
 	//determine rating
-	if (rating_rate>4.5)
-	{
-		var rating = '<span class="rating-static rating-50"></span>';
-	}
-	else if(rating_rate>4 && rating_rate<=4.5)
-	{
-		var rating = '<span class="rating-static rating-45"></span>';
-	}
-	else if(rating_rate>3.5 && rating_rate<=4)
-	{
-		var rating = '<span class="rating-static rating-40"></span>';
-	}
-	else if(rating_rate>3 && rating_rate<=3.5)
-	{
-		var rating = '<span class="rating-static rating-35"></span>';
-	}
-	else if(rating_rate>2.5 && rating_rate<=3)
-	{
-		var rating = '<span class="rating-static rating-30"></span>';
-	}
-	else if(rating_rate>2 && rating_rate<=2.5)
-	{
-		var rating = '<span class="rating-static rating-25"></span>';
-	}
-	else if(rating_rate>1.5 && rating_rate<=2)
-	{
-		var rating = '<span class="rating-static rating-20"></span>';
-	}
-	else if(rating_rate>1 && rating_rate<=1.5)
-	{
-		var rating = '<span class="rating-static rating-15"></span>';
-	}
-	else if(rating_rate>0.5 && rating_rate<=1)
-	{
-		var rating = '<span class="rating-static rating-10"></span>';
-	}
-	else
-	{
-		var rating = '<span class="rating-static rating-5"></span>';
-	}
+	var rating_rate_collect = Math.round(item.rating_rate * 10);
+	var rating_rate = round5(rating_rate_collect);	
+	var rating = '<span class="rating-static rating-'+rating_rate+'"></span>';
+
 
 	// var zenden naar hTmL hak hak
  	$('.startmenu_naamrondje').append(naamrondje);
