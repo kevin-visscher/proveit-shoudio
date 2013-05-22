@@ -127,6 +127,8 @@ function popupClick(featureid) {
     switch(type) {
         case 'shoudio':
             //show player
+            $("#audio-player")[0].src = "http:\/\/noise.shoudio.com\/wav\/shoudio_"+shoudioItem.id+".wav";
+            showaudiowrapper();
             break;
         case 'text':
             $(".placeholder").append("<div class='reader'><h3>"+shoudioItem.message+"</h3>"+shoudioItem.description+"</div>");

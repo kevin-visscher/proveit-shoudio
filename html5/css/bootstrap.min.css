@@ -290,4 +290,13 @@ display: block;
 
 /* END IMAGECONTAINER */
 
-
+#audiowrapper {
+    position: absolute;
+	width: 400px;
+	height: 150px;
+	background-color: #fff;
+	z-index: 1003;
+	margin-top: 403px;
+	box-shadow: 0 -2px 2px #666;
+    padding: 0px;
+}

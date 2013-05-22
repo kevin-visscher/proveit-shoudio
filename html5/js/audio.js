@@ -12,6 +12,16 @@ var status = 0;
 function changeVolume(value){
     $("#audio-player")[0].volume = (value / 100);
 }
+
+function hideaudiowrapper() {
+    $("#audiowrapper").animate({'margin-top':'403px'},1000);
+}
+
+function showaudiowrapper() {
+    $("#audiowrapper").animate({'margin-top':'250px'},1000);
+}
+
+
 // sec omzetten naar HHMMSS
 //String.prototype.toHHMMSS = function () {
 function timeConvert(time) {
