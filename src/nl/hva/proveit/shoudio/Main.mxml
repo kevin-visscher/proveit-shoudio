@@ -68,9 +68,9 @@
                        width="160"
                        cacheAsBitmap="true"/>
 
-        <s:Button id="btnToggleSidebar"
-                  label="Show sidebar"
-                  label.sidebarVisible="Hide sidebar"
+        <s:Image  id="btnToggleSidebar"
+                  source="@Embed('/assets/open-sidebar.png')"
+                  source.sidebarVisible="@Embed('/assets/slide-up.gif')"
                   top="4"
                   right="4"
                   includeIn="sidebarHidden, sidebarVisible"
