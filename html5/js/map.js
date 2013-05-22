@@ -134,7 +134,7 @@ function popupClick(featureid) {
             break;
         case 'poi':
         case 'image':
-            $(".placeholder").html('<img src="http://s3.amazonaws.com/noise.shoudio.com/jpg/original/'+shoudioItem.shoudio_id+'.jpg" />');
+            $(".placeholder").html('<img src="http://s3.amazonaws.com/noise.shoudio.com/jpg/original/'+shoudioItem.shoudio_id+'.jpg" onclick=\'javascript:$("#imagecontainer").fadeOut();javascript:$(".placeholder").html("");\' />');
             $("#imagecontainer").fadeIn();
             break;
         case 'youtube':
@@ -143,6 +143,7 @@ function popupClick(featureid) {
                 '?autoplay=1&amp;modestbranding=1"></iframe>';
             
             $(".placeholder").html(youtubeiframe);
+            
             $("#imagecontainer").fadeIn();
             break;
         default:
