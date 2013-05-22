@@ -21,9 +21,15 @@ function timeConvert(time) {
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = Math.round(sec_num - (hours * 3600) - (minutes * 60));
 
+    if (seconds == 60){
+    	var seconds = 0;
+    	minutes++;
+    }
+
     if (hours   < 10) {hours   = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
+
 
     if (00<hours){
     	var time    = hours+':'+minutes+':'+seconds;
@@ -64,7 +70,7 @@ $(document).ready(function(){
         $("#audio-player")[0].pause();
         //css knoppen
 
-	  if (status == 1) {
+	if (status == 1) {
 	    $("#audio-player")[0].play();
 		$("#playbutton").css("display", "none");
 		$("#pausebutton").css("display", "block");
