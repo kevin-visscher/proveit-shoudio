@@ -166,15 +166,20 @@ button.css3button {
 
 #playbuttondiv {
 width: 20px;
-height: 20px;
+float: left;
 
-display: table-cell; 
 }
-#stopdiv {
-width: 20px;
-height: 20px;
 
-display: table-cell; 
+#currenctsec{
+	width: 190px;
+	float: left
+
+}
+
+#maxsec{
+	width: 190px;
+	float: left;
+	text-align: right;
 }
 
 #playbutton{
@@ -185,15 +190,14 @@ display: block;
 display: none;
 }
 
-#stop-bt {
-display: block;
-}
-
-
 #imgloading {
 	position: absolute;
 	width: 300px;
 	height: 74px;
+}
+
+#range_volume{
+	width: 80%;
 }
 
 #waveimg { 
