@@ -87,46 +87,87 @@ ul.rightmenuitems .selected {
 
 /* STARTMENU */
 #startmenubg {
-height: 400px;
-width: 400px;
-opacity: 0.2;
-position: absolute;
-z-index: 1007;
-background-color: black;
-top: 0;
-left: 0;
-
-
+	height: 400px;
+	width: 400px;
+	opacity: 0.2;
+	position: absolute;
+	z-index: 1008;
+	background-color: black;
+	top: 0;
+	left: 0;
 }
 
 #startmenu {
-height: 100px;
-width: 400px;
-position: absolute;
-z-index: 1008;
-background-color: white;
-top: 0;
-left: 0;
+	height: 120px;
+	width: 400px;
+	position: absolute;
+	z-index: 1009;
+	background-color: white;
+	top: 0;
+	left: 0;
+}
+#startmenu_description{
+    position: absolute;
+	width: 400px;
+	height: 134px;
+	background-color: #fff;
+	z-index: -1;
+	margin-top: -14px;
+	box-shadow: 0 -2px 2px #666;
+    padding: 0px;
+}
+
+#startmenu_description_indoud{
+	z-index: -1;
+	background-color: #fa925e;
+	height: 118px;
+	max-height: 118px;
+}
+
+#hideStart{
+	display: none;
+	bottom: 0px;
+	text-align: center;
+}
+
+#showStart{
+	display: block;
+	text-align: center;
+}
+
+#showstartButton {
+	min-height: 16px;
+	background-color: #fa925e;
+}
+
+.startmenu_plaatje{
+	width:100px;
+	height: 100px;
+	float:left;
+}
+
+#startmenuNNR {
+	float: left;
+	max-width: 200px;
+	max-height: 100px;
+	min-height: 100px;
+	background-color: white;
 }
 
 .startmenu_naamrondje{
 	text-align: center;
 }
 
-.startmenu_plaatje{
-	width:100px;
-}
-
-.startmenu_address{
-	width:300px;
-}
-
-.startmenu_description{
-	max-width: 340px;
+#showDescription {
+	min-width: 400px;
+	max-width: 400px;
+	z-index: -2;
 }
 
 .startmenu_button_div{
 	text-align: center;
+	min-height: 100px;
+	background-color: white;
 }
 
 
@@ -301,6 +342,7 @@ button.css3button {
 }
 
 /* END AUDIOPLAYER */
+
 /* IMAGECONTAINER for image and poi */
 #imagecontainer {
     position: absolute;
