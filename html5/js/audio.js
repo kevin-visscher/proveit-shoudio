@@ -10,7 +10,7 @@ var maxsec = 60000;
 var status = 0;
 
 function changeVolume(value){
-    $("#audio-player")[0].volume = (value / 100);
+    $("#audio-player")[0].volume = value;
 }
 
 function hideaudiowrapper() {
@@ -18,7 +18,7 @@ function hideaudiowrapper() {
 }
 
 function showaudiowrapper() {
-    $("#audiowrapper").animate({'margin-top':'250px'},1000);
+    $("#audiowrapper").animate({'margin-top':'266px'},1000);
 }
 
 
@@ -96,11 +96,15 @@ $(document).ready(function(){
 		//$("#playbutton").css("display", "block");
 		//$("#pausebutton").css("display", "none");
     });
-
-    $("#volumeBar").bind("click", function(event){
+    
+    $("#volumeclickhandler").bind("click", function(event){
 		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
-		var locclick = event.pageX - windowwidth;
-        $("#waveimg").css('width', locclick + 'px');
+		var locclick = event.pageX - (windowwidth+20);
+        
+        $("#volumeload").animate({'width':locclick + 'px'},100);
+        //$("#volumeload").css('width', locclick + 'px');
+        changeVolume((locclick / 360));
+        $("#volumeclickhandler img").animate({'margin-left':(locclick-5)+'px'},100);
         //css knoppen
     })
 

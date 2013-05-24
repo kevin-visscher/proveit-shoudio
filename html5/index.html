@@ -20,6 +20,7 @@
 <title>Shoudio Player</title>
 </head>
 <body>
+<div id="rightmarkforwindowwidth"></div>
 <div id="title">Shoudio</div>
 <div id="playerwrapper">
     <div id="startmenu">
@@ -49,24 +50,24 @@
 
     <div id="audiowrapper">
         <audio id="audio-player" name="audio-player" src="test.wav" ></audio>
-
-            <div id="currenctsec">00:00</div>
-            <div id="playbuttondiv">
-                <a id="playbutton" href="#"><img src="img/playicon.png" width="20px" height="20px"/></a>
-                <a id="pausebutton" href="#"><img src="img/pauseicon.png" width="20px" height="20px"/></a>
-            </div>
-            <div id="maxsec">klaas</div>
-            <input class="range_volume" type="range" min="0" max="100" value="100" step="5" onchange="changeVolume(this.value)" />
-            <div id="currenctsec"></div>
-            <div id="volumeBar">s</div>
-            
-
         <div id="imgloading">
             <img src="http://s3.amazonaws.com/noise.shoudio.com/waveform/small/7050.png" style="" width="400" height="74"/>
             <div id="waveimg"></div>
             <div id="loadclickhandler"></div>
         </div>
-    
+        <div id="audiomiddlebar">
+            <div id="currenctsec">00:00</div>
+            <div id="playbuttondiv">
+                <a id="playbutton"><img src="img/playicon.png" width="17px" height="20px"/></a>
+                <a id="pausebutton"><img src="img/pauseicon.png" width="17px" height="20px"/></a>
+            </div>
+            <div id="maxsec">06:42</div>
+            <div id="currenctsec"></div>
+        </div>
+        <div id="volumebar">
+            <div id="volumeclickhandler"><img src="img/volumebutton.png" width="11px" height="11px"/></div>
+            <div id="volumeload"></div>
+        </div>
     </div>
 
 	<div id="openstreetmap">
