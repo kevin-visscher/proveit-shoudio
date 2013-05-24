@@ -25,7 +25,7 @@ function startmenu(item){
 	// var zenden naar hTmL hak hak
  	$('.startmenu_naamrondje').append(naamrondje);
  	$('.startmenu_plaatje').append(plaatje);
- 	$('.startmenu_description').append(description);
+ 	//$('.startmenu_description').append(description);
  	$('.startmenu_rating').append(rating);
 }
 

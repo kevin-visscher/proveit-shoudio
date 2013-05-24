@@ -86,9 +86,27 @@ ul.rightmenuitems .selected {
 /* RECHTERMENU */
 
 /* STARTMENU */
+#startmenubg {
+height: 400px;
+width: 400px;
+opacity: 0.2;
+position: absolute;
+z-index: 1007;
+background-color: black;
+top: 0;
+left: 0;
+
+
+}
 
 #startmenu {
-    height: 400px;
+height: 100px;
+width: 400px;
+position: absolute;
+z-index: 1008;
+background-color: white;
+top: 0;
+left: 0;
 }
 
 .startmenu_naamrondje{
@@ -104,7 +122,7 @@ ul.rightmenuitems .selected {
 }
 
 .startmenu_description{
-	max-width: 380px;
+	max-width: 340px;
 }
 
 .startmenu_button_div{
@@ -216,6 +234,7 @@ button.css3button {
     margin-top: 74px;
     font-size:12px;
 }
+
 
 #waveimg { 
 	z-index: 1004;
