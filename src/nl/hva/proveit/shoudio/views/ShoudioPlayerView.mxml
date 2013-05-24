@@ -2,8 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
-         xmlns:mx="library://ns.adobe.com/flex/mx"
-         removed="{controller.removedHandler()}">
+         xmlns:mx="library://ns.adobe.com/flex/mx">
 
     <fx:Declarations>
         <controllers:ShoudioPlayerController id="controller" view="{this}" shoudioId="{shoudioId}"/>
@@ -18,7 +17,7 @@
 
     <s:Rect top="0" left="0" bottom="0" right="0">
         <s:fill>
-            <s:SolidColor color="0xEEEEEE"/>
+            <s:SolidColor color="0xFFFFFF"/>
         </s:fill>
     </s:Rect>
 
@@ -29,23 +28,60 @@
                     verticalCenter="0"/>
 
     <s:VGroup includeIn="playing, paused"
-              top="0" left="0" right="0" bottom="0">
+              top="0" left="0" right="0" bottom="0"
+              creationComplete="{controller.controlGroupCreatedHandler()}">
 
         <s:Button id="btnClose"
                   label="Close"
                   click="{controller.btnClose_clickHandler()}"/>
 
-        <s:Image id="imgWave"
-                 width="400"
-                 height="74"
-                 source="{controller.imageWaveSource}"/>
+        <s:Group width="100%" height="74" click="{controller.wave_clickHandler(event)}">
+            <s:Image id="imgWave"
+                     source="{controller.imageWaveSource}"
+                     width="400"
+                     height="74"/>
 
-        <s:HGroup width="100%">
-            <s:Button id="btnPlayPause"
-                      label.paused="Play"
-                      label.playing="Pause"
-                      click="{controller.btnPlayPause_clickHandler()}"/>
-        </s:HGroup>
+            <s:Rect id="waveOverlay" alpha=".3" top="0" bottom="0" left="0" right="{controller.offsetRight}">
+                <s:fill>
+                    <s:SolidColor color="0xf55100"/>
+                </s:fill>
+            </s:Rect>
+
+            <s:Line id="waveLine" top="0" bottom="0" width="1" left="{waveOverlay.width}">
+                <s:stroke>
+                    <s:SolidColorStroke color="0xf55100"/>
+                </s:stroke>
+            </s:Line>
+        </s:Group>
+
+        <s:VGroup width="100%" paddingLeft="20" paddingRight="20">
+            <s:HGroup width="100%">
+
+                <s:Label id="lblCurrentPosition"
+                         text="{controller.currentMinutes}:{controller.currentSeconds}"/>
+
+                <s:Spacer width="100%"/>
+
+                <s:Button id="btnPlayPause"
+                          label.paused="Play"
+                          label.playing="Pause"
+                          click="{controller.btnPlayPause_clickHandler()}"/>
+
+                <s:Spacer width="100%"/>
+
+                <s:Label id="lblEndPosition"
+                         text="{controller.totalMinutes}:{controller.totalSeconds}"/>
+
+            </s:HGroup>
+
+            <s:HSlider id="sliderVolume"
+                       minimum="0"
+                       maximum="100"
+                       width="100%"
+                       change="{controller.sliderVolume_changeHandler()}"
+                       creationComplete="{controller.sliderCreated()}"/>
+        </s:VGroup>
+
     </s:VGroup>
 
 </s:Group>

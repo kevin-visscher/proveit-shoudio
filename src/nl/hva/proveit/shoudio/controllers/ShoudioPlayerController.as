@@ -3,10 +3,13 @@ package nl.hva.proveit.shoudio.controllers
 
     import flash.events.Event;
     import flash.events.IOErrorEvent;
+    import flash.events.MouseEvent;
     import flash.events.SecurityErrorEvent;
     import flash.events.TimerEvent;
     import flash.media.Sound;
     import flash.media.SoundChannel;
+    import flash.media.SoundMixer;
+    import flash.media.SoundTransform;
     import flash.net.URLLoader;
     import flash.net.URLLoaderDataFormat;
     import flash.net.URLRequest;
@@ -25,6 +28,21 @@ package nl.hva.proveit.shoudio.controllers
 
         [Bindable]
         public var imageWaveSource:ByteArray;
+
+        [Bindable]
+        public var currentMinutes:String;
+
+        [Bindable]
+        public var currentSeconds:String;
+
+        [Bindable]
+        public var totalMinutes:String;
+
+        [Bindable]
+        public var totalSeconds:String;
+
+        [Bindable]
+        public var offsetRight:Number;
 
         private var _shoudioId:int;
 
@@ -58,8 +76,28 @@ package nl.hva.proveit.shoudio.controllers
                 _hasEverytingLoadedTimer.stop();
                 _hasEverytingLoadedTimer.removeEventListener(TimerEvent.TIMER, hasEverythingLoadedTimer_tickHandler);
 
-                _soundChannel = _sound.play();
-                _soundChannel.addEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler, false, 0 ,true);
+                var secs:Number = Math.round(_sound.length / 1000);
+                var mins:Number = secs >= 60 ? Math.floor(secs / 60) : 0;
+                var seconds:Number = secs - mins * 60;
+
+                if (mins >= 0)
+                {
+                    if (mins > 9)
+                    {
+                        totalMinutes = mins + "";
+                    }
+                    else
+                    {
+                        totalMinutes = "0" + mins;
+                    }
+                }
+
+                totalSeconds = seconds + "";
+
+                if (seconds < 10)
+                {
+                    totalSeconds = "0" + seconds;
+                }
 
                 view.currentState = "playing";
             }
@@ -67,6 +105,8 @@ package nl.hva.proveit.shoudio.controllers
 
         private function soundChannel_soundCompleteHandler(e:Event):void
         {
+            _soundChannel.removeEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler);
+
             _pausePosition = 0;
 
             view.currentState = "paused";
@@ -84,8 +124,10 @@ package nl.hva.proveit.shoudio.controllers
             }
             else if (view.currentState === "paused")
             {
-                _soundChannel = null;
+                _soundChannel.removeEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler);
+
                 _soundChannel = _sound.play(_pausePosition);
+                _soundChannel.addEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler);
 
                 view.currentState = "playing";
             }
@@ -99,12 +141,34 @@ package nl.hva.proveit.shoudio.controllers
             close();
         }
 
+        private function updatePlayingTimes(e:Event):void
+        {
+            var pos:Number = view.currentState === "paused" ? _pausePosition : _soundChannel.position;
+
+            var progressPercent:Number = pos / _sound.length;
+            var offsetRight:Number = view.imgWave.width - view.imgWave.width * progressPercent;
+
+            if (offsetRight <= 0)
+                offsetRight = 0;
+
+            view.waveOverlay.right = offsetRight;
+
+            updateCurrentTime();
+        }
+
         private function loadSound(url:String):void
         {
-            _sound.addEventListener(IOErrorEvent.IO_ERROR, sound_ioErrorHandler, false, 0 ,true);
-            _sound.addEventListener(Event.COMPLETE, sound_loadedHandler, false, 0 , true);
+            try
+            {
+                _sound.load(new URLRequest(url));
 
-            _sound.load(new URLRequest(url));
+                _sound.addEventListener(IOErrorEvent.IO_ERROR, sound_ioErrorHandler, false, 0 ,true);
+                _sound.addEventListener(Event.COMPLETE, sound_loadedHandler, false, 0 , true);
+            }
+            catch (err:Error)
+            {
+                Alert.show("There was an error playing the item");
+            }
         }
 
         private function loadSoundSpectrumImage(url:String):void
@@ -124,6 +188,8 @@ package nl.hva.proveit.shoudio.controllers
 
         private function close():void
         {
+            view.removeEventListener(Event.ENTER_FRAME, updatePlayingTimes);
+
             PopUpManager.removePopUp(view);
         }
 
@@ -136,6 +202,9 @@ package nl.hva.proveit.shoudio.controllers
 
         private function sound_loadedHandler(e:Event):void
         {
+            _soundChannel = _sound.play();
+            _soundChannel.addEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler, false, 0, true);
+
             _hasSoundLoaded = true;
         }
 
@@ -184,10 +253,68 @@ package nl.hva.proveit.shoudio.controllers
             _hasEverytingLoadedTimer.start();
         }
 
-        public function removedHandler():void
+        public function sliderCreated():void
         {
-            if (_soundChannel)
+            view.sliderVolume.value = SoundMixer.soundTransform.volume * 100;
+        }
+
+        public function sliderVolume_changeHandler():void
+        {
+            SoundMixer.soundTransform = new SoundTransform(view.sliderVolume.value / 100);
+        }
+
+        public function controlGroupCreatedHandler():void
+        {
+            view.addEventListener(Event.ENTER_FRAME, updatePlayingTimes);
+        }
+
+        public function wave_clickHandler(e:MouseEvent):void
+        {
+            var position:Number = (e.localX / view.imgWave.width) * _sound.length;
+
+            if (view.currentState === "paused")
+            {
+                _pausePosition = position;
+
+                updateCurrentTime();
+            }
+            else
+            {
+                // Currently playing, skip right ahead and start playing
                 _soundChannel.stop();
+                _soundChannel.removeEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler);
+
+                _soundChannel = _sound.play(position);
+                _soundChannel.addEventListener(Event.SOUND_COMPLETE, soundChannel_soundCompleteHandler);
+            }
+        }
+
+        private function updateCurrentTime():void
+        {
+            var pos:Number = view.currentState === "paused" ? _pausePosition : _soundChannel.position;
+
+            var secs:Number = Math.round(pos / 1000);
+            var mins:Number = secs >= 60 ? Math.floor(secs / 60) : 0;
+            var seconds:Number = secs - mins * 60;
+
+            if (mins >= 0)
+            {
+                if (mins > 9)
+                {
+                    currentMinutes = mins + "";
+                }
+                else
+                {
+                    currentMinutes = "0" + mins;
+                }
+            }
+
+            currentSeconds = seconds + "";
+
+            if (seconds < 10)
+            {
+                currentSeconds = "0" + seconds;
+            }
         }
     }
 }

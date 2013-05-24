@@ -77,7 +77,4 @@
                   click="{currentState = (currentState === 'sidebarHidden' ? 'sidebarVisible' : 'sidebarHidden')}"/>
 
     </s:Group>
-
-    <fx:Script><![CDATA[
-        ]]></fx:Script>
 </s:Application>
