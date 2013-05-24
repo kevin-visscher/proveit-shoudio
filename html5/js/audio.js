@@ -97,6 +97,13 @@ $(document).ready(function(){
 		//$("#pausebutton").css("display", "none");
     });
 
+    $("#volumeBar").bind("click", function(event){
+		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
+		var locclick = event.pageX - windowwidth;
+        $("#waveimg").css('width', locclick + 'px');
+        //css knoppen
+    })
+
 	// pausebutton
 	$("#pausebutton").click(function(){
 		$("#audio-player")[0].pause();
