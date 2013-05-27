@@ -2,7 +2,8 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controllers="nl.hva.proveit.shoudio.controllers.*" xmlns:mx="library://ns.adobe.com/flex/mx"
-         creationComplete="{controller.init()}">
+         creationComplete="{controller.init()}"
+         click="{controller.clickHandler(event)}">
 
     <fx:Declarations>
         <controllers:ImagePlayerController id="controller" view="{this}"/>
@@ -26,11 +27,6 @@
                     includeIn="loading"
                     horizontalCenter="0"
                     verticalCenter="0"/>
-
-    <s:Button id="btnClose"
-              label="Close"
-              includeIn="done"
-              click="{controller.btnClose_clickHandler()}"/>
 
     <s:Image id="image"
              source="{imageSource}"

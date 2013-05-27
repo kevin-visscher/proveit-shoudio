@@ -2,7 +2,8 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controller="nl.hva.proveit.shoudio.controllers.*" xmlns:mx="library://ns.adobe.com/flex/mx"
-         creationComplete="{controller.init()}">
+         creationComplete="{controller.init()}"
+         click="{controller.clickHandler(event)}">
 
     <fx:Declarations>
         <controller:VideoPlayerController id="controller" view="{this}" youTubeVideoId="{youTubeVideoId}"/>
@@ -16,9 +17,9 @@
     </s:states>
 
     <s:Rect top="0" right="0"
-            bottom="0" left="0">
+            bottom="0" left="0" alpha=".5">
         <s:fill>
-            <s:SolidColor color="0xEEEEEE"/>
+            <s:SolidColor color="0x000000"/>
         </s:fill>
     </s:Rect>
 
@@ -28,8 +29,7 @@
                     includeIn="loading"/>
 
     <s:Group id="videoContainer"
-             top="0" right="0"
-             bottom="0" left="0"/>
+             top="50"/>
 
     <s:Group id="videoPlayerControls"
              left="0"
@@ -52,11 +52,5 @@
                    liveDragging="true"
                    change="{controller.sliderVolume_changeHandler()}"/>
     </s:Group>
-
-    <s:Button label="Close"
-              top="0"
-              right="0"
-              includeIn="playing, paused"
-              click="{controller.btnClose_clickHandler()}"/>
 
 </s:Group>

@@ -50,6 +50,7 @@ package nl.hva.proveit.shoudio.controllers
                     openShoudioPlayer();
                     break;
 
+                case ShoudioItemType.POINT_OF_INTEREST:
                 case ShoudioItemType.TEXT:
                     openTextViewer();
                     break;

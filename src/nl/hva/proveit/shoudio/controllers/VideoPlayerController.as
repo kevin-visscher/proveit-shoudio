@@ -3,6 +3,7 @@ package nl.hva.proveit.shoudio.controllers
     import flash.display.Loader;
     import flash.display.LoaderInfo;
     import flash.events.Event;
+    import flash.events.MouseEvent;
     import flash.net.URLRequest;
     import flash.system.Security;
 
@@ -37,6 +38,14 @@ package nl.hva.proveit.shoudio.controllers
             _loader.load(request);
         }
 
+        public function clickHandler(e:MouseEvent):void
+        {
+            if (e.target === view)
+            {
+                close();
+            }
+        }
+
         private function initYouTubePlayer(e:Event):void
         {
             var loaderInfo:LoaderInfo = e.target as LoaderInfo;
@@ -54,8 +63,8 @@ package nl.hva.proveit.shoudio.controllers
         {
             _youTubePlayer = _loader.content as Object;
 
-            _youTubePlayer.setSize(view.width, view.height);
-            _youTubePlayer.loadVideoById({videoId: youTubeVideoId});
+            _youTubePlayer.setSize(view.width, (view.width / 4) * 3);
+            _youTubePlayer.loadVideoById({ videoId: youTubeVideoId });
 
             view.currentState = "playing";
         }
@@ -113,7 +122,7 @@ package nl.hva.proveit.shoudio.controllers
             view.sliderVolume.value = _youTubePlayer.getVolume();
         }
 
-        public function btnClose_clickHandler():void
+        public function close():void
         {
             // Stop the youtube player
             _youTubePlayer.stopVideo();

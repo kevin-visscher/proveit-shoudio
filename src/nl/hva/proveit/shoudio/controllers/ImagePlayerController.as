@@ -1,6 +1,7 @@
 package nl.hva.proveit.shoudio.controllers
 {
     import flash.events.Event;
+    import flash.events.MouseEvent;
 
     import mx.managers.PopUpManager;
 
@@ -15,7 +16,15 @@ package nl.hva.proveit.shoudio.controllers
 
         }
 
-        public function btnClose_clickHandler():void
+        public function clickHandler(e:MouseEvent):void
+        {
+            if (e.target === view)
+            {
+                close();
+            }
+        }
+
+        public function close():void
         {
             PopUpManager.removePopUp(view);
         }

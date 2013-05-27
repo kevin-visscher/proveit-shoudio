@@ -15,6 +15,15 @@
         <s:State name="paused"/>
     </s:states>
 
+    <s:Rect top="0" bottom="0">
+        <s:fill>
+            <s:LinearGradient rotation="180">
+                <s:GradientEntry color="0x777777"/>
+                <s:GradientEntry color="0xFFFFFF" alpha="0"/>
+            </s:LinearGradient>
+        </s:fill>
+    </s:Rect>
+
     <s:Rect top="0" left="0" bottom="0" right="0">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
@@ -78,6 +87,8 @@
                        minimum="0"
                        maximum="100"
                        width="100%"
+                       showDataTip="false"
+                       skinClass="nl.hva.proveit.shoudio.HSliderSkin"
                        change="{controller.sliderVolume_changeHandler()}"
                        creationComplete="{controller.sliderCreated()}"/>
         </s:VGroup>

@@ -2,18 +2,15 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controller="nl.hva.proveit.shoudio.controllers.*"
-         xmlns:modestmaps="com.modestmaps.flex.*"
          creationComplete="{controller.init()}">
 
     <fx:Declarations>
-        <controller:MapController id="controller" view="{this}" map="{mapComponent.map}"/>
+        <controller:MapController id="controller" view="{this}"/>
     </fx:Declarations>
 
-    <modestmaps:MapComponent id="mapComponent"
-                             provider="OPEN_STREET_MAP"
-                             width="{width}"
-                             height="{height}"
-                             zoom="17"/>
+    <s:Group id="mapComponent" width="{width}" height="{height}">
+
+    </s:Group>
 
     <!-- 0xA9 is the hex code for the copyright symbol -->
     <s:Label text="{String.fromCharCode(0xA9)} OpenStreetMap"
