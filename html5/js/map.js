@@ -10,7 +10,6 @@
 */
 function addmapItems(item, overlay) {
     //add to map
-    var b = -1;
     for(var i in item) {
         var message = item[i].message;
         var lon = item[i].lon;
@@ -29,40 +28,39 @@ function addmapItems(item, overlay) {
         
         this.overlay.addFeatures([feature]);
         
-        //if the shoudioitem is an collection item,
         if(item[i].sorting > -1) {
-            
-            //set b the first time we come accross an collection item,
-            // so that we can start drawing lines for the collection items.
-            if(b == -1) b = i;
-            
-            //add map item to right menu
             addrightmenuItem(item[i], feature.id);
-            
-            //draw the line
-            var start_point;
-            var end_point;
-            
-            if(i>b) {
-                start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
-                end_point = new OpenLayers.Geometry.Point(lon, lat);
-            } if(i==item.length-1) {
-                //this is the last object, so draw the last line
-                // and draw the line back to start
-                
-                //draw line to to start
-                start_point = new OpenLayers.Geometry.Point(lon, lat);
-                end_point = new OpenLayers.Geometry.Point(item[b].lon, item[b].lat);
-                this.overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-                .transform(this.fromProjection, this.toProjection))]);
-                
-                //draw last line
-                start_point = new OpenLayers.Geometry.Point(item[i-1].lon, item[i-1].lat);
-                end_point = new OpenLayers.Geometry.Point(lon, lat);
-            }
-            overlay.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
-                .transform(this.fromProjection, this.toProjection))]);
         }
+        
+    }
+}
+
+function drawLines(route, overlay) {
+    route = unserialize(route);
+    
+    var start_point;
+    var end_point;
+    
+    for(var i = 1;i < _.size(route);i++){
+        var lon = route[i].split(',')[1];
+        var lat = route[i].split(',')[0];
+        
+        var prevlon = route[i-1].split(',')[1];
+        var prevlat = route[i-1].split(',')[0];
+        
+        start_point = new OpenLayers.Geometry.Point(prevlon, prevlat);
+        end_point = new OpenLayers.Geometry.Point(lon, lat);
+        
+        var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([start_point, end_point])
+            .transform(this.fromProjection, this.toProjection));
+        
+        lineFeature.style = {
+            strokeColor: "#ff5100",
+            strokeOpacity: 0.6,
+            strokeWidth: 4
+        };
+        
+        this.overlay.addFeatures([lineFeature]);
     }
 }
 

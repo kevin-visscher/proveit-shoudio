@@ -13,7 +13,6 @@ function jsonLoaded(data) {
         temp = jQuery.parseJSON(data);
     
     this.collection = temp.collection;
-    
 
     for(var i in temp.contents) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
@@ -45,6 +44,7 @@ function jsonLoaded(data) {
     map.addControl(selectMarkerControl);
     selectMarkerControl.activate();
     
+    drawLines(temp.collection.route, overlay);
     addmapItems(temp.contents, overlay);
     startmenu(this.collection);
 
