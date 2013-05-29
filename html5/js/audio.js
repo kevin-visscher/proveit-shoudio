@@ -1,21 +1,22 @@
 /*
-========================
-= Shoudio audio-player =
-=					   =
-========================
+=======================================================================
+= 						Shoudio Audioplayer 						  =
+=					  												  =
+=======================================================================
+ *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *	!!!!!!!IF YOU CHANGE TABS TO SPACES, YOU WILL BE KILLED!!!!!!!
+ *       !!!!!!!!!!!!!!DOING SO FUCKS THE BUILD PROCESS!!!!!!!!!!!!!!!!
+ *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
 var currenctsec = 0;
-var maxsec = 60000;
+var maxsec = 0;
 var status = 0;
 
 function changeVolume(value){
     $("#audio-player")[0].volume = value;
-}
-
-function hideaudiowrapper() {
-    $("#audiowrapper").animate({'margin-top':'403px'},1000);
-    $("#imgclose").fadeOut(1000);
 }
 
 function showaudiowrapper() {
@@ -23,9 +24,18 @@ function showaudiowrapper() {
     $("#imgclose").fadeIn(1000);
 }
 
+function hideaudiowrapper() {
+    $("#audiowrapper").animate({'margin-top':'403px'},1000);
+    $("#imgclose").fadeOut(1000);
+	$("#audio-player")[0].pause(); 
+	$("#audio-player")[0].currentTime = 0;
+	//css knoppen
+	$("#playbutton").css("display", "block");
+	$("#pausebutton").css("display", "none");
+	status = 0;
+}
 
 // sec omzetten naar HHMMSS
-//String.prototype.toHHMMSS = function () {
 function timeConvert(time) {
     
     var sec_num = time;
@@ -42,18 +52,18 @@ function timeConvert(time) {
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
 
-
+    //als er geen uren zijn haal hours weg
     if (00<hours){
     	var time    = hours+':'+minutes+':'+seconds;
     }else{
     	var time    = minutes+':'+seconds;
     }
+
     return time;
 }
 //alert(timeConvert(maxsec));
 
 $(document).ready(function(){
-
 
 	// playbutton
 	$("#playbutton").click(function(){
@@ -79,6 +89,7 @@ $(document).ready(function(){
 		}, 10);		
 
 	})
+
 	// progress bar
 	$("#loadclickhandler").bind("click", function(event){
 		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
@@ -86,23 +97,19 @@ $(document).ready(function(){
         $("#waveimg").css('width', locclick + 'px');
         $("#audio-player")[0].currentTime = (locclick / 400 * maxsec);
         $("#audio-player")[0].pause();
-        //css knoppen
 
-	if (status == 1) {
-	    $("#audio-player")[0].play();
-		$("#playbutton").css("display", "none");
-		$("#pausebutton").css("display", "block");
+		if (status == 1) {
+		    $("#audio-player")[0].play();
+			$("#playbutton").css("display", "none");
+			$("#pausebutton").css("display", "block");
 
-	  } else {
-	     $("#audio-player")[0].pause();
-		//css knoppen
-		$("#playbutton").css("display", "block");
-		$("#pausebutton").css("display", "none");
-	  }
-
-		//$("#playbutton").css("display", "block");
-		//$("#pausebutton").css("display", "none");
-    });
+		  } else {
+		     $("#audio-player")[0].pause();
+			//css knoppen
+			$("#playbutton").css("display", "block");
+			$("#pausebutton").css("display", "none");
+		  }
+    })
     
     $("#volumeclickhandler").bind("click", function(event){
 		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
@@ -112,7 +119,6 @@ $(document).ready(function(){
         //$("#volumeload").css('width', locclick + 'px');
         changeVolume((locclick / 360));
         $("#volumeclickhandler img").animate({'margin-left':(locclick-5)+'px'},100);
-        //css knoppen
     })
 
 	// pausebutton
@@ -123,17 +129,5 @@ $(document).ready(function(){
 		$("#pausebutton").css("display", "none");
 		status = 0;
 	})
-
-	// stopbutton
-	$("#stop-bt").click(function(){
-		$("#audio-player")[0].pause(); 
-		$("#audio-player")[0].currentTime = 0;
-		//css knoppen
-		$("#playbutton").css("display", "block");
-		$("#pausebutton").css("display", "none");
-		status = 0;
-	})
-
-
 // hack hack	
 })
