@@ -1,3 +1,9 @@
+Flash vars
+===
+
+* uri: Url to the shoudio JSON collection
+* logo: Url to a logo that is to be shown in the app
+
 proveit-shoudio
 ===============
 

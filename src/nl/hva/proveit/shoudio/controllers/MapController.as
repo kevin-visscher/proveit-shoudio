@@ -5,11 +5,17 @@ package nl.hva.proveit.shoudio.controllers
     import com.modestmaps.events.MarkerEvent;
     import com.modestmaps.geo.Location;
     import com.modestmaps.mapproviders.OpenStreetMapProvider;
+    import com.modestmaps.overlays.MarkerClip;
+    import com.modestmaps.overlays.Polyline;
+    import com.modestmaps.overlays.PolylineClip;
 
+    import flash.display.CapsStyle;
+    import flash.display.JointStyle;
+    import flash.display.LineScaleMode;
     import flash.events.MouseEvent;
     import flash.geom.Point;
 
-    import mx.controls.Alert;
+    import mx.core.FlexGlobals;
     import mx.core.IFlexDisplayObject;
     import mx.managers.PopUpManager;
 
@@ -50,6 +56,10 @@ package nl.hva.proveit.shoudio.controllers
 
             view.mapComponent.addElement(wrapper);
 
+            var logoUrl:String = FlexGlobals.topLevelApplication.parameters.logo || "http://shoudio.com/img/nd_shoudio_logo.png";
+
+            view.imgLogo.source = logoUrl;
+
             view.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
         }
 
@@ -59,34 +69,40 @@ package nl.hva.proveit.shoudio.controllers
 
             _collection = ShoudioCollection.fromObject(e.data);
 
-            _map.grid.graphics.lineStyle(4, 0xFF0000, 0.8);
+            var polyLineClip:PolylineClip = new PolylineClip(_map);
+            var markerClip:MarkerClip = new MarkerClip(_map);
 
+            var line:Polyline = new Polyline(
+                    "collection-route-line",
+                    [ ],
+                    4, 0xff5100,.6, false, LineScaleMode.NORMAL, CapsStyle.ROUND, JointStyle.ROUND
+            );
+
+            // Create all of the lines that belong to the route of the collection
             for (var i:int = 0; i < _collection.route.length; i++)
             {
                 var latAndLong:Array = _collection.route[i].split(",");
-                var p:Point = _map.locationPoint(new Location(latAndLong[0], latAndLong[1]));
 
-                Alert.show(p.x + ":" + p.y);
-
-                if (i === 0)
-                    _map.grid.graphics.moveTo(p.x, p.y);
-               else
-                   _map.grid.graphics.lineTo(p.x, p.y);
+                line.locationsArray.push(new Location(latAndLong[0], latAndLong[1]));
             }
 
+            // Create all of the markers
             for each (var item:ShoudioCollectionItem in _collection.items)
             {
-                // Add a marker for each item in the collection
-                _map.putMarker(new Location(item.latitude, item.longtitude), new MapMarker(item));
+                markerClip.attachMarker(new MapMarker(item), new Location(item.latitude, item.longtitude));
             }
+
+            polyLineClip.addPolyline(line);
+
+            _map.addChild(polyLineClip);
+            _map.addChild(markerClip);
 
             // Initial location of the map are the long- and latitude of the collection
             _map.setCenterZoom(new Location(_collection.latitude, _collection.longtitude), 17);
 
             view.addEventListener(SidebarEvent.MAP_MARKER_CLICKED, sidebar_mapMarkerClickedHandler);
 
-            _map.addEventListener(MarkerEvent.MARKER_ROLL_OVER, map_markerRollOverHandler);
-            _map.addEventListener(MarkerEvent.MARKER_ROLL_OUT, map_markerRollOutHandler);
+            _map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickedHandler);
 
             _map.addEventListener(MapEvent.STOP_PANNING, map_stopPanningHandler);
         }
@@ -132,18 +148,12 @@ package nl.hva.proveit.shoudio.controllers
                 PopUpManager.removePopUp(_activePopup);
         }
 
-        private function map_markerRollOverHandler(e:MarkerEvent):void
+        private function map_markerClickedHandler(e:MarkerEvent):void
         {
             var location:Location = e.location;
             var item:ShoudioCollectionItem = (e.marker as MapMarker).item;
 
             openMarkerPopup(location, item);
-        }
-
-        private function map_markerRollOutHandler(e:MarkerEvent):void
-        {
-//            if (_activePopup !== null)
-//                PopUpManager.removePopUp(_activePopup);
         }
 
         private function activePopup_rollOutHandler(e:MouseEvent):void
@@ -156,6 +166,11 @@ package nl.hva.proveit.shoudio.controllers
             var item:ShoudioCollectionItem = e.item;
 
             openMarkerPopup(new Location(item.latitude, item.longtitude), item);
+        }
+
+        public function notifySidebarVisible():void
+        {
+            closeActivePopup();
         }
     }
 }

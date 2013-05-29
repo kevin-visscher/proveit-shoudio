@@ -9,16 +9,16 @@
     </s:layout>
 
     <!-- Drop shadow on the left side -->
-    <s:Rect top="0" bottom="0" left="-8" width="8">
+    <s:Rect top="0" bottom="0" left="0" width="8">
         <s:fill>
             <s:LinearGradient rotation="180">
-                <s:GradientEntry color="0x777777"/>
+                <s:GradientEntry color="0x000000"/>
                 <s:GradientEntry color="0xFFFFFF" alpha="0"/>
             </s:LinearGradient>
         </s:fill>
     </s:Rect>
 
-    <s:Rect top="0" right="0" bottom="0" left="0">
+    <s:Rect top="0" right="0" bottom="0" left="8">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
         </s:fill>
@@ -26,7 +26,7 @@
 
     <s:List id="listPoints"
             top="32" right="0"
-            bottom="0" left="0"
+            bottom="0" left="8"
             borderVisible="false"
             itemRenderer="nl.hva.proveit.shoudio.renderer.SidebarItemRenderer"/>
 

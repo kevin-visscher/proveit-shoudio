@@ -83,7 +83,7 @@
         </s:fill>
     </s:Rect>
 
-    <s:Graphic maskType="alpha" cacheAsBitmap="true" top="4" left="2">
+    <s:Graphic maskType="alpha" cacheAsBitmap="true" top="4" left="7">
         <s:Rect id="mass" width="16" height="16">
             <s:fill>
                 <s:SolidColor color="0x000000"
@@ -100,7 +100,7 @@
     <s:Label id="lblText"
              top="8"
              bottom="2"
-             left="22"
+             left="28"
              fontWeight="bold"
              color.hovered="0xFFFFFF"/>
 

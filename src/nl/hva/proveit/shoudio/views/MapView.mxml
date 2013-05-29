@@ -12,6 +12,10 @@
 
     </s:Group>
 
+    <s:Image id="imgLogo"
+             top="2"
+             left="2"/>
+
     <!-- 0xA9 is the hex code for the copyright symbol -->
     <s:Label text="{String.fromCharCode(0xA9)} OpenStreetMap"
              fontFamily="Lucida Sans Unicode"
