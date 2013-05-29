@@ -23,13 +23,22 @@
 <div id="rightmarkforwindowwidth"></div>
 <div id="title">Shoudio</div>
 <div id="playerwrapper">
-    
+    <div id="logodiv">
+        <a href="http://shoudio.com/"><img src="http://shoudio.com/img/nd_shoudio_logo.png"></a>
+    </div>
+
     <div id="imagecontainer">
         <div class="seethroughbg" onclick='javascript:$("#imagecontainer").fadeOut();javascript:$(".placeholder").html("");'></div>
         <div class="placeholder"></div>
     </div>
 
     <div id="audiowrapper">
+        <div id="imgclose">
+            <a href="javascript:hideaudiowrapper()">
+            <img src="img/close-img.png"/></a>
+        </div>
+       
+
         <audio id="audio-player" name="audio-player" src="test.wav" ></audio>
         <div id="imgloading">
             <img src="http://s3.amazonaws.com/noise.shoudio.com/waveform/small/7050.png" style="" width="400" height="74"/>
@@ -79,15 +88,12 @@
             <div class="startmenu_naamrondje"></div>
             <div class="startmenu_username"></div>
             <div class="startmenu_rating"></div>
+            <div id="startButtonDiv"><a id="startButton" href="javascript:startmenuHide()"> Start </a></div>
         </div>
-        
-        <div class="startmenu_button_div">
-            <button type="button" onclick="javascript:startmenuHide()" name="" value="" class="css3button">Start</button>
-        </div>
+            
         <div id="showDescription">
         </div>
 
-        
     </div>
     <!--eindeeee      startmenu-->
 </div>

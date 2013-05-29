@@ -15,10 +15,12 @@ function changeVolume(value){
 
 function hideaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'403px'},1000);
+    $("#imgclose").fadeOut(1000);
 }
 
 function showaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'266px'},1000);
+    $("#imgclose").fadeIn(1000);
 }
 
 
@@ -69,6 +71,11 @@ $(document).ready(function(){
 			procent = procent * 4;
 			$("#waveimg").css('width', procent + 'px');
 			$("#currenctsec").text(timeConvert(currenctsec));
+			if (currenctsec == maxsec) {
+				$("#playbutton").css("display", "block");
+				$("#pausebutton").css("display", "none");
+				status = 0;
+			};
 		}, 10);		
 
 	})
