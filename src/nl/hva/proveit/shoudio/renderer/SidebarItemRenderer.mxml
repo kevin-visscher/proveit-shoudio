@@ -11,7 +11,7 @@
         [Embed("/assets/music.png")]
         private static const MUSIC_ICON_CLASS:Class;
 
-        [Embed("/assets/list.png")]
+        [Embed("/assets/book.png")]
         private static const TEXT_ICON_CLASS:Class;
 
         [Embed("/assets/video.png")]

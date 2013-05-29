@@ -12,7 +12,7 @@
 
     <s:states>
         <s:State name="loading"/>
-        <s:State name="playing" enterState="{controller.playingStateEnteredHandler()}"/>
+        <s:State name="playing"/>
         <s:State name="paused"/>
     </s:states>
 
@@ -29,28 +29,10 @@
                     includeIn="loading"/>
 
     <s:Group id="videoContainer"
-             top="50"/>
-
-    <s:Group id="videoPlayerControls"
+             top="50"
              left="0"
-             bottom="0"
-             includeIn="playing, paused">
-        <s:layout>
-            <s:HorizontalLayout/>
-        </s:layout>
-
-        <s:Button id="btnPlayPause"
-                  label="Pause"
-                  label.paused="Play"
-                  click="{controller.btnPlayPause_clickHandler()}"/>
-
-        <s:Label text="Volume"/>
-        <s:HSlider id="sliderVolume"
-                   minimum="0"
-                   maximum="100"
-                   snapInterval="1"
-                   liveDragging="true"
-                   change="{controller.sliderVolume_changeHandler()}"/>
-    </s:Group>
+             right="0"
+             bottom="50"
+             clipAndEnableScrolling="true"/>
 
 </s:Group>

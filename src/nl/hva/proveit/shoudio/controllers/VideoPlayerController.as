@@ -1,9 +1,10 @@
 package nl.hva.proveit.shoudio.controllers
 {
     import flash.display.Loader;
-    import flash.display.LoaderInfo;
     import flash.events.Event;
+    import flash.events.IOErrorEvent;
     import flash.events.MouseEvent;
+    import flash.events.SecurityErrorEvent;
     import flash.net.URLRequest;
     import flash.system.Security;
 
@@ -15,27 +16,54 @@ package nl.hva.proveit.shoudio.controllers
 
     public class VideoPlayerController
     {
-        private static const YOUTUBE_API_URL:String = "http://www.youtube.com/apiplayer?version=3";
+        private static const YOUTUBE_EMBED_URL:String = "http://www.youtube.com/v/";
+        private static const YOUTUBE_EMBED_URL_PARAMS:String = "?playerapiid=ytplayer&version=3&autoplay=1";
 
         public var view:VideoPlayerView;
         public var youTubeVideoId:String;
 
         private var _loader:Loader;
 
-        private var _youTubePlayer:Object;
-
-        private var _paused:Boolean;
+        private var _youtubePlayer:Object;
 
         public function init():void
         {
             // Allow YouTube to communicate with the SWF
             Security.allowDomain("www.youtube.com");
 
-            var request:URLRequest = new URLRequest(YOUTUBE_API_URL);
+            var request:URLRequest = new URLRequest(YOUTUBE_EMBED_URL + youTubeVideoId + YOUTUBE_EMBED_URL_PARAMS);
 
             _loader = new Loader();
-            _loader.contentLoaderInfo.addEventListener(Event.INIT, initYouTubePlayer, false, 0, true);
+            _loader.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR, loader_securityErrorHandler, false, 0, true);
+            _loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, loader_ioErrorHandler, false, 0, true);
+            _loader.contentLoaderInfo.addEventListener(Event.INIT, loader_initHandler, false, 0, true);
             _loader.load(request);
+        }
+
+        private function loader_initHandler(e:Event):void
+        {
+            _youtubePlayer = _loader.content;
+            _youtubePlayer.addEventListener("onReady", youtubePlayer_readyHandler);
+
+            var youTubePlayerContainer:UIComponent = new UIComponent();
+            youTubePlayerContainer.addChild(_loader);
+
+            view.videoContainer.addElement(youTubePlayerContainer);
+        }
+
+        private function youtubePlayer_readyHandler(e:Event):void
+        {
+            _youtubePlayer.setSize(400, 300);
+        }
+
+        private function loader_securityErrorHandler(e:SecurityErrorEvent):void
+        {
+            Alert.show("error loading the video");
+        }
+
+        private function loader_ioErrorHandler(e:IOErrorEvent):void
+        {
+            Alert.show("error loading the video");
         }
 
         public function clickHandler(e:MouseEvent):void
@@ -46,88 +74,8 @@ package nl.hva.proveit.shoudio.controllers
             }
         }
 
-        private function initYouTubePlayer(e:Event):void
-        {
-            var loaderInfo:LoaderInfo = e.target as LoaderInfo;
-
-            loaderInfo.content.addEventListener("onReady", youTubePlayer_readyHandler);
-            loaderInfo.content.addEventListener("onError", youTubePlayer_errorHandler);
-
-            var youTubePlayerContainer:UIComponent = new UIComponent();
-            youTubePlayerContainer.addChild(loaderInfo.loader);
-
-            view.videoContainer.addElement(youTubePlayerContainer);
-        }
-
-        private function youTubePlayer_readyHandler(e:Event):void
-        {
-            _youTubePlayer = _loader.content as Object;
-
-            _youTubePlayer.setSize(view.width, (view.width / 4) * 3);
-            _youTubePlayer.loadVideoById({ videoId: youTubeVideoId });
-
-            view.currentState = "playing";
-        }
-
-        private function youTubePlayer_errorHandler(e:Event):void
-        {
-            var message:String;
-            var errorCode:int = (e as Object).data;
-
-            switch (errorCode)
-            {
-                // The video was either removed or not found
-                case 100:
-                    message = "Video was either removed or not found";
-                    break;
-
-                // The owner of the video didn't allow the video to be embedded
-                case 101:
-                case 150:
-                    message = "Owner doesn't allow the video to be embedded";
-                    break;
-
-                default:
-                    message = "N/A (" + errorCode + ")";
-            }
-
-            Alert.show("YouTube error: " + message);
-        }
-
-        public function btnPlayPause_clickHandler():void
-        {
-            if (_paused)
-            {
-                _youTubePlayer.playVideo();
-            }
-            else
-            {
-                _youTubePlayer.pauseVideo();
-            }
-
-            // Togggle the paused status
-            _paused = !_paused;
-
-            // Change the state of the view accordingly
-            view.currentState = _paused ? "paused" : "playing";
-        }
-
-        public function sliderVolume_changeHandler():void
-        {
-            _youTubePlayer.setVolume(view.sliderVolume.value);
-        }
-
-        public function playingStateEnteredHandler():void
-        {
-            view.sliderVolume.value = _youTubePlayer.getVolume();
-        }
-
         public function close():void
         {
-            // Stop the youtube player
-            _youTubePlayer.stopVideo();
-            _youTubePlayer.destroy();
-
             // And unload the swf
             _loader.unloadAndStop();
 
