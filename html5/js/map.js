@@ -22,6 +22,13 @@ function addmapItems(item, overlay) {
         
         var feature = new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'});
         
+        feature.style = {
+            externalGraphic: 'img/marker-'+item[i].type+'.png',
+            graphicWidth: 24, 
+            graphicHeight: 33, 
+            graphicYOffset: -33
+        };
+        
         this.shoudioObjectsPointer[feature.id] = Array(2);
         this.shoudioObjectsPointer[feature.id][0] = item[i];
         this.shoudioObjectsPointer[feature.id][1] = feature;
@@ -110,10 +117,10 @@ function onFeatureSelect(feature) {
                              null,
                              popupdata,
                              null, false);
+    
     var offset = {'size':new OpenLayers.Size(200,12),'offset':new OpenLayers.Pixel(0,-102)};
     popup.offset = offset;
-    popup.relativePosition = "tr";
-
+    
     feature.popup = popup;
     map.addPopup(popup);
 }
@@ -126,6 +133,7 @@ function popupClick(featureid) {
         case 'shoudio':
             //show player
             $("#audio-player")[0].src = "http:\/\/noise.shoudio.com\/wav\/shoudio_"+shoudioItem.id+".wav";
+            //$("#volumebtn").draggable();
             showaudiowrapper();
             break;
         case 'text':
@@ -160,4 +168,5 @@ function onFeatureUnselect(feature) {
     map.removePopup(feature.popup);
     feature.popup.destroy();
     feature.popup = null;
+    selectedFeature = null;
 }   

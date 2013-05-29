@@ -18,13 +18,7 @@ function jsonLoaded(data) {
         if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
     }
     
-    overlay = new OpenLayers.Layer.Vector('Overlay', {
-        styleMap: new OpenLayers.StyleMap({
-            externalGraphic: 'img/marker.png',
-            graphicWidth: 25, graphicHeight: 41, graphicYOffset: -41,
-            title: '${tooltip}'
-        })
-    });
+    overlay = new OpenLayers.Layer.Vector('Overlay');
     
     var centerLocation = new OpenLayers.Geometry.Point(
         shoudioObjects[0].lon, 
@@ -40,7 +34,7 @@ function jsonLoaded(data) {
         center: centerLocation.getBounds().getCenterLonLat(), zoom: 17
     });
     
-    selectMarkerControl = new OpenLayers.Control.SelectFeature(overlay, {onSelect: onFeatureSelect});
+    selectMarkerControl = new OpenLayers.Control.SelectFeature(overlay, {onSelect: onFeatureSelect, onUnselect: onFeatureUnselect});
     map.addControl(selectMarkerControl);
     selectMarkerControl.activate();
     
