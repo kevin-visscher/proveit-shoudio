@@ -116,7 +116,7 @@ function onFeatureSelect(feature) {
     popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
                              popupdata,
-                             null, false);
+                             null, true);
     
     var offset = {'size':new OpenLayers.Size(200,12),'offset':new OpenLayers.Pixel(0,-102)};
     popup.offset = offset;

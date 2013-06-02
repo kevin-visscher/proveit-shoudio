@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<script type="text/javascript" src="https://bamhosting.nl/templates/bamhostingnew/js/jquery.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="js/jquery.jplayer.min.js"></script>
-<script src="js/jquery.orbit.js"></script>
-<script src="js/jquery.orbit.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/rightmenu.js"></script>
 <script src="js/startmenu.js"></script>
@@ -20,8 +17,7 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 <link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
-<link media="all" type="text/css" rel="stylesheet" href="css/orbit.css" />
-<link media="all" type="text/css" rel="stylesheet" href="skin/shoudyolo/jplayer.yolorange.css" />
+<link media="all" type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <title>Shoudio Player</title>
 </head>
 <body>
@@ -57,6 +53,7 @@
             <div id="maxsec">06:42</div>
             <div id="currenctsec"></div>
         </div>
+        <div id="volumediv" style="width: 400px;"></div>
         <div id="volumebar">
             <div id="volumeclickhandler"><img id="volumebtn" src="img/volumebutton.png" width="11px" height="11px"/></div>
             <div id="volumeload"></div>
@@ -74,6 +71,7 @@
         <ul class="rightmenuitems">
         </ul>
 	</div>
+    
     <!--startmenu-->
     <div id="startmenubg"></div>
     <div id="startmenu">

@@ -43,5 +43,6 @@ function jsonLoaded(data) {
     startmenu(this.collection);
 
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
-    map.removeControl(map.getControl('OpenLayers.Control.Attribution_17'));
+    map.removeControl(map.getControl('OpenLayers.Control.Attribution_13'));
+
 }

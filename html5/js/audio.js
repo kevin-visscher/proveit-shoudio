@@ -16,7 +16,7 @@ var maxsec = 0;
 var status = 0;
 
 function changeVolume(value){
-    $("#audio-player")[0].volume = value;
+    $("#audio-player")[0].volume = value/100;
 }
 
 function showaudiowrapper() {
@@ -63,8 +63,21 @@ function timeConvert(time) {
 }
 //alert(timeConvert(maxsec));
 
-$(document).ready(function(){
 
+function showvolumebar() {
+    $( "#volumediv" ).slider({
+        value: 50,
+        orientation: "horizontal",
+        range: "min",
+        animate: true,
+        change: function(event, ui) {
+            changeVolume(ui.value);
+        }
+    });
+}
+
+$(document).ready(function(){
+    
 	// playbutton
 	$("#playbutton").click(function(){
 		$("#audio-player")[0].play();

@@ -258,13 +258,15 @@ div.olControlSaveFeaturesItemInactive {
 }
 
 .olPopupCloseBox {
-  background: url("img/close.gif") no-repeat;
+  background: url("../../img/close-img.png") no-repeat;
+  margin-top:-1px;
   cursor: pointer;
 }
 
 .olFramedCloudPopupContent {
     padding: 5px;
     overflow: auto;
+    font-size:12px;
 }
 
 .olControlNoSelect {
