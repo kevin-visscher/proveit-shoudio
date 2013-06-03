@@ -17,6 +17,7 @@ var popup;
 var icon;
 var collection;
 var youtubePlayer;
+var audioInterval;
 
 $(function() {
     

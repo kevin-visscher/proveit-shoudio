@@ -14,7 +14,6 @@ body {
     user-select: none;
 }
 
-
 #title {
 	text-align: center;
 	color: #fff;
@@ -34,6 +33,13 @@ body {
     position: relative;
     overflow: hidden;
 }
+
+#logodiv {
+	position: absolute;
+	float: left;
+	z-index: 1004;
+}
+
 /*OPENSTREETMAP*/
 #openstreetmap { 
 	width: 400px;
@@ -45,7 +51,24 @@ body {
     top: 6px;
     right: 3px;
 }
+
+.olFramedCloudPopupContent a { 
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 3px 5px;
+    font-weight: bold;
+    text-decoration: none; 
+    line-height: 14px;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #fa925e;
+}
+
 /*OPENSTREETMAP*/
+
 /* RECHTERMENU */
 #rightmenu {
 	width: 160px;
@@ -422,9 +445,3 @@ ul.rightmenuitems .selected {
 }
 
 /* END IMAGECONTAINER */
-
-#logodiv {
-	position: absolute;
-	float: left;
-	z-index: 1004;
-}

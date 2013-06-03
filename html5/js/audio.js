@@ -95,8 +95,7 @@ $(document).ready(function(){
 		$("#pausebutton").css("display", "block");
 		status = 1;
 
-
-		setInterval(function() {
+		audioInterval = setInterval(function() {
 			currenctsec = $("#audio-player")[0].currentTime;
 			var procent = 100/maxsec * currenctsec;
 			procent = procent * 4;
@@ -107,8 +106,7 @@ $(document).ready(function(){
 				$("#pausebutton").css("display", "none");
 				status = 0;
 			};
-		}, 10);		
-
+		}, 10);
 	})
 
 	// progress bar
@@ -145,7 +143,8 @@ $(document).ready(function(){
 	// pausebutton
 	$("#pausebutton").click(function(){
 		$("#audio-player")[0].pause();
-		//css knoppen
+        window.clearInterval(audioInterval);
+        //css knoppen
 		$("#playbutton").css("display", "block");
 		$("#pausebutton").css("display", "none");
 		status = 0;
