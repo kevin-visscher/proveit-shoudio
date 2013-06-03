@@ -49,11 +49,14 @@ function hideaudiowrapper() {
 function setMaxsec(){
 	maxsec = $("#audio-player")[0].duration;
 	$("#maxsec").text(timeConvert(maxsec));
+    changeWaveLength();
 }
 
 function statusZero(){
 	$("#playbutton").css("display", "block");
 	$("#pausebutton").css("display", "none");
+    if(audioInterval!=null){ window.clearInterval(audioInterval); audioInterval = null;}
+    changeWaveLength();
 	status = 0;
 }
 
@@ -83,6 +86,19 @@ function timeConvert(time) {
 
     return time;
 }
+
+function changeWaveLength() {
+    currenctsec = $("#audio-player")[0].currentTime;
+    var procent = 100/maxsec * currenctsec;
+    procent = procent * 4;
+    $("#waveimg").css('width', procent + 'px');
+    $("#currenctsec").text(timeConvert(currenctsec));
+    if (currenctsec == maxsec) {
+        $("#playbutton").css("display", "block");
+        $("#pausebutton").css("display", "none");
+        status = 0;
+    }
+}
 //alert(timeConvert(maxsec));
 
 $(document).ready(function(){
@@ -95,18 +111,7 @@ $(document).ready(function(){
 		$("#pausebutton").css("display", "block");
 		status = 1;
 
-		audioInterval = setInterval(function() {
-			currenctsec = $("#audio-player")[0].currentTime;
-			var procent = 100/maxsec * currenctsec;
-			procent = procent * 4;
-			$("#waveimg").css('width', procent + 'px');
-			$("#currenctsec").text(timeConvert(currenctsec));
-			if (currenctsec == maxsec) {
-				$("#playbutton").css("display", "block");
-				$("#pausebutton").css("display", "none");
-				status = 0;
-			};
-		}, 10);
+		audioInterval = setInterval(changeWaveLength, 50);
 	})
 
 	// progress bar
@@ -143,7 +148,11 @@ $(document).ready(function(){
 	// pausebutton
 	$("#pausebutton").click(function(){
 		$("#audio-player")[0].pause();
-        window.clearInterval(audioInterval);
+        if(audioInterval != null) {
+            window.clearInterval(audioInterval);
+            audioInterval = null;
+        }
+        changeWaveLength();
         //css knoppen
 		$("#playbutton").css("display", "block");
 		$("#pausebutton").css("display", "none");
