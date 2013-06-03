@@ -50,14 +50,15 @@ function setMaxsec(){
 	maxsec = $("#audio-player")[0].duration;
 	$("#maxsec").text(timeConvert(maxsec));
     changeWaveLength();
+    $("#audio-player")[0].play();
 }
 
 function statusZero(){
-	$("#playbutton").css("display", "block");
-	$("#pausebutton").css("display", "none");
     if(audioInterval!=null){ window.clearInterval(audioInterval); audioInterval = null;}
     changeWaveLength();
-	status = 0;
+		$("#playbutton").css("display", "none");
+		$("#pausebutton").css("display", "block");
+		status = 1;
 }
 
 // sec omzetten naar HHMMSS
