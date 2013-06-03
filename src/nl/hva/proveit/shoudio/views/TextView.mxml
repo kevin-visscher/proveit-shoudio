@@ -27,14 +27,15 @@
 
         <s:Label text="{item.message}"
                  fontWeight="bold"
-                 fontSize="16"/>
+                 fontSize="16"
+                 fontFamily="Times New Roman"/>
 
         <s:Spacer height="8"/>
 
         <s:TextArea editable="false"
                     selectable="false"
                     borderVisible="false"
-                    fontFamily="Arial"
+                    fontFamily="Times New Roman"
                     fontSize="12"
                     width="100%"
                     height="100%"

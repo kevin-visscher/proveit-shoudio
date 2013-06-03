@@ -75,23 +75,19 @@
         </fx:Component>
     </fx:Declarations>
 
-    <s:Rect left="0" right="0" top="0" bottom="0" height="5">
-        <s:fill>
-            <s:SolidColor color="0xEEEEEE"/>
-        </s:fill>
-    </s:Rect>
-
-    <!--- The default skin class is HSliderTrackSkin.
- @copy spark.components.supportClasses.TrackBase#track
- @see spark.skins.spark.HSliderTrackSkin -->
-    <s:Button id="track" left="0" right="0" top="0" bottom="0" minWidth="33" width="100"
+    <s:Button id="track" left="0" right="0" top="0" bottom="0" minWidth="33"
               tabEnabled="false"
               skinClass="nl.hva.proveit.shoudio.HSliderTrackSkin" />
 
-    <!--- The default skin class is HSliderThumbSkin.
- @copy spark.components.supportClasses.TrackBase#thumb
- @see spark.skins.spark.HSliderThumbSkin -->
-    <s:Button id="thumb" top="0" bottom="0" width="11" height="11"
+    <s:Rect top="4" bottom="4" left="0" width="{thumb.x}" height="5">
+        <s:fill>
+            <s:SolidColor color="0xff5100"/>
+        </s:fill>
+    </s:Rect>
+
+    <s:Button id="thumb"
+              verticalCenter="0"
+              width="11" height="11"
               tabEnabled="false"
               skinClass="nl.hva.proveit.shoudio.HSliderThumbSkin" />
 </s:SparkSkin>

@@ -29,16 +29,8 @@
         <s:State name="disabled" />
     </s:states>
 
-
-    <!-- border -->
-    <s:Rect left="0" right="0" top="0" bottom="0" radiusX="7" radiusY="7">
-        <s:fill>
-            <s:SolidColor color="0xff5100" />
-        </s:fill>
-    </s:Rect>
-
     <!-- fill -->
-    <s:Rect left="0.5" right="0.5" top="0.5" bottom="0.5" radiusX="6" radiusY="6">
+    <s:Rect left="0" right="0" top="0" bottom="0" radiusX="32" radiusY="32">
         <s:fill>
             <s:SolidColor color="0xf55100"/>
         </s:fill>

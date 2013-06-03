@@ -1,5 +1,6 @@
 package nl.hva.proveit.shoudio.controllers
 {
+    import mx.core.FlexGlobals;
     import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.models.ShoudioCollection;
@@ -15,6 +16,8 @@ package nl.hva.proveit.shoudio.controllers
         public function btnStart_clickHandler():void
         {
             PopUpManager.removePopUp(view);
+
+            FlexGlobals.topLevelApplication.currentState = "sidebarVisible";
         }
     }
 }
