@@ -1,5 +1,10 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 
+s|Application
+{
+    fontFamily: "Helvetica, Arial, sans-serif";
+}
+
 .shoudioMessage
 {
     fontSize: 16px;

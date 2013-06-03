@@ -40,10 +40,6 @@
               top="0" left="0" right="0" bottom="0"
               creationComplete="{controller.controlGroupCreatedHandler()}">
 
-        <s:Button id="btnClose"
-                  label="Close"
-                  click="{controller.btnClose_clickHandler()}"/>
-
         <s:Group width="100%" height="74" click="{controller.wave_clickHandler(event)}">
             <s:Image id="imgWave"
                      source="{controller.imageWaveSource}"
@@ -71,10 +67,12 @@
 
                 <s:Spacer width="100%"/>
 
-                <s:Button id="btnPlayPause"
-                          label.paused="Play"
-                          label.playing="Pause"
-                          click="{controller.btnPlayPause_clickHandler()}"/>
+                <s:Image id="btnPlayPause"
+                         source.paused="@Embed('/assets/playicon.png')"
+                         source.playing="@Embed('/assets/pauseicon.png')"
+                         width="17"
+                         height="20"
+                         click="{controller.btnPlayPause_clickHandler()}"/>
 
                 <s:Spacer width="100%"/>
 
@@ -94,5 +92,11 @@
         </s:VGroup>
 
     </s:VGroup>
+
+    <s:Image id="btnClose"
+             source="@Embed('/assets/close-img.png')"
+             click="{controller.btnClose_clickHandler()}"
+             top="-10"
+             right="5"/>
 
 </s:Group>

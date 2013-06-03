@@ -3,9 +3,7 @@
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
          xmlns:models="nl.hva.proveit.shoudio.models.*"
-         width="300"
-         height="200"
-         mask="{popupMask}">
+         creationComplete="{controller.init()}">
 
     <fx:Declarations>
         <models:ShoudioCollectionItem id="item"/>
@@ -18,48 +16,84 @@
                             distance="0"/>
     </s:filters>
 
-    <s:Group id="popupMask" top="0" right="0" bottom="0" left="0">
-        <s:Rect top="0" right="0" bottom="32" left="0" radiusX="4" radiusY="4">
+    <!-- mask -->
+    <s:Group id="popupMask" right="0" top="0" left="0" bottom="0">
+        <s:Rect top="0" right="0" bottom="32" left="0">
             <s:fill>
-                <s:SolidColor color="0xFFFFFF"/>
+                <s:SolidColor color="0x000000"/>
             </s:fill>
         </s:Rect>
-        <s:Path bottom="0" right="8" width="32" height="32">
-            <s:data>M 0 0 h 32 l 16 32 l 0 0 z</s:data>
+        <s:Path bottom="0" right="16" width="24" height="32">
+            <s:data>M 0 0 L 24 0 L 12 32 L 0 0 Z</s:data>
             <s:fill>
                 <s:SolidColor color="0xFFFFFF"/>
             </s:fill>
         </s:Path>
     </s:Group>
 
-    <s:Rect top="0" right="0" bottom="0" left="0" radiusX="4" radiusY="4">
+    <!-- fill -->
+    <s:Rect top="0" right="0" bottom="0" left="0" mask="{popupMask}">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
         </s:fill>
+        <s:stroke>
+            <s:SolidColorStroke color="0xff5100"/>
+        </s:stroke>
     </s:Rect>
 
-    <s:Group top="4" right="4" bottom="34" left="4">
-        <s:VGroup top="0" right="0" bottom="0" left="0">
-            <s:Label text="{item.message}"
-                     styleName="shoudioMessage"
-                     width="100%"/>
+    <s:Path bottom="0" right="16" width="24" height="32">
+        <s:data>M 0 0 L 12 32 L 24 0</s:data>
+        <s:stroke>
+            <s:SolidColorStroke color="0xff5100"/>
+        </s:stroke>
+    </s:Path>
 
-            <s:TextArea text="{item.description}"
+    <s:Line bottom="32" left="0" right="40" height="1">
+        <s:stroke>
+            <s:SolidColorStroke color="0xff5100"/>
+        </s:stroke>
+    </s:Line>
+
+    <s:Line bottom="32" right="0" width="16" height="1">
+        <s:stroke>
+            <s:SolidColorStroke color="0xff5100"/>
+        </s:stroke>
+    </s:Line>
+
+    <s:Group top="4" right="4" bottom="32" left="4">
+        <s:VGroup top="0" right="0" bottom="0" left="0">
+
+            <s:HGroup width="100%" paddingTop="4">
+                <s:Label id="txtMessage"
+                         text="{item.message}"
+                         styleName="shoudioMessage"/>
+
+                <s:Image id="btnClose"
+                         source="@Embed('/assets/close-img.png')"
+                         click="{controller.btnClose_clickHandler()}"
+                         verticalCenter="0"/>
+            </s:HGroup>
+
+            <s:TextArea id="txtDescription"
+                        text="{item.description}"
                         styleName="shoudioDescription"
                         editable="false"
                         selectable="false"
                         lineBreak="toFit"
                         borderVisible="false"
                         width="100%"
-                        height="100%"/>
+                        height="100%"
+                        includeInLayout="false"
+                        visible="false"/>
 
             <s:Button id="btnOpenViewer"
                       label="{controller.btnOpenViewerLabel}"
                       click="{controller.doSomethingAwesome()}"
-                      bottom="4"/>
+                      skinClass="nl.hva.proveit.shoudio.skin.ButtonPopupSkin"/>
+
+            <s:Spacer height="2"/>
+
         </s:VGroup>
     </s:Group>
-
-
 
 </s:Group>

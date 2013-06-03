@@ -17,6 +17,7 @@ package nl.hva.proveit.shoudio.controllers
 
     import mx.core.FlexGlobals;
     import mx.core.IFlexDisplayObject;
+    import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
 
     import nl.hva.proveit.shoudio.events.SidebarEvent;
@@ -124,8 +125,6 @@ package nl.hva.proveit.shoudio.controllers
 
             var popup:MapMarkerPopup = new MapMarkerPopup();
             popup.item = item;
-            popup.x = view.parent.x + view.parent.width / 2 - popup.width / 2;
-            popup.y = view.parent.y + view.parent.width / 2 - popup.height / 2 - 32;
 
             markerLocationPoint.x -= popup.width / 2;
             markerLocationPoint.y -= popup.height / 2;
@@ -138,8 +137,18 @@ package nl.hva.proveit.shoudio.controllers
 
             _activePopup = popup;
             _activePopup.addEventListener(MouseEvent.ROLL_OUT, activePopup_rollOutHandler, false, 0, true);
+            _activePopup.addEventListener(FlexEvent.CREATION_COMPLETE, activePopup_creationCompleteHandler, false, 0, true);
+
+            popup.x = -9999;
+            popup.y = -9999;
 
             PopUpManager.addPopUp(popup, view);
+        }
+
+        private function activePopup_creationCompleteHandler(e:FlexEvent):void
+        {
+            _activePopup.x = view.parent.x + view.parent.width / 2 - _activePopup.width / 2;
+            _activePopup.y = view.parent.y + view.parent.height / 2 - _activePopup.height / 2 - 32;
         }
 
         private function closeActivePopup():void

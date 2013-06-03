@@ -26,22 +26,18 @@
 
             if (value !== null)
             {
-                var metrics:TextLineMetrics = lblText.measureText(data.message);
+                var text:String = data.message as String;
+                var originalText:String = text;
 
                 // Line would exceed the width of the container
                 // add dots to the end of the string
-                if (metrics.width + lblText.left > parent.width)
+                if (text.length >= 17)
                 {
-                    var text:String = data.message as String;
-
-                    lblText.text = text.substring(0, 17) + "...";
-                }
-                else
-                {
-                    lblText.text = data.message;
+                    text = text.substring(0, 14) + "...";
                 }
 
-                lblText.toolTip = data.message;
+                lblText.text = text;
+                lblText.toolTip = originalText;
 
                 var source:Class = null;
 

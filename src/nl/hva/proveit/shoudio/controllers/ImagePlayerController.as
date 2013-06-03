@@ -37,6 +37,10 @@ package nl.hva.proveit.shoudio.controllers
             if (view.image.height > view.height)
                 view.image.height = view.height;
 
+            view.image.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
+                close();
+            });
+
             view.currentState = "done";
         }
     }

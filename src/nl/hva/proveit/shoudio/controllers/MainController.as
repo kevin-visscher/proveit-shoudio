@@ -26,7 +26,7 @@ package nl.hva.proveit.shoudio.controllers
         {
             _jsonLoader = new JsonLoader();
             _jsonLoader.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
-            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri || "https://dl.dropbox.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
+            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri || "https://dl.dropboxusercontent.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
         }
 
         private function listPoints_indexChangingEvent(e:IndexChangeEvent):void

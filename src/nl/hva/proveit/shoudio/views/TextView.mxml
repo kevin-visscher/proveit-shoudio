@@ -15,7 +15,21 @@
         </s:fill>
     </s:Rect>
 
+    <s:Rect top="25" left="50" bottom="0" right="50">
+        <s:fill>
+            <s:SolidColor color="0xffffff"/>
+        </s:fill>
+    </s:Rect>
+
     <s:VGroup top="25" left="50" right="50" bottom="0">
+
+        <s:Spacer height="8"/>
+
+        <s:Label text="{item.message}"
+                 fontWeight="bold"
+                 fontSize="16"/>
+
+        <s:Spacer height="8"/>
 
         <s:TextArea editable="false"
                     selectable="false"

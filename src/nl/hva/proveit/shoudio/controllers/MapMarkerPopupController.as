@@ -18,22 +18,29 @@ package nl.hva.proveit.shoudio.controllers
 
     public final class MapMarkerPopupController
     {
-        public var view:MapMarkerPopup;
-
-        private var _item:ShoudioCollectionItem;
+        private static var _openedPopup:IFlexDisplayObject;
 
         [Bindable]
         public var btnOpenViewerLabel:String;
 
-        private static var _openedPopup:IFlexDisplayObject;
+        public var view:MapMarkerPopup;
+
+        private var _item:ShoudioCollectionItem;
+
+        public function init():void
+        {
+            if (item.type === ShoudioItemType.POINT_OF_INTEREST)
+            {
+                view.txtDescription.includeInLayout = true;
+                view.txtDescription.visible = true;
+            }
+        }
 
         public function doSomethingAwesome():void
         {
             if (_openedPopup)
             {
-                PopUpManager.removePopUp(_openedPopup);
-
-                _openedPopup = null;
+                closeOpenPopup();
             }
 
             switch (item.type)
@@ -42,6 +49,7 @@ package nl.hva.proveit.shoudio.controllers
                     openVideoPlayer();
                     break;
 
+                case ShoudioItemType.POINT_OF_INTEREST:
                 case ShoudioItemType.IMAGE:
                     openImageViewer();
                     break;
@@ -50,7 +58,6 @@ package nl.hva.proveit.shoudio.controllers
                     openShoudioPlayer();
                     break;
 
-                case ShoudioItemType.POINT_OF_INTEREST:
                 case ShoudioItemType.TEXT:
                     openTextViewer();
                     break;
@@ -58,6 +65,13 @@ package nl.hva.proveit.shoudio.controllers
                 default:
                     Alert.show("Sorry. Was unable to handle type: " + item.type);
             }
+        }
+
+        private function closeOpenPopup():void
+        {
+            PopUpManager.removePopUp(_openedPopup);
+
+            _openedPopup = null;
         }
 
         private function openVideoPlayer():void
@@ -126,6 +140,7 @@ package nl.hva.proveit.shoudio.controllers
 
             switch (_item.type)
             {
+                case ShoudioItemType.POINT_OF_INTEREST:
                 case ShoudioItemType.IMAGE:
                     btnOpenViewerLabel = "View image";
                     break;
@@ -145,6 +160,11 @@ package nl.hva.proveit.shoudio.controllers
                 default:
                     btnOpenViewerLabel = "Try to open";
             }
+        }
+
+        public function btnClose_clickHandler():void
+        {
+            closeOpenPopup();
         }
     }
 }
