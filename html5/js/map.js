@@ -95,7 +95,7 @@ function onFeatureSelect(feature) {
     map.panTo(feature.geometry.getBounds().getCenterLonLat());
     
     var popupdata = shoudioItem.message + "<br /><br />";
-    popupdata += "<a href='javascript:popupClick(\""+feature.id+"\");'>";
+    popupdata += "<a href='javascript:popupClick(\""+feature.id+"\");' onclick='statusZero()'>";
     
     switch(type) {
         case 'shoudio':

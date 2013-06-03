@@ -51,6 +51,12 @@ function setMaxsec(){
 	$("#maxsec").text(timeConvert(maxsec));
 }
 
+function statusZero(){
+	$("#playbutton").css("display", "block");
+	$("#pausebutton").css("display", "none");
+	status = 0;
+}
+
 // sec omzetten naar HHMMSS
 function timeConvert(time) {
     
