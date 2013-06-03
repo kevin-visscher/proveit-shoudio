@@ -150,8 +150,9 @@ ul.rightmenuitems .selected {
 	background-color: #fa925e;
 	float: right;
 	text-align: center;
-	margin-top: 5px;
-	margin-right: 10px;
+	position: absolute;
+	right: 10px;
+	top: 60px;
 }
 
 #startButton {
