@@ -1,10 +1,8 @@
-@import url("MyriadHebrew-SemiBold-Include");
-
 body {
 	margin: 0px;
 	padding: 0px;
     background: #fff url('../img/bodybackground.png') repeat-x;
-    font-family: "MyriadHebrew-Regular";
+    font-family: "Helvetica Neue",Arial,sans-serif;
     
     /*make everything none selectable*/
     -webkit-user-select: none;
@@ -18,7 +16,6 @@ body {
 	text-align: center;
 	color: #fff;
 	font-size: 36px;
-	font-family: "MyriadHebrew-SemiBold" !important;
 	text-shadow: 1px 2px #444;
 	margin-top: 20px;
 }
@@ -83,8 +80,7 @@ body {
 }
 ul.rightmenuitems {
 	list-style-type: none;
-	font-family: "MyriadHebrew-Regular" !important; 
-	font-size: 12px;
+	font-size: 11px;
 	padding: 0px;
 }
 ul.rightmenuitems li {
