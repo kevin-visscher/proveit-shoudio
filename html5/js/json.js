@@ -5,17 +5,10 @@
 */
 function jsonLoaded(data) {
     
-    var temp;
-    
-    if (document.location.hostname == "localhost")
-        temp = data;
-    else
-        temp = jQuery.parseJSON(data);
-    
-    this.collection = temp.collection;
+    this.collection = data.collection;
 
-    for(var i in temp.contents) {
-        if(temp.contents[i].sorting > -1)shoudioObjects.push(temp.contents[i]);
+    for(var i in data.contents) {
+        if(data.contents[i].sorting > -1)shoudioObjects.push(data.contents[i]);
     }
     
     overlay = new OpenLayers.Layer.Vector('Overlay');
@@ -38,8 +31,8 @@ function jsonLoaded(data) {
     map.addControl(selectMarkerControl);
     selectMarkerControl.activate();
     
-    drawLines(temp.collection.route, overlay);
-    addmapItems(temp.contents, overlay);
+    drawLines(data.collection.route, overlay);
+    addmapItems(data.contents, overlay);
     startmenu(this.collection);
 
     map.removeControl(map.getControl('OpenLayers.Control.Zoom_54'));
