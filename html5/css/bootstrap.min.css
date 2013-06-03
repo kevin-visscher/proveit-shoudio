@@ -445,3 +445,11 @@ ul.rightmenuitems .selected {
 }
 
 /* END IMAGECONTAINER */
+
+#openstreetmapCredit {
+	position: absolute;
+	z-index: 1000;
+	bottom: 1px;
+	right: 1px;
+	font-size: 10px;
+}
