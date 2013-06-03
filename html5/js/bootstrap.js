@@ -31,6 +31,7 @@ $(function() {
     
     // adding click handlers
     $('.rightmenuitems li').live('click', rightmenuClick);
+    $(".rightmenuitems li").live({mouseenter: rightmenuHover, mouseleave: rightmenuLeave});
 	$("#playbutton").click(audioPlay);
 	$("#pausebutton").click(audioPause);
 	$("#loadclickhandler").bind("click", loadClickHandler); //progress bar

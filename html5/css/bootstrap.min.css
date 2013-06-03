@@ -84,13 +84,18 @@ ul.rightmenuitems {
 	padding: 0px;
 }
 ul.rightmenuitems li {
-	height: auto;
+	height: 30px;
     min-height:30px;
 	width: 160px;
-	line-height:30px;
+    list-style-position:inside;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height:30px;
 }
+
 ul.rightmenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }
-ul.rightmenuitems .selected {
+ul.rightmenuitems li:hover {
 	background: #fff url('../img/rechtermenuselectie.gif') repeat;
 	color: #fff;
 }

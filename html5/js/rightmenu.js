@@ -9,30 +9,11 @@ function showrightmenu() {
 function addrightmenuItem(item, featureid) {
     var message = item.message;
     var shoudiotype = item.type;
-    if(message.length > 19) message = message.substr(0,19) + "...";
     
     $(".rightmenuitems").append('<li class="notselected" data-shouindex="'+featureid+'"><object id="icon" data="img/'+shoudiotype+'black.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
 }
 
-function rightmenuClick(){
-    
-    if(this == oldthis) return;
-    
-    $(oldthis).toggleClass('selected');
-    $(this).toggleClass('selected');
-    
-    if(oldthis) {
-        //make icon old selected black
-        var featureid = $(oldthis).data("shouindex");
-        var feature = shoudioObjectsPointer[featureid][1];
-        var item = shoudioObjectsPointer[featureid][0];
-        
-        var message = item.message;
-        var shoudiotype = item.type;
-        if(message.length > 19) message = message.substr(0,19) + "...";
-        $(oldthis).html('<object id="icon" data="img/'+shoudiotype+'black.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
-    }
-    
+function rightmenuHover(){ 
     //make icon white
     featureid = $(this).data("shouindex");
     feature = shoudioObjectsPointer[featureid][1];
@@ -40,11 +21,23 @@ function rightmenuClick(){
     
     message = item.message;
     shoudiotype = item.type;
-    if(message.length > 19) message = message.substr(0,19) + "...";
     $(this).html('<object id="icon" data="img/'+shoudiotype+'white.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
+}
+
+function rightmenuLeave() {
+    //make icon old selected black
+    var featureid = $(this).data("shouindex");
+    var feature = shoudioObjectsPointer[featureid][1];
+    var item = shoudioObjectsPointer[featureid][0];
     
-    oldthis = this;
-    
+    var message = item.message;
+    var shoudiotype = item.type;
+    $(this).html('<object id="icon" data="img/'+shoudiotype+'black.svg" type="image/svg+xml" width="18" height="18"></object>'+message+'</li>');
+}
+
+function rightmenuClick(){
+    featureid = $(this).data("shouindex");    
+    feature = shoudioObjectsPointer[featureid][1];
     onFeatureSelect(feature);
     selectedFeature = feature;
 }

@@ -99,17 +99,20 @@ function onFeatureSelect(feature) {
     
     switch(type) {
         case 'shoudio':
-            popupdata += "Speel deze shoudio af</a>";
+            popupdata += "Play this shoudio</a>";
             break;
         case 'text':
-            popupdata += "Text laten zien</a>";
+            popupdata += "Show text</a>";
             break;
         case 'poi':
+            popupdata += shoudioItem.description;
+            popupdata += "Show picture</a>";
+            break;
         case 'image':
-            popupdata += "Foto weergeven</a>";
+            popupdata += "Show picture</a>";
             break;
         case 'youtube':
-            popupdata += "Speel de video af</a>";
+            popupdata += "Play video</a>";
             break;
     }
     
