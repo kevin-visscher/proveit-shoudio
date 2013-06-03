@@ -18,6 +18,9 @@ var icon;
 var collection;
 var youtubePlayer;
 var audioInterval;
+var currenctsec;
+var maxsec;
+var status;
 
 $(function() {
     
@@ -26,6 +29,9 @@ $(function() {
     
     $.get("hva-route-1.json",null, jsonLoaded);
     
-    //add rightmenuclick handler
+    // adding click handlers
     $('.rightmenuitems li').live('click', rightmenuClick);
+	$("#playbutton").click(audioPlay);
+	$("#pausebutton").click(audioPause);
+	$("#loadclickhandler").bind("click", loadClickHandler); //progress bar
 });

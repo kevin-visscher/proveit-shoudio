@@ -11,10 +11,6 @@
  *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 
-var currenctsec = 0;
-var maxsec = 0;
-var status = 0;
-
 function changeVolume(value){
     $("#audio-player")[0].volume = value/100;
 }
@@ -38,27 +34,20 @@ function showaudiowrapper() {
 function hideaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'403px'},1000);
     $("#imgclose").fadeOut(1000);
-	$("#audio-player")[0].pause(); 
 	$("#audio-player")[0].currentTime = 0;
-	//css knoppen
-	$("#playbutton").css("display", "block");
-	$("#pausebutton").css("display", "none");
-	status = 0;
+	audioPause();
 }
 
 function setMaxsec(){
 	maxsec = $("#audio-player")[0].duration;
 	$("#maxsec").text(timeConvert(maxsec));
     changeWaveLength();
-    $("#audio-player")[0].play();
+    audioPlay();
 }
 
 function statusZero(){
     if(audioInterval!=null){ window.clearInterval(audioInterval); audioInterval = null;}
     changeWaveLength();
-		$("#playbutton").css("display", "none");
-		$("#pausebutton").css("display", "block");
-		status = 1;
 }
 
 // sec omzetten naar HHMMSS
@@ -100,24 +89,30 @@ function changeWaveLength() {
         status = 0;
     }
 }
-//alert(timeConvert(maxsec));
 
-$(document).ready(function(){
+function audioPlay() {
+	$("#audio-player")[0].play();
+	$("#playbutton").css("display", "none");
+	$("#pausebutton").css("display", "block");
+	status = 1;
+	audioInterval = setInterval(changeWaveLength, 50);
+}
 
+function audioPause() {
+		$("#audio-player")[0].pause();
+        if(audioInterval != null) {
+            window.clearInterval(audioInterval);
+            audioInterval = null;
+        }
+        changeWaveLength();
+        //css knoppen
+		$("#playbutton").css("display", "block");
+		$("#pausebutton").css("display", "none");
+		status = 0;
+}
 
-	// playbutton
-	$("#playbutton").click(function(){
-		$("#audio-player")[0].play();
-		$("#playbutton").css("display", "none");
-		$("#pausebutton").css("display", "block");
-		status = 1;
-
-		audioInterval = setInterval(changeWaveLength, 50);
-	})
-
-	// progress bar
-	$("#loadclickhandler").bind("click", function(event){
-		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
+function loadClickHandler(event) {
+	var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
 		var locclick = event.pageX - windowwidth;
         $("#waveimg").css('width', locclick + 'px');
         $("#audio-player")[0].currentTime = (locclick / 400 * maxsec);
@@ -134,30 +129,4 @@ $(document).ready(function(){
 			$("#playbutton").css("display", "block");
 			$("#pausebutton").css("display", "none");
 		  }
-    })
-    
-    $("#volumeclickhandler").bind("click", function(event){
-		var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
-		var locclick = event.pageX - (windowwidth+20);
-        
-        $("#volumeload").animate({'width':locclick + 'px'},100);
-        //$("#volumeload").css('width', locclick + 'px');
-        changeVolume((locclick / 360));
-        $("#volumeclickhandler img").animate({'margin-left':(locclick-5)+'px'},100);
-    })
-
-	// pausebutton
-	$("#pausebutton").click(function(){
-		$("#audio-player")[0].pause();
-        if(audioInterval != null) {
-            window.clearInterval(audioInterval);
-            audioInterval = null;
-        }
-        changeWaveLength();
-        //css knoppen
-		$("#playbutton").css("display", "block");
-		$("#pausebutton").css("display", "none");
-		status = 0;
-	})
-// hack hack	
-})
+}
