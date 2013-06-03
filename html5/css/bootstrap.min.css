@@ -286,7 +286,6 @@ ul.rightmenuitems .selected {
     font-size:12px;
 }
 
-
 #waveimg { 
 	z-index: 1004;
 	position: absolute;
@@ -311,35 +310,32 @@ ul.rightmenuitems .selected {
 	height: 74px;
 }
 
-#volumebar {
+#volumediv {
     margin-left: 20px;
     margin-top: 11px;
     width: 360px;
-    background-color: #e2e2e2;
+    background: #e2e2e2;
     height: 3px;
+    border:0px;
 }
 
-#volumeload {
-    position:absolute;
-    z-index: 1004;
-    width: 180px;
-    height:3px;
+#volumediv div {
+    background: none;
     background-color: #fa925e;
 }
 
-#volumeclickhandler {
-    z-index: 1005;
-    position: absolute;
-    width: 360px;
-    height:15px;
-    margin-top:-5px;
-}
-
-#volumeclickhandler img {
-    position: absolute;
-    margin-left: 175px;
-    margin-top: 1px;
-    cursor:hand;
+#volumediv a {
+    border:0;
+    background: url(../img/volumebutton.png) no-repeat;
+    width: 11px;
+    height: 11px;
+    margin-left:-5px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 #rightmarkforwindowwidth {

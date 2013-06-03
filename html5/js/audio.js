@@ -22,6 +22,17 @@ function changeVolume(value){
 function showaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'266px'},1000);
     $("#imgclose").fadeIn(1000);
+    
+    $( "#volumediv" ).slider({
+        value: 50,
+        orientation: "horizontal",
+        range: "min",
+        animate: true,
+        change: function(event, ui) {
+            changeVolume(ui.value);
+        }
+    });
+    
 }
 
 function hideaudiowrapper() {
@@ -62,19 +73,6 @@ function timeConvert(time) {
     return time;
 }
 //alert(timeConvert(maxsec));
-
-
-function showvolumebar() {
-    $( "#volumediv" ).slider({
-        value: 50,
-        orientation: "horizontal",
-        range: "min",
-        animate: true,
-        change: function(event, ui) {
-            changeVolume(ui.value);
-        }
-    });
-}
 
 $(document).ready(function(){
     
