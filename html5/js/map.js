@@ -133,7 +133,6 @@ function popupClick(featureid) {
         case 'shoudio':
             //show player
             $("#audio-player")[0].src = "http:\/\/noise.shoudio.com\/wav\/shoudio_"+shoudioItem.id+".wav";
-            //$("#volumebtn").draggable();
             showaudiowrapper();
             break;
         case 'text':

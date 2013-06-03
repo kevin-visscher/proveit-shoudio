@@ -23,7 +23,7 @@ $(function() {
     fromProjection = new OpenLayers.Projection("EPSG:4326");  // Transform from WGS 1984
     toProjection   = new OpenLayers.Projection("EPSG:3857");
     
-    $.get("json-mooie-ding.json",null, jsonLoaded);
+    $.get("hva-route-1.json",null, jsonLoaded);
     
     //add rightmenuclick handler
     $('.rightmenuitems li').live('click', rightmenuClick);

@@ -38,7 +38,7 @@
             <a href="javascript:hideaudiowrapper()">
             <img src="img/close-img.png"/></a>
         </div>
-        <audio id="audio-player" name="audio-player" src="test.wav" ></audio>
+        <audio id="audio-player" name="audio-player" onloadeddata="setMaxsec()" ></audio>
         <div id="imgloading">
             <img src="http://s3.amazonaws.com/noise.shoudio.com/waveform/small/7050.png" style="" width="400" height="74"/>
             <div id="waveimg"></div>
@@ -50,7 +50,7 @@
                 <a id="playbutton"><img src="img/playicon.png" width="17px" height="20px"/></a>
                 <a id="pausebutton"><img src="img/pauseicon.png" width="17px" height="20px"/></a>
             </div>
-            <div id="maxsec">00:00</div>
+            <div id="maxsec"></div>
             <div id="currenctsec"></div>
         </div>
         <div id="volumediv"></div>

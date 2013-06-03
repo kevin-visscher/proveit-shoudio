@@ -46,6 +46,11 @@ function hideaudiowrapper() {
 	status = 0;
 }
 
+function setMaxsec(){
+	maxsec = $("#audio-player")[0].duration;
+	$("#maxsec").text(timeConvert(maxsec));
+}
+
 // sec omzetten naar HHMMSS
 function timeConvert(time) {
     
@@ -75,14 +80,13 @@ function timeConvert(time) {
 //alert(timeConvert(maxsec));
 
 $(document).ready(function(){
-    
+
+
 	// playbutton
 	$("#playbutton").click(function(){
 		$("#audio-player")[0].play();
 		$("#playbutton").css("display", "none");
 		$("#pausebutton").css("display", "block");
-		maxsec = $("#audio-player")[0].duration;
-		$("#maxsec").text(timeConvert(maxsec));
 		status = 1;
 
 
