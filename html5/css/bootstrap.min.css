@@ -99,13 +99,24 @@ ul.rightmenuitems li:hover {
 	background: #fff url('../img/rechtermenuselectie.gif') repeat;
 	color: #fff;
 }
+
+ul.rightmenuitems li:hover svg {
+    fill: #fff;
+}
+
 .rightmenuclose {
     position: absolute;
     margin-left: 147px;
     margin-top: 4px;
 }
-#icon {
-    margin: 0px 7px -5px 7px;
+.icon {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 5px;
+}
+.icon svg {
+    
 }
 /* RECHTERMENU */
 
