@@ -95,7 +95,7 @@ package nl.hva.proveit.shoudio.controllers
             var shoudioPlayer:ShoudioPlayerView = new ShoudioPlayerView();
             shoudioPlayer.shoudioId = item.shoudioId;
 
-            openViewer(shoudioPlayer, NaN, 150);
+            openViewer(shoudioPlayer, NaN, 134);
         }
 
         private function openTextViewer():void
@@ -164,7 +164,7 @@ package nl.hva.proveit.shoudio.controllers
 
         public function btnClose_clickHandler():void
         {
-            closeOpenPopup();
+            PopUpManager.removePopUp(view);
         }
     }
 }

@@ -121,13 +121,16 @@ package nl.hva.proveit.shoudio.controllers
 
         private function openMarkerPopup(markerLocation:Location, item:ShoudioCollectionItem):void
         {
+            // Hide the sidebar when the user clicks on a marker
+            FlexGlobals.topLevelApplication.currentState = "sidebarHidden";
+
             var markerLocationPoint:Point = _map.locationPoint(markerLocation, view);
 
             var popup:MapMarkerPopup = new MapMarkerPopup();
             popup.item = item;
 
             markerLocationPoint.x -= popup.width / 2;
-            markerLocationPoint.y -= popup.height / 2;
+            markerLocationPoint.y -= 100;
 
             _shouldIgnoreNextPanEvent = true;
 
@@ -137,18 +140,18 @@ package nl.hva.proveit.shoudio.controllers
 
             _activePopup = popup;
             _activePopup.addEventListener(MouseEvent.ROLL_OUT, activePopup_rollOutHandler, false, 0, true);
-            _activePopup.addEventListener(FlexEvent.CREATION_COMPLETE, activePopup_creationCompleteHandler, false, 0, true);
+            _activePopup.addEventListener(FlexEvent.UPDATE_COMPLETE, activePopup_creationCompleteHandler, false, 0, true);
 
-            popup.x = -9999;
-            popup.y = -9999;
+            _activePopup.x = -9999;
+            _activePopup.y = -9999;
 
             PopUpManager.addPopUp(popup, view);
         }
 
         private function activePopup_creationCompleteHandler(e:FlexEvent):void
         {
-            _activePopup.x = view.parent.x + view.parent.width / 2 - _activePopup.width / 2;
-            _activePopup.y = view.parent.y + view.parent.height / 2 - _activePopup.height / 2 - 32;
+            _activePopup.x = view.parent.x + view.parent.width / 2 - _activePopup.width + 32;
+            _activePopup.y = view.parent.y + view.parent.height / 2 - _activePopup.height + 67;
         }
 
         private function closeActivePopup():void

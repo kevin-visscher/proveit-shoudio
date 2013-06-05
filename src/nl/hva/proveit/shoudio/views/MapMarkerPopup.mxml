@@ -18,7 +18,7 @@
 
     <!-- mask -->
     <s:Group id="popupMask" right="0" top="0" left="0" bottom="0">
-        <s:Rect top="0" right="0" bottom="32" left="0">
+        <s:Rect top="0" right="0" bottom="32" left="0" radiusX="4" radiusY="4">
             <s:fill>
                 <s:SolidColor color="0x000000"/>
             </s:fill>
@@ -32,7 +32,7 @@
     </s:Group>
 
     <!-- fill -->
-    <s:Rect top="0" right="0" bottom="0" left="0" mask="{popupMask}">
+    <s:Rect top="0" right="0" bottom="0" left="0" mask="{popupMask}" radiusX="4" radiusY="4">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
         </s:fill>
@@ -41,6 +41,7 @@
         </s:stroke>
     </s:Rect>
 
+    <!-- The tooltip on the bottom -->
     <s:Path bottom="0" right="16" width="24" height="32">
         <s:data>M 0 0 L 12 32 L 24 0</s:data>
         <s:stroke>
@@ -48,22 +49,24 @@
         </s:stroke>
     </s:Path>
 
-    <s:Line bottom="32" left="0" right="40" height="1">
+    <!-- Bottom stroke - bottom left to start of tooltip -->
+    <s:Line bottom="32" left="1" right="40" height="1">
         <s:stroke>
-            <s:SolidColorStroke color="0xff5100"/>
+            <s:SolidColorStroke color="0xff5100" pixelHinting="true" weight="1"/>
         </s:stroke>
     </s:Line>
 
-    <s:Line bottom="32" right="0" width="16" height="1">
+    <!-- Bottom stroke - end of the tooltip to the end of the popup -->
+    <s:Line bottom="32" right="1" width="16">
         <s:stroke>
-            <s:SolidColorStroke color="0xff5100"/>
+            <s:SolidColorStroke color="0xff5100" pixelHinting="true" weight="1"/>
         </s:stroke>
     </s:Line>
 
     <s:Group top="4" right="4" bottom="32" left="4">
-        <s:VGroup top="0" right="0" bottom="0" left="0">
+        <s:VGroup top="0" right="0" bottom="0" left="0" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8">
 
-            <s:HGroup width="100%" paddingTop="4">
+            <s:HGroup width="100%" paddingTop="4" verticalAlign="middle">
                 <s:Label id="txtMessage"
                          text="{item.message}"
                          styleName="shoudioMessage"/>
@@ -71,7 +74,7 @@
                 <s:Image id="btnClose"
                          source="@Embed('/assets/close-img.png')"
                          click="{controller.btnClose_clickHandler()}"
-                         verticalCenter="0"/>
+                         useHandCursor="true"/>
             </s:HGroup>
 
             <s:TextArea id="txtDescription"
@@ -82,7 +85,7 @@
                         lineBreak="toFit"
                         borderVisible="false"
                         width="100%"
-                        height="100%"
+                        height="100"
                         includeInLayout="false"
                         visible="false"/>
 

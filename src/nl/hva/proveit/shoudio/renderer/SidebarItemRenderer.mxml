@@ -20,6 +20,9 @@
         [Embed("/assets/picture.png")]
         private static const IMAGE_ICON_CLASS:Class;
 
+        [Embed("/assets/map-marker.png")]
+        private static const POI_ICON_CLASS:Class;
+
         override public function set data(value:Object):void
         {
             super.data = value;
@@ -47,7 +50,6 @@
                         source = IMAGE_ICON_CLASS;
                         break;
 
-                    default:
                     case ShoudioItemType.SHOUDIO:
                     case ShoudioItemType.AUDIO_GUIDE:
                         source = MUSIC_ICON_CLASS;
@@ -55,6 +57,11 @@
 
                     case ShoudioItemType.TEXT:
                         source = TEXT_ICON_CLASS;
+                        break;
+
+                    default:
+                    case ShoudioItemType.POINT_OF_INTEREST:
+                        source = POI_ICON_CLASS;
                         break;
                 }
 

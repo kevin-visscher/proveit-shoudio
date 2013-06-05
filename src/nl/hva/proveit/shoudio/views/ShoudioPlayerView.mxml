@@ -15,15 +15,17 @@
         <s:State name="paused"/>
     </s:states>
 
-    <s:Rect top="0" bottom="0">
+    <!-- Drop shadow -->
+    <s:Rect top="-8" right="0" left="0" height="8">
         <s:fill>
-            <s:LinearGradient rotation="180">
-                <s:GradientEntry color="0x777777"/>
+            <s:LinearGradient rotation="90">
                 <s:GradientEntry color="0xFFFFFF" alpha="0"/>
+                <s:GradientEntry color="0x000000"/>
             </s:LinearGradient>
         </s:fill>
     </s:Rect>
 
+    <!-- background fill -->
     <s:Rect top="0" left="0" bottom="0" right="0">
         <s:fill>
             <s:SolidColor color="0xFFFFFF"/>
@@ -40,7 +42,7 @@
               top="0" left="0" right="0" bottom="0"
               creationComplete="{controller.controlGroupCreatedHandler()}">
 
-        <s:Group width="100%" height="74" click="{controller.wave_clickHandler(event)}">
+        <s:Group width="100%" click="{controller.wave_clickHandler(event)}">
             <s:Image id="imgWave"
                      source="{controller.imageWaveSource}"
                      width="400"
@@ -52,15 +54,16 @@
                 </s:fill>
             </s:Rect>
 
-            <s:Line id="waveLine" top="0" bottom="0" width="1" left="{waveOverlay.width}">
+            <s:Line id="waveLine" top="0" bottom="0" left="{waveOverlay.width}">
                 <s:stroke>
-                    <s:SolidColorStroke color="0xf55100"/>
+                    <s:SolidColorStroke color="0xf55100" weight="1" pixelHinting="true"/>
                 </s:stroke>
             </s:Line>
         </s:Group>
 
-        <s:VGroup width="100%" paddingLeft="20" paddingRight="20">
-            <s:HGroup width="100%">
+        <s:VGroup width="100%" paddingTop="10" paddingBottom="20" paddingLeft="20" paddingRight="20" gap="0">
+
+            <s:HGroup width="100%" verticalAlign="middle">
 
                 <s:Label id="lblCurrentPosition"
                          text="{controller.currentMinutes}:{controller.currentSeconds}"/>
@@ -80,6 +83,8 @@
                          text="{controller.totalMinutes}:{controller.totalSeconds}"/>
 
             </s:HGroup>
+
+            <s:Spacer height="6"/>
 
             <s:HSlider id="sliderVolume"
                        minimum="0"

@@ -30,9 +30,9 @@
     </s:states>
 
     <!-- fill -->
-    <s:Rect left="1" right="1" top="4" bottom="4" height="5">
+    <s:Rect left="1" right="1" top="5" bottom="5" height="3">
         <s:fill>
-            <s:SolidColor color="0xeeeeee"/>
+            <s:SolidColor color="0xEEEEEE"/>
         </s:fill>
     </s:Rect>
 

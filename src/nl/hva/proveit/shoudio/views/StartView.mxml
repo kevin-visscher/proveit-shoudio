@@ -8,34 +8,99 @@
         <controller:StartController id="controller" view="{this}"/>
     </fx:Declarations>
 
-    <s:Rect top="0" left="0" bottom="0" right="0">
+    <s:states>
+        <s:State name="foldedIn"/>
+        <s:State name="foldedOut"/>
+    </s:states>
+
+    <s:transitions>
+        <s:Transition fromState="foldedIn" toState="foldedOut" autoReverse="true">
+            <s:Sequence>
+                <s:Move target="{groupDescription}"
+                        duration="350"
+                        yFrom="0"
+                        yTo="100"/>
+                <s:SetAction target="{groupDescription}"
+                             property="visible"/>
+            </s:Sequence>
+        </s:Transition>
+    </s:transitions>
+
+    <s:Rect top="0" left="0" bottom="0" right="0" alpha=".3">
         <s:fill>
-            <s:SolidColor color="0xEEEEEE"/>
+            <s:SolidColor color="0x000000"/>
         </s:fill>
     </s:Rect>
 
-    <s:VGroup top="4" left="4" bottom="4" right="4">
-        <s:HGroup id="startScreenContainer" width="100%" height="100%">
-            <s:Image id="imgAvatar"
-                     source="http://s3.amazonaws.com/noise.shoudio.com/collections/100x100/collection_{collection.id}.jpg"/>
+    <s:Group id="groupDescription" left="0" right="0" height="130" y.foldedOut="100">
+        <s:Rect top="-1" left="0" right="0" bottom="0">
+            <s:fill>
+                <s:SolidColor color="0xFFFFFF"/>
+            </s:fill>
+        </s:Rect>
 
-            <s:VGroup width="100%" height="100%" horizontalAlign="contentJustify">
-                <s:Label id="lblRouteName"
-                         text="{collection.name}"
-                         fontSize="14"
-                         fontWeight="bold"
-                         paddingBottom="8"
-                         width="80%"/>
+        <s:TextArea id="lblRouteDescription"
+                    text="{collection.description}"
+                    contentBackgroundColor="0xFFFFFF"
+                    borderVisible="false"
+                    editable="false"
+                    selectable="false"
+                    top="4"
+                    right="4"
+                    left="4"
+                    bottom="40"
+                    visible.foldedIn="false"/>
 
-                <s:Label id="lblRouteDescription"
-                         text="{collection.description}"
-                         width="80%"/>
-            </s:VGroup>
-        </s:HGroup>
+        <s:Label text="Open"
+                 text.foldedOut="Close"
+                 bottom="0"
+                 left="0"
+                 right="0"
+                 height="30"
+                 backgroundColor="0xfa925e"
+                 textAlign="center"
+                 verticalAlign="middle"
+                 color="0xFFFFFF"
+                 fontWeight="bold"
+                 click="{currentState = (currentState === 'foldedIn' ? 'foldedOut' : 'foldedIn')}"/>
+    </s:Group>
+
+    <s:Group id="groupCollection" top="0" left="0" right="0" height="100">
+
+        <s:Rect top="0" left="0" right="0" bottom="0">
+            <s:fill>
+                <s:SolidColor color="0xFFFFFF"/>
+            </s:fill>
+        </s:Rect>
+
+        <s:VGroup top="0" left="0" right="0">
+            <s:HGroup id="startScreenContainer" width="100%" height="100">
+                <s:Image id="imgAvatar"
+                         source="http://s3.amazonaws.com/noise.shoudio.com/collections/100x100/collection_{collection.id}.jpg"/>
+
+                <s:VGroup width="100%" height="100%" horizontalAlign="contentJustify">
+                    <s:Label id="lblRouteName"
+                             text="{collection.name}"
+                             fontSize="14"
+                             fontWeight="bold"
+                             paddingTop="4"
+                             width="80%"/>
+
+                    <s:Label id="lblUsername"
+                             text="TODO USERNAME HERE"/>
+
+                    <s:Label text="TODO RATING HERE"/>
+
+                </s:VGroup>
+            </s:HGroup>
+        </s:VGroup>
 
         <s:Button id="btnStart"
                   label="Start"
+                  right="10"
+                  bottom="5"
+                  skinClass="nl.hva.proveit.shoudio.skin.ButtonStartSkin"
                   click="{controller.btnStart_clickHandler()}"/>
-    </s:VGroup>
+    </s:Group>
 
 </s:Group>

@@ -79,9 +79,9 @@
               tabEnabled="false"
               skinClass="nl.hva.proveit.shoudio.HSliderTrackSkin" />
 
-    <s:Rect top="4" bottom="4" left="0" width="{thumb.x}" height="5">
+    <s:Rect top="5" bottom="5" left="0" width="{thumb.x}" height="3">
         <s:fill>
-            <s:SolidColor color="0xff5100"/>
+            <s:SolidColor color="0xfa925e"/>
         </s:fill>
     </s:Rect>
 
