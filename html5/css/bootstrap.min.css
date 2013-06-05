@@ -254,7 +254,7 @@ ul.rightmenuitems li:hover svg {
   width: 60px;
   height: 16px;
   display: block;
-  background: url('http://www.itsalif.info/blogfiles/rating/star-rating.png') 0 0 no-repeat;
+  background: url('..//img/star-rating.png') 0 0 no-repeat;
 }
 
 .rating-50 { background-position: 0 0; }
