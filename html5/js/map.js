@@ -9,7 +9,7 @@
 *                   an marker (feature) to the overlay
 */
 function addmapItems(item, overlay) {
-    //add to map
+    //walk through every item
     for(var i in item) {
         var message = item[i].message;
         var lon = item[i].lon;
@@ -20,6 +20,7 @@ function addmapItems(item, overlay) {
         var myLocation = new OpenLayers.Geometry.Point(lon, lat)
             .transform(this.fromProjection, this.toProjection);
         
+        //create the marker
         var feature = new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'});
         
         feature.style = {
@@ -33,6 +34,7 @@ function addmapItems(item, overlay) {
         this.shoudioObjectsPointer[feature.id][0] = item[i];
         this.shoudioObjectsPointer[feature.id][1] = feature;
         
+        //add the marker to the overlay
         this.overlay.addFeatures([feature]);
         
         if(item[i].sorting > -1) {
@@ -42,11 +44,21 @@ function addmapItems(item, overlay) {
     }
 }
 
+/*
+* Function that projects a marker on the map for all shoudio
+*  items, if the item is in a collection, 
+*  the items that have a sorting value > -1
+*
+* @param route      serialized data with longtitudes and latitudes 
+*                   from every point in the route
+* @param overlay    extra layer above the map to draw 
+*                   the route on
+*/
 function drawLines(route, overlay) {
     route = unserialize(route);
     
-    var start_point;
-    var end_point;
+    var start_point; //draw line from
+    var end_point; //draw line to
     
     for(var i = 1;i < _.size(route);i++){
         var lon = route[i].split(',')[1];
@@ -62,21 +74,25 @@ function drawLines(route, overlay) {
             .transform(this.fromProjection, this.toProjection));
         
         lineFeature.style = {
-            strokeColor: "#ff5100",
+            strokeColor: "#ff5100", //shoudiorange color
             strokeOpacity: 0.6,
             strokeWidth: 4
         };
         
-        this.overlay.addFeatures([lineFeature]);
+        this.overlay.addFeatures([lineFeature]); //add the line to the overlay
     }
 }
 
 /*
-* Function that creates the popup onclick
+* Function that creates the popup above the marker that 
+*  the user clicks on the marker
+*
+* @param feature    feature is the marker that is clicked on
 */
 function onFeatureSelect(feature) {
     hiderightmenu();
     
+    //if the previous popup is not removed, do it here
     if(selectedFeature) {
         map.removePopup(selectedFeature.popup);
         selectedFeature.popup.destroy();
@@ -114,6 +130,7 @@ function onFeatureSelect(feature) {
             break;
     }
     
+    //create the popup and fill the popup with the data
     popup = new OpenLayers.Popup.FramedCloud("popup", feature.geometry.getBounds().getCenterLonLat(),
                              null,
                              popupdata,
@@ -123,9 +140,16 @@ function onFeatureSelect(feature) {
     popup.offset = offset;
     
     feature.popup = popup;
-    map.addPopup(popup);
+    map.addPopup(popup); // add the popup to the map
 }
 
+/*
+* Function that preforms the action once a user wants to play a video or 
+*
+* @param featureid  the feature id is the id to find the shoudioItem 
+*                   that is connected to the marker that the user clicked on.
+*                   once we know the shoudioItem we know wich action to preform
+*/
 function popupClick(featureid) {
     var shoudioItem = shoudioObjectsPointer[featureid][0];
     var type = shoudioItem.type;
@@ -159,10 +183,11 @@ function popupClick(featureid) {
     }
 }
 
-/* DEPRECATED
-* Function that removes the popup
-*  this function is called when a user clicks 
-*  on another marker or somewhere the map
+/*
+* Function that removes the popup if anoter marker is clicked or if the map gets clicked
+* 
+* @param feature    feature is the marker that is not on focus anymore, 
+*                   with this we can remove the popup that is connected to this feature
 */
 function onFeatureUnselect(feature) {
     map.removePopup(feature.popup);
