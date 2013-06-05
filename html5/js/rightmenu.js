@@ -10,7 +10,7 @@ function addrightmenuItem(item, featureid) {
     var message = item.message;
     var shoudiotype = item.type;
     
-    $.get('img/'+shoudiotype+'black.svg', function(data) {
+    $.get('img/'+shoudiotype+'.svg', function(data) {
         $(".rightmenuitems").append('<li class="notselected" data-shouindex="'+featureid+'"><div class="icon">'+
         data+'</div>'+message+'</li>');
     });
