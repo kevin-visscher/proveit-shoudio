@@ -1,20 +1,16 @@
 /*
-=======================================================================
-= 						Shoudio Audioplayer 						  =
-=					  												  =
-=======================================================================
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *	!!!!!!!IF YOU CHANGE TABS TO SPACES, YOU WILL BE KILLED!!!!!!!
- *       !!!!!!!!!!!!!!DOING SO FUCKS THE BUILD PROCESS!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+* Function volume of the audioplayer
+* 
+* @param (value) get from 
 */
-
 function changeVolume(value){
     $("#audio-player")[0].volume = value/100;
 }
 
+/*
+* Function will show the audioplayer with animate
+* 
+*/
 function showaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'266px'},1000);
     $("#imgclose").fadeIn(1000);
@@ -31,6 +27,10 @@ function showaudiowrapper() {
     
 }
 
+/*
+* Function will hide the audioplayer with animate
+* 
+*/
 function hideaudiowrapper() {
     $("#audiowrapper").animate({'margin-top':'403px'},1000);
     $("#imgclose").fadeOut(1000);
@@ -38,6 +38,10 @@ function hideaudiowrapper() {
 	audioPause();
 }
 
+/*
+* function will set max sec when audio is loaded
+*  and autoplay the audio
+*/
 function setMaxsec(){
 	maxsec = $("#audio-player")[0].duration;
 	$("#maxsec").text(timeConvert(maxsec));
@@ -45,12 +49,19 @@ function setMaxsec(){
     audioPlay();
 }
 
+/*
+* 
+*/
 function statusZero(){
     if(audioInterval!=null){ window.clearInterval(audioInterval); audioInterval = null;}
     changeWaveLength();
 }
 
-// sec omzetten naar HHMMSS
+/*
+* Function timeconvert convert int into hh:mm:ss
+* 
+* @param (time) is amount of seconds
+*/
 function timeConvert(time) {
     
     var sec_num = time;
@@ -77,19 +88,10 @@ function timeConvert(time) {
     return time;
 }
 
-function changeWaveLength() {
-    currenctsec = $("#audio-player")[0].currentTime;
-    var procent = 100/maxsec * currenctsec;
-    procent = procent * 4;
-    $("#waveimg").css('width', procent + 'px');
-    $("#currenctsec").text(timeConvert(currenctsec));
-    if (currenctsec == maxsec) {
-        $("#playbutton").css("display", "block");
-        $("#pausebutton").css("display", "none");
-        status = 0;
-    }
-}
-
+/*
+* Function play audio and change playbutton into pausebutton
+* 
+*/
 function audioPlay() {
 	$("#audio-player")[0].play();
 	$("#playbutton").css("display", "none");
@@ -98,6 +100,10 @@ function audioPlay() {
 	audioInterval = setInterval(changeWaveLength, 50);
 }
 
+/*
+* Function play audio and change pausebutton into playbutton 
+*  and stop interval
+*/
 function audioPause() {
 		$("#audio-player")[0].pause();
         if(audioInterval != null) {
@@ -111,6 +117,13 @@ function audioPause() {
 		status = 0;
 }
 
+/*
+* Function change wave where is clicked
+*  if audio is played it continues to play
+*  when paused it remain paused
+*
+* @param (event) is cordination where is clicked
+*/
 function loadClickHandler(event) {
 	var windowwidth = $("#rightmarkforwindowwidth").position().left/2-200;
 		var locclick = event.pageX - windowwidth;
@@ -129,4 +142,21 @@ function loadClickHandler(event) {
 			$("#playbutton").css("display", "block");
 			$("#pausebutton").css("display", "none");
 		  }
+}
+
+/*
+* Function fill in the wavelength when audio play
+* 
+*/
+function changeWaveLength() {
+    currenctsec = $("#audio-player")[0].currentTime;
+    var procent = 100/maxsec * currenctsec;
+    procent = procent * 4;
+    $("#waveimg").css('width', procent + 'px');
+    $("#currenctsec").text(timeConvert(currenctsec));
+    if (currenctsec == maxsec) {
+        $("#playbutton").css("display", "block");
+        $("#pausebutton").css("display", "none");
+        status = 0;
+    }
 }

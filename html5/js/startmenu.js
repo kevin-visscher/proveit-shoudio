@@ -3,12 +3,6 @@
 = 						Shoudio Startmenu.js 						  =
 =					  												  =
 =======================================================================
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *	!!!!!!!IF YOU CHANGE TABS TO SPACES, YOU WILL BE KILLED!!!!!!!
- *       !!!!!!!!!!!!!!DOING SO FUCKS THE BUILD PROCESS!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 */
 var showStatus = 0;
 
@@ -69,7 +63,7 @@ function startmenu(item){
 	//username
 	var username = "Sjaak afhaak"
 
-	// var zenden naar hTmL hack hack
+	// var zenden naar html
  	$('.startmenu_naamrondje').append(naamrondje);
  	$('.startmenu_plaatje').append(plaatje);
  	$('.startmenu_username').append(username);
