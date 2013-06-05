@@ -5,8 +5,6 @@
 */
 function jsonLoaded(data) {
     
-    //data = jQuery.parseJSON(data);
-    
     this.collection = data.collection;
 
     for(var i in data.contents) {
