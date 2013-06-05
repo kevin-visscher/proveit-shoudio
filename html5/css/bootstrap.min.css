@@ -92,6 +92,8 @@ ul.rightmenuitems li {
     overflow: hidden;
     text-overflow: ellipsis;
     line-height:30px;
+    cursor: hand; 
+    cursor: pointer;
 }
 
 ul.rightmenuitems li img { padding: 0px 4px 0px 4px; vertical-align: middle; }

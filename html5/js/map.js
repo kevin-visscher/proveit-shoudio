@@ -95,6 +95,7 @@ function onFeatureSelect(feature) {
     map.panTo(feature.geometry.getBounds().getCenterLonLat());
     
     var popupdata = shoudioItem.message + "<br /><br />";
+    if(type == 'poi') popupdata += shoudioItem.description + '<br /><br />';
     popupdata += "<a href='javascript:popupClick(\""+feature.id+"\");' onclick='statusZero()'>";
     
     switch(type) {
@@ -105,9 +106,6 @@ function onFeatureSelect(feature) {
             popupdata += "Show text</a>";
             break;
         case 'poi':
-            popupdata += shoudioItem.description;
-            popupdata += "Show picture</a>";
-            break;
         case 'image':
             popupdata += "Show picture</a>";
             break;
