@@ -1,7 +1,6 @@
 body {
 	margin: 0px;
 	padding: 0px;
-    background: #fff url('../img/bodybackground.png') repeat-x;
     font-family: "Helvetica Neue",Arial,sans-serif;
     
     /*make everything none selectable*/
@@ -12,22 +11,11 @@ body {
     user-select: none;
 }
 
-#title {
-	text-align: center;
-	color: #fff;
-	font-size: 36px;
-	text-shadow: 1px 2px #444;
-	margin-top: 20px;
-}
-
 #playerwrapper {
 	width:400px;
 	height: 400px;
-	margin:0px auto;
 	background-color: #fff;
-	box-shadow: 0 0 20px #444;
-	margin-top: 48px;
-    position: relative;
+	position: relative;
     overflow: hidden;
 }
 
