@@ -27,9 +27,9 @@ $(function() {
     fromProjection = new OpenLayers.Projection("EPSG:4326");  // Transform from WGS 1984
     toProjection   = new OpenLayers.Projection("EPSG:3857");
 
-    $.get(config.collection || "json-mooie-ding.json",null, jsonLoaded);
+    $.get(window.parent.config.collection, null, jsonLoaded);
 
-    $('#image-logo').attr('src', config.logo);
+    $('#image-logo').attr('src', window.parent.config.logo);
 
     // adding click handlers
     $('.rightmenuitems li').live('click', rightmenuClick);
