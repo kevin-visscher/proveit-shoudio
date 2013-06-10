@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+    
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate.js"></script>
+<script src="js/jquery-ui.js"></script>
+
+<script src="js/audio.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/json.js"></script>
+<script src="js/map.js"></script>
+<script src="js/rightmenu.js"></script>
+<script src="js/startmenu.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/unserialize.js"></script>
+
+<script src="OpenLayers.js"></script>
+<link media="all" type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+<link media="all" type="text/css" rel="stylesheet" href="css/jquery-ui.css" />
+
+<title>Shoudio Player</title>
+
+</head>
+<body>
+<div id="rightmarkforwindowwidth"></div>
+<div id="playerwrapper">
+    <div id="logodiv">
+        <a href="http://shoudio.com/"><img src="http://shoudio.com/img/nd_shoudio_logo.png"></a>
+    </div>
+
+    <div id="imagecontainer">
+        <div class="seethroughbg" onclick='javascript:$("#imagecontainer").fadeOut();javascript:$(".placeholder").html("");'></div>
+        <div class="placeholder"></div>
+    </div>
+    <!--audio player-->
+    <div id="audiowrapper">
+        <div id="imgclose">
+            <a href="javascript:hideaudiowrapper()">
+            <img src="img/close-img.png"/></a>
+        </div>
+        <audio id="audio-player" name="audio-player" onloadeddata="setMaxsec()" ></audio>
+        <div id="imgloading">
+            <img src="http://s3.amazonaws.com/noise.shoudio.com/waveform/small/7050.png" style="" width="400" height="74"/>
+            <div id="waveimg"></div>
+            <div id="loadclickhandler"></div>
+        </div>
+        <div id="audiomiddlebar">
+            <div id="currenctsec">00:00</div>
+            <div id="playbuttondiv">
+                <a id="playbutton"><img src="img/playicon.png" width="17px" height="20px"/></a>
+                <a id="pausebutton"><img src="img/pauseicon.png" width="17px" height="20px"/></a>
+            </div>
+            <div id="maxsec"></div>
+            <div id="currenctsec"></div>
+        </div>
+        <div id="volumediv"></div>
+    </div>
+    <!--end audio player-->
+    <!--map-->
+	<div id="openstreetmap">
+		<div class="rightmenuopen">
+			<a href="javascript:showrightmenu()">
+			<img class="imgopen" src="img/open-sidebar.png"/></a>
+		</div>
+	</div>
+    <!--einde map-->
+    <!--right menu-->
+	<div id="rightmenu">
+        <div class="rightmenuclose"><a href="javascript:hiderightmenu()"><img src="img/slide-up.gif"/></a></div>
+        <ul class="rightmenuitems">
+        </ul>
+	</div>
+    <!--einde right menu-->
+    <!--startmenu-->
+    <div id="startmenubg"></div>
+    <div id="startmenu">
+        
+        <div id="startmenu_description">
+                <div id="startmenu_description_indoud"></div>
+                <div id="showstartButton">
+                    <a id="showStart" href="javascript:showStartmenu_description()">open</a>
+                    <a id="hideStart" href="javascript:hideStartmenu_description()">closed</a>
+                </div>
+        </div>
+        <div class="startmenu_plaatje"></div>
+        
+        <div id="startmenuNNR">
+            <div class="startmenu_naamrondje"></div>
+            <div class="startmenu_username"></div>
+            <div class="startmenu_rating"></div>
+            <div id="startButtonDiv"><a id="startButton" href="javascript:startmenuHide()"> Start </a></div>
+        </div>
+            
+        <div id="showDescription">
+        </div>
+
+    </div>
+    <!--end startmenu-->
+    <div id="openstreetmapCredit">Data CC-By-SA by <a href="http://openstreetmap.org/">OpenStreetMap</a></div>
+</div>
+</body>

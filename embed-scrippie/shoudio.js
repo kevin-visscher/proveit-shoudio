@@ -12,7 +12,20 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
 (function() {
 
 	var embedHtml5Version = function() {
+        var frame = document.createElement('iframe');
+        frame.width = 400;
+        frame.height = 400;
 
+        frame.setAttribute('marginwidth', 0);
+        frame.setAttribute('marginheight', 0);
+        frame.setAttribute('frameborder', 0);
+
+        frame.scrolling = "no";
+
+        frame.src = "html5/index.html";
+
+        var container = document.getElementById('shoudio-container');
+        container.appendChild(frame);
 	};
 
 	var embedFlashVersion = function() {
