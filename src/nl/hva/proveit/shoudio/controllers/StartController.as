@@ -19,5 +19,13 @@ package nl.hva.proveit.shoudio.controllers
 
             FlexGlobals.topLevelApplication.currentState = "sidebarVisible";
         }
+
+        public function init():void
+        {
+            view.lblRouteDescription.text = collection.description;
+            view.lblRouteName.text = collection.name;
+            view.lblUsername.text = collection.items[0].userName;
+            view.lblRating.text = collection.rating + "/ 5";
+        }
     }
 }
