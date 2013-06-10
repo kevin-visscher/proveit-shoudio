@@ -87,7 +87,12 @@
 
                     <s:Label id="lblUsername"/>
 
-                    <s:Label id="lblRating"/>
+                    <s:Group id="ratingContainer">
+                        <s:Image source="@Embed('/assets/star-rating-empty.png')"/>
+                        <s:Group id="ratingContainerFilled" clipAndEnableScrolling="true" width="0" height="16">
+                            <s:Image source="@Embed('/assets/star-rating-full.png')"/>
+                        </s:Group>
+                    </s:Group>
 
                 </s:VGroup>
             </s:HGroup>

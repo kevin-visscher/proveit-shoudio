@@ -3,7 +3,6 @@ package nl.hva.proveit.shoudio.controllers
     import mx.core.FlexGlobals;
     import mx.managers.PopUpManager;
 
-    import nl.hva.proveit.shoudio.models.ShoudioCollection;
     import nl.hva.proveit.shoudio.views.StartView;
 
     public class StartController
@@ -11,7 +10,7 @@ package nl.hva.proveit.shoudio.controllers
         public var view:StartView;
 
         [Bindable]
-        public var collection:ShoudioCollection;
+        public var collection:Object;
 
         public function btnStart_clickHandler():void
         {
@@ -25,7 +24,11 @@ package nl.hva.proveit.shoudio.controllers
             view.lblRouteDescription.text = collection.description;
             view.lblRouteName.text = collection.name;
             view.lblUsername.text = collection.items[0].userName;
-            view.lblRating.text = collection.rating + "/ 5";
+
+            var percentRating:Number = (collection.rating.value / 5);
+
+            // HARDCODED 60: It's the width of the rating image
+            view.ratingContainerFilled.width = 60 * percentRating;
         }
     }
 }
