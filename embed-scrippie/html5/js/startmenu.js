@@ -61,7 +61,7 @@ function startmenu(item){
 	var rating = '<span class="rating-static rating-'+rating_rate+'"></span>';
 
 	//username
-	var username = "Sjaak afhaak"
+	var username = shoudioObjects[0].u_name;
 
 	// var zenden naar html
  	$('.startmenu_naamrondje').append(naamrondje);
