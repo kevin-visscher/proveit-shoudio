@@ -12,11 +12,7 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
 (function() {
 
 	var embedHtml5Version = function() {
-
-        embedFlashVersion();
-
-
-        return;
+		
         var frame = document.createElement('iframe');
         frame.width = 400;
         frame.height = 400;
