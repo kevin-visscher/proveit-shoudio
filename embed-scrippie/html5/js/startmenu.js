@@ -50,10 +50,10 @@ function startmenu(item){
 	var description_hide =  '</br><a href="javascript:showStartmenu_description()">show</a>';
 
 	//userid for image
-	var user_id = item.userid;
+	var item_id = item.id;
 	//s3.amazonaws.com/noise.shoudio.com/avatars/{SIZING}/user_id.jpg
 	var sizing = "100x100";
-	var plaatje = '<img src="http://s3.amazonaws.com/noise.shoudio.com/avatars/'+sizing+'/'+ user_id+'.jpg" />';
+	var plaatje = '<img src="http://s3.amazonaws.com/noise.shoudio.com/collections/'+sizing+'/collection_'+ item_id +'.jpg" />';
 	
 	//determine rating
 	var rating_rate_collect = Math.round(item.rating_rate * 10);
