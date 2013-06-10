@@ -53,7 +53,10 @@ package nl.hva.proveit.shoudio.controllers
 
         private function youtubePlayer_readyHandler(e:Event):void
         {
-            _youtubePlayer.setSize(400, 300);
+            var width:Number = view.videoContainer.height / 3 * 4;
+
+            _youtubePlayer.setSize(width, view.videoContainer.height);
+            _youtubePlayer.x = (view.videoContainer.width - width) / 2;
         }
 
         private function loader_securityErrorHandler(e:SecurityErrorEvent):void

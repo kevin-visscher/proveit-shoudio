@@ -26,7 +26,7 @@ package nl.hva.proveit.shoudio.controllers
         {
             _jsonLoader = new JsonLoader();
             _jsonLoader.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
-            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri || "https://dl.dropboxusercontent.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
+            _jsonLoader.load(FlexGlobals.topLevelApplication.parameters.uri || "https://dl.dropbox.com/s/v8biz6wnjlw267a/json-mooie-ding.json?token_hash=AAGTmA8inr1pIb4CIRY-4mKUZZhYm3XRMq4cDYho2XU0Vw&dl=1");
         }
 
         private function listPoints_indexChangingEvent(e:IndexChangeEvent):void
@@ -63,8 +63,8 @@ package nl.hva.proveit.shoudio.controllers
             }
 
             var startView:StartView = new StartView();
-            startView.width = 400;
-            startView.height = 400;
+            startView.width = view.mapContainer.width;
+            startView.height = view.mapContainer.height;
             startView.x = (view.width - startView.width) / 2;
             startView.y = (view.height - startView.height) / 2;
             startView.collection = collection;

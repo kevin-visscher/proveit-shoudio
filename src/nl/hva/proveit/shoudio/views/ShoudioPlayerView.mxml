@@ -45,7 +45,7 @@
         <s:Group width="100%" click="{controller.wave_clickHandler(event)}">
             <s:Image id="imgWave"
                      source="{controller.imageWaveSource}"
-                     width="400"
+                     width="{width}"
                      height="74"/>
 
             <s:Rect id="waveOverlay" alpha=".3" top="0" bottom="0" left="0" right="{controller.offsetRight}">

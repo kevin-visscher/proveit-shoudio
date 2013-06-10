@@ -11,52 +11,43 @@ var swfobject=function(){var D="undefined",r="object",S="Shockwave Flash",W="Sho
 
 (function() {
 
+	var embedHtml5Version = function() {
 
-	var embedHtml5Version = function()
-	{
-		// TODO: Implement
 	};
 
-	var embedFlashVersion = function()
-	{
-           // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
-            var swfVersionStr = "11.1.0";
+	var embedFlashVersion = function() {
+        var swfVersionStr = "11.1.0";
 
-            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
-            var xiSwfUrlStr = "expressInstall.swf";
+        // To use express install, set to playerProductInstall.swf, otherwise the empty string.
+        var xiSwfUrlStr = "expressInstall.swf";
 
-            var flashvars = { uri: config.collection, logo: config.logo };
+        var flashvars = { uri: config.collection, logo: config.logo };
 
-            var params = {
-		quality: "high",
-		bgcolor: "#ffffff",
-		allowscriptaccess: "sameDomain",
-		allowfullscreen: "false",
+        var params = {
+		    quality: "high",
+		    bgcolor: "#ffffff",
+		    allowscriptaccess: "sameDomain",
+		    allowfullscreen: "false"
 	    };
 
 	    var attributes = {
-		id: "shoudio",
-		name: "shoudio",
-		align: "middle"
+		    id: "shoudio",
+		    name: "shoudio",
+		    align: "middle"
 	    };
 
-            swfobject.embedSWF(
-                "shoudio.swf", "shoudio-container", 
-                "400", "400", 
-                swfVersionStr, xiSwfUrlStr, 
-                flashvars, params, attributes);
-
-            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-            //swfobject.createCSS("#shoudioContainer", "display:block;text-align:left;");
+        swfobject.embedSWF(
+            "shoudio.swf", "shoudio-container",
+            "400", "400",
+            swfVersionStr, xiSwfUrlStr,
+            flashvars, params, attributes);
 	};
 
 	var supportsHtml5Version = Modernizr.svg && Modernizr.inlinesvg && Modernizr.audio.mp3;
 		
 	if (supportsHtml5Version)
 	{
-		// TODO: Insert HTML5 version
-		//embedHtml5Version();
-		embedFlashVersion();
+		embedHtml5Version();
 	}
 	else
 	{

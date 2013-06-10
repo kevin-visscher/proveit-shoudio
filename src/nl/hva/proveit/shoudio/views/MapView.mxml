@@ -2,13 +2,14 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:s="library://ns.adobe.com/flex/spark"
          xmlns:controller="nl.hva.proveit.shoudio.controllers.*"
-         creationComplete="{controller.init()}">
+         creationComplete="{controller.init()}"
+         resize="{controller.handleResize()}">
 
     <fx:Declarations>
         <controller:MapController id="controller" view="{this}"/>
     </fx:Declarations>
 
-    <s:Group id="mapComponent" width="{width}" height="{height}">
+    <s:Group id="mapComponent" top="0" left="0" bottom="0" right="0">
 
     </s:Group>
 

@@ -12,7 +12,6 @@ package nl.hva.proveit.shoudio.controllers
     import flash.display.CapsStyle;
     import flash.display.JointStyle;
     import flash.display.LineScaleMode;
-    import flash.events.MouseEvent;
     import flash.geom.Point;
 
     import mx.core.FlexGlobals;
@@ -52,14 +51,16 @@ package nl.hva.proveit.shoudio.controllers
             var wrapper:SpriteVisualElement = new SpriteVisualElement();
             wrapper.width = view.width;
             wrapper.height = view.height;
+            wrapper.top = wrapper.left = wrapper.right = wrapper.bottom = 0;
 
             wrapper.addChild(_map);
 
             view.mapComponent.addElement(wrapper);
 
-            var logoUrl:String = FlexGlobals.topLevelApplication.parameters.logo || "http://shoudio.com/img/nd_shoudio_logo.png";
+            var logoUrl:String = FlexGlobals.topLevelApplication.parameters.logo;
 
-            view.imgLogo.source = logoUrl;
+            if (logoUrl)
+                view.imgLogo.source = logoUrl;
 
             view.addEventListener(JsonLoaderEvent.JSON_LOADED, jsonLoader_jsonLoadedHandler);
         }
@@ -104,7 +105,6 @@ package nl.hva.proveit.shoudio.controllers
             view.addEventListener(SidebarEvent.MAP_MARKER_CLICKED, sidebar_mapMarkerClickedHandler);
 
             _map.addEventListener(MarkerEvent.MARKER_CLICK, map_markerClickedHandler);
-
             _map.addEventListener(MapEvent.STOP_PANNING, map_stopPanningHandler);
         }
 
@@ -124,7 +124,7 @@ package nl.hva.proveit.shoudio.controllers
             // Hide the sidebar when the user clicks on a marker
             FlexGlobals.topLevelApplication.currentState = "sidebarHidden";
 
-            var markerLocationPoint:Point = _map.locationPoint(markerLocation, view);
+            var markerLocationPoint:Point = _map.locationPoint(markerLocation);
 
             var popup:MapMarkerPopup = new MapMarkerPopup();
             popup.item = item;
@@ -139,9 +139,10 @@ package nl.hva.proveit.shoudio.controllers
             closeActivePopup();
 
             _activePopup = popup;
-            _activePopup.addEventListener(MouseEvent.ROLL_OUT, activePopup_rollOutHandler, false, 0, true);
             _activePopup.addEventListener(FlexEvent.UPDATE_COMPLETE, activePopup_creationCompleteHandler, false, 0, true);
 
+            // Move the popup off the screen to prevent flickering from the
+            // element being updated. It's later positioned in the UPDATE_COMPLETE handler
             _activePopup.x = -9999;
             _activePopup.y = -9999;
 
@@ -168,11 +169,6 @@ package nl.hva.proveit.shoudio.controllers
             openMarkerPopup(location, item);
         }
 
-        private function activePopup_rollOutHandler(e:MouseEvent):void
-        {
-            PopUpManager.removePopUp(e.target as IFlexDisplayObject);
-        }
-
         private function sidebar_mapMarkerClickedHandler(e:SidebarEvent):void
         {
             var item:ShoudioCollectionItem = e.item;
@@ -183,6 +179,14 @@ package nl.hva.proveit.shoudio.controllers
         public function notifySidebarVisible():void
         {
             closeActivePopup();
+        }
+
+        public function handleResize():void
+        {
+            if (!view || ! _map)
+                return;
+
+            _map.setSize(_map.parent.width, _map.parent.height);
         }
     }
 }

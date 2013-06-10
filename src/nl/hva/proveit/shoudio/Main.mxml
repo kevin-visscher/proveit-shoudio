@@ -3,8 +3,8 @@
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:controllers="nl.hva.proveit.shoudio.controllers.*"
                xmlns:views="nl.hva.proveit.shoudio.views.*" xmlns:mx="library://ns.adobe.com/flex/mx"
-               minWidth="400"
-               minHeight="400"
+               width="100%"
+               height="100%"
                creationComplete="{controller.creationCompleteHandler()}">
 
     <fx:Style source="/assets/style.css"/>
@@ -45,8 +45,10 @@
                     verticalCenter="0"
                     includeIn="loading"/>
 
-    <s:Group width="400" height="400"
-             left="{(width - 400) / 2}" top="{(height - 400) / 2}"
+    <s:Group top="0"
+             right="0"
+             bottom="0"
+             left="0"
              clipAndEnableScrolling="true"
              id="mapContainer">
 
