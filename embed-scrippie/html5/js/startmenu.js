@@ -19,7 +19,7 @@ function round5(x){
 * Function that hide Startmenu_description and will change button
 */
 function hideStartmenu_description() {
-    $("#startmenu_description").animate({'margin-top':'-14px'},1000);
+    $("#startmenu_description").animate({'margin-top':'-14px'},350);
 	$("#hideStart").css("display", "none");
     $("#showStart").css("display", "block");
 }
@@ -28,7 +28,7 @@ function hideStartmenu_description() {
 * Function that show Startmenu_description and will change button
 */
 function showStartmenu_description() {
-    $("#startmenu_description").animate({'margin-top':'100px'},1000);
+    $("#startmenu_description").animate({'margin-top':'100px'},350);
     //$("#showDescription").css("display", "none");
     $("#hideStart").css("display", "block");
     $("#showStart").css("display", "none");
