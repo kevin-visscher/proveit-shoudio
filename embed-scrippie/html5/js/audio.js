@@ -12,7 +12,7 @@ function changeVolume(value){
 * 
 */
 function showaudiowrapper() {
-    $("#audiowrapper").animate({'margin-top':'266px'},500);
+    $("#audiowrapper").animate({'margin-top':'266px'},350);
     $("#imgclose").fadeIn(1000);
     
     $( "#volumediv" ).slider({
@@ -32,7 +32,7 @@ function showaudiowrapper() {
 * 
 */
 function hideaudiowrapper() {
-    $("#audiowrapper").animate({'margin-top':'403px'},500);
+    $("#audiowrapper").animate({'margin-top':'403px'},350);
     $("#imgclose").fadeOut(1000);
 	$("#audio-player")[0].currentTime = 0;
 	audioPause();
