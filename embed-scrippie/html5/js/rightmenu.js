@@ -1,9 +1,9 @@
 function hiderightmenu() {
-    $("#rightmenu").animate({'margin-left':'403px'},1000);
+    $("#rightmenu").animate({'margin-left':'403px'},300);
 }
 
 function showrightmenu() {
-    $("#rightmenu").animate({'margin-left':'240px'},1000);
+    $("#rightmenu").animate({'margin-left':'240px'},300);
 }
 
 function addrightmenuItem(item, featureid) {
